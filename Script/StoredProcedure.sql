@@ -11,7 +11,8 @@ CREATE
     | COMMENT 'string'*/
 	BEGIN
 		INSERT INTO users(profilePicture, firstName, middleName, lastName, address, contactNumber, email, username, `password`)
-		VALUES(pProfilePicture, pFirstName, pMiddleName, pLastName, pAddress, pContactNumber, pEmail, pUsername, pPassword);
+		VALUES(pProfilePicture, pFirstName, pMiddleName, pLastName, pAddress, pContactNumber, pEmail, pUsername,
+		AES_ENCRYPT(pPassword, "J.v3n!j.$hu4c.@l0ver4!#@"));
 	END$$
 
 DELIMITER ;
@@ -29,6 +30,25 @@ CREATE
 	BEGIN
 		INSERT INTO descriptions(`description`)
 		VALUES(pDescription);
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loginUser`(pUsername VARCHAR(45), pPassword VARBINARY(255))
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT userId, profilePicture, firstName, middleName, lastName, address, contactNumber, email, username,
+		CAST(AES_DECRYPT(`password`, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR)
+		FROM users
+		WHERE username = pUsername AND CAST(AES_DECRYPT(`password`, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR) = pPassword;
 	END$$
 
 DELIMITER ;

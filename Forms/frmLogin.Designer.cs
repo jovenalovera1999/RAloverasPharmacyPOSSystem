@@ -148,6 +148,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnLogin.TabIndex = 5;
             this.btnLogin.TabStop = false;
             this.btnLogin.Text = "LOGIN";
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnExit
             // 
@@ -166,6 +167,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnExit.TabIndex = 6;
             this.btnExit.TabStop = false;
             this.btnExit.Text = "EXIT";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // frmLogin
             // 
@@ -186,6 +188,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN";
             this.Load += new System.EventHandler(this.frmLogin_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmLogin_KeyPress);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.ResumeLayout(false);

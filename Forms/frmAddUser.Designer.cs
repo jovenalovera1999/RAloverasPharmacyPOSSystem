@@ -531,6 +531,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ADD USER";
             this.Load += new System.EventHandler(this.frmAddUser_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmAddUser_KeyDown);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfilePicture)).EndInit();
