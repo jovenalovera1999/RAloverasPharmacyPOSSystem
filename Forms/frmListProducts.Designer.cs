@@ -33,20 +33,22 @@ namespace RAloverasPharmacyPOSSystem.Forms
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gridProducts = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.btnAddProduct = new Guna.UI2.WinForms.Guna2Button();
-            this.btnNext = new Guna.UI2.WinForms.Guna2Button();
-            this.btnPrevious = new Guna.UI2.WinForms.Guna2Button();
             this.clmProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmPackagingUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmGeneric = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmExpirationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDateAdded = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDateUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAddProduct = new Guna.UI2.WinForms.Guna2Button();
+            this.btnNext = new Guna.UI2.WinForms.Guna2Button();
+            this.btnPrevious = new Guna.UI2.WinForms.Guna2Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridProducts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +63,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gridProducts.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.OliveDrab;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -76,8 +80,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.clmCode,
             this.clmDescription,
             this.clmPackagingUnit,
-            this.clmQuantity,
             this.clmPrice,
+            this.clmQuantity,
             this.clmGeneric,
             this.clmExpirationDate,
             this.clmDateAdded,
@@ -93,12 +97,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridProducts.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gridProducts.Location = new System.Drawing.Point(12, 54);
+            this.gridProducts.Location = new System.Drawing.Point(12, 55);
             this.gridProducts.Name = "gridProducts";
             this.gridProducts.ReadOnly = true;
             this.gridProducts.RowHeadersVisible = false;
             this.gridProducts.RowTemplate.Height = 36;
-            this.gridProducts.Size = new System.Drawing.Size(866, 551);
+            this.gridProducts.Size = new System.Drawing.Size(863, 430);
             this.gridProducts.TabIndex = 0;
             this.gridProducts.TabStop = false;
             this.gridProducts.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -106,7 +110,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridProducts.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
             this.gridProducts.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
             this.gridProducts.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.gridProducts.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.gridProducts.ThemeStyle.BackColor = System.Drawing.Color.WhiteSmoke;
             this.gridProducts.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gridProducts.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.OliveDrab;
             this.gridProducts.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -122,6 +126,83 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridProducts.ThemeStyle.RowsStyle.Height = 36;
             this.gridProducts.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gridProducts.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            // 
+            // clmProductId
+            // 
+            this.clmProductId.HeaderText = "";
+            this.clmProductId.Name = "clmProductId";
+            this.clmProductId.ReadOnly = true;
+            this.clmProductId.Visible = false;
+            // 
+            // clmCode
+            // 
+            this.clmCode.HeaderText = "CODE";
+            this.clmCode.Name = "clmCode";
+            this.clmCode.ReadOnly = true;
+            this.clmCode.Width = 65;
+            // 
+            // clmDescription
+            // 
+            this.clmDescription.HeaderText = "DESCRIPTION";
+            this.clmDescription.Name = "clmDescription";
+            this.clmDescription.ReadOnly = true;
+            this.clmDescription.Width = 110;
+            // 
+            // clmPackagingUnit
+            // 
+            this.clmPackagingUnit.HeaderText = "PACKAGING UNIT";
+            this.clmPackagingUnit.Name = "clmPackagingUnit";
+            this.clmPackagingUnit.ReadOnly = true;
+            this.clmPackagingUnit.Width = 121;
+            // 
+            // clmPrice
+            // 
+            this.clmPrice.HeaderText = "PRICE";
+            this.clmPrice.Name = "clmPrice";
+            this.clmPrice.ReadOnly = true;
+            this.clmPrice.Width = 64;
+            // 
+            // clmQuantity
+            // 
+            this.clmQuantity.HeaderText = "QUANTITY";
+            this.clmQuantity.Name = "clmQuantity";
+            this.clmQuantity.ReadOnly = true;
+            this.clmQuantity.Width = 92;
+            // 
+            // clmGeneric
+            // 
+            this.clmGeneric.HeaderText = "GENERIC";
+            this.clmGeneric.Name = "clmGeneric";
+            this.clmGeneric.ReadOnly = true;
+            this.clmGeneric.Width = 83;
+            // 
+            // clmExpirationDate
+            // 
+            this.clmExpirationDate.HeaderText = "EXPIRATION DATE";
+            this.clmExpirationDate.Name = "clmExpirationDate";
+            this.clmExpirationDate.ReadOnly = true;
+            this.clmExpirationDate.Width = 123;
+            // 
+            // clmDateAdded
+            // 
+            this.clmDateAdded.HeaderText = "DATE ADDED";
+            this.clmDateAdded.Name = "clmDateAdded";
+            this.clmDateAdded.ReadOnly = true;
+            this.clmDateAdded.Width = 98;
+            // 
+            // clmDateUpdated
+            // 
+            this.clmDateUpdated.HeaderText = "DATE UPDATED";
+            this.clmDateUpdated.Name = "clmDateUpdated";
+            this.clmDateUpdated.ReadOnly = true;
+            this.clmDateUpdated.Width = 110;
+            // 
+            // clmAction
+            // 
+            this.clmAction.HeaderText = "ACTION";
+            this.clmAction.Name = "clmAction";
+            this.clmAction.ReadOnly = true;
+            this.clmAction.Width = 77;
             // 
             // btnAddProduct
             // 
@@ -143,6 +224,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // btnNext
             // 
+            this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNext.Animated = true;
             this.btnNext.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNext.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -152,7 +234,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnNext.FillColor = System.Drawing.Color.OliveDrab;
             this.btnNext.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnNext.ForeColor = System.Drawing.Color.White;
-            this.btnNext.Location = new System.Drawing.Point(832, 611);
+            this.btnNext.Location = new System.Drawing.Point(829, 491);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(46, 36);
             this.btnNext.TabIndex = 23;
@@ -161,6 +243,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // btnPrevious
             // 
+            this.btnPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrevious.Animated = true;
             this.btnPrevious.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPrevious.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -170,98 +253,71 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnPrevious.FillColor = System.Drawing.Color.OliveDrab;
             this.btnPrevious.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnPrevious.ForeColor = System.Drawing.Color.White;
-            this.btnPrevious.Location = new System.Drawing.Point(780, 611);
+            this.btnPrevious.Location = new System.Drawing.Point(777, 491);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(46, 36);
             this.btnPrevious.TabIndex = 24;
             this.btnPrevious.TabStop = false;
             this.btnPrevious.Text = "<<";
             // 
-            // clmProductId
+            // label2
             // 
-            this.clmProductId.HeaderText = "";
-            this.clmProductId.Name = "clmProductId";
-            this.clmProductId.ReadOnly = true;
-            this.clmProductId.Visible = false;
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(551, -13);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            this.label2.Size = new System.Drawing.Size(55, 32);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "SEARCH";
             // 
-            // clmCode
+            // txtUsername
             // 
-            this.clmCode.HeaderText = "CODE";
-            this.clmCode.Name = "clmCode";
-            this.clmCode.ReadOnly = true;
-            // 
-            // clmDescription
-            // 
-            this.clmDescription.HeaderText = "DESCRIPTION";
-            this.clmDescription.Name = "clmDescription";
-            this.clmDescription.ReadOnly = true;
-            // 
-            // clmPackagingUnit
-            // 
-            this.clmPackagingUnit.HeaderText = "PACKAGING UNIT";
-            this.clmPackagingUnit.Name = "clmPackagingUnit";
-            this.clmPackagingUnit.ReadOnly = true;
-            // 
-            // clmQuantity
-            // 
-            this.clmQuantity.HeaderText = "QUANTITY";
-            this.clmQuantity.Name = "clmQuantity";
-            this.clmQuantity.ReadOnly = true;
-            // 
-            // clmPrice
-            // 
-            this.clmPrice.HeaderText = "PRICE";
-            this.clmPrice.Name = "clmPrice";
-            this.clmPrice.ReadOnly = true;
-            // 
-            // clmGeneric
-            // 
-            this.clmGeneric.HeaderText = "GENERIC";
-            this.clmGeneric.Name = "clmGeneric";
-            this.clmGeneric.ReadOnly = true;
-            // 
-            // clmExpirationDate
-            // 
-            this.clmExpirationDate.HeaderText = "EXPIRATION DATE";
-            this.clmExpirationDate.Name = "clmExpirationDate";
-            this.clmExpirationDate.ReadOnly = true;
-            // 
-            // clmDateAdded
-            // 
-            this.clmDateAdded.HeaderText = "DATE ADDED";
-            this.clmDateAdded.Name = "clmDateAdded";
-            this.clmDateAdded.ReadOnly = true;
-            // 
-            // clmDateUpdated
-            // 
-            this.clmDateUpdated.HeaderText = "DATE UPDATED";
-            this.clmDateUpdated.Name = "clmDateUpdated";
-            this.clmDateUpdated.ReadOnly = true;
-            // 
-            // clmAction
-            // 
-            this.clmAction.HeaderText = "ACTION";
-            this.clmAction.Name = "clmAction";
-            this.clmAction.ReadOnly = true;
+            this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtUsername.Animated = true;
+            this.txtUsername.BorderRadius = 3;
+            this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtUsername.DefaultText = "";
+            this.txtUsername.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtUsername.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtUsername.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtUsername.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtUsername.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
+            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.txtUsername.ForeColor = System.Drawing.Color.Black;
+            this.txtUsername.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
+            this.txtUsername.Location = new System.Drawing.Point(555, 12);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.PasswordChar = '\0';
+            this.txtUsername.PlaceholderText = "";
+            this.txtUsername.SelectedText = "";
+            this.txtUsername.Size = new System.Drawing.Size(320, 36);
+            this.txtUsername.TabIndex = 25;
             // 
             // frmListProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(890, 659);
+            this.ClientSize = new System.Drawing.Size(887, 539);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(this.gridProducts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MinimumSize = new System.Drawing.Size(890, 659);
+            this.MinimumSize = new System.Drawing.Size(887, 539);
             this.Name = "frmListProducts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LIST OF PRODUCTS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.gridProducts)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -271,12 +327,14 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2Button btnAddProduct;
         private Guna.UI2.WinForms.Guna2Button btnNext;
         private Guna.UI2.WinForms.Guna2Button btnPrevious;
+        private System.Windows.Forms.Label label2;
+        private Guna.UI2.WinForms.Guna2TextBox txtUsername;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmProductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmPackagingUnit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmGeneric;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmExpirationDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDateAdded;

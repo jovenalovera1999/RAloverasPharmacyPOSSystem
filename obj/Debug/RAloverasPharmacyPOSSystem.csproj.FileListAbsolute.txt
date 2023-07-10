@@ -9,7 +9,6 @@ C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.csproj.CopyComplete
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.exe
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.pdb
-C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.csproj.AssemblyReference.cache
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmDashboard.resources
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmListProducts.resources
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmAddProduct.resources
@@ -39,3 +38,7 @@ C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\System.Memory.xml
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmAddOrder.resources
+C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmAddOrderQuantity.resources
+C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmPayment.resources
+C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.csproj.AssemblyReference.cache
