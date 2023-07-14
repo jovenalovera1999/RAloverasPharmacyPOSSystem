@@ -40,6 +40,7 @@ CREATE TABLE generics(
 
 CREATE TABLE products(
 	productId BIGINT NOT NULL AUTO_INCREMENT,
+	code VARCHAR(45) DEFAULT NULL,
 	descriptionId BIGINT NOT NULL,
 	packagingUnitId BIGINT NOT NULL,
 	quantity INT NOT NULL,

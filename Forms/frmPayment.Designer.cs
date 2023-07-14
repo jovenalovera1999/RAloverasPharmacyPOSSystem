@@ -225,7 +225,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // btnLogin
             // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLogin.Animated = true;
             this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -235,7 +235,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnLogin.FillColor = System.Drawing.Color.OliveDrab;
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(342, 493);
+            this.btnLogin.Location = new System.Drawing.Point(649, 493);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(110, 36);
             this.btnLogin.TabIndex = 15;
@@ -244,7 +244,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // guna2Button1
             // 
-            this.guna2Button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.guna2Button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Button1.Animated = true;
             this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -254,7 +254,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.guna2Button1.FillColor = System.Drawing.Color.OliveDrab;
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(458, 493);
+            this.guna2Button1.Location = new System.Drawing.Point(765, 493);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(110, 36);
             this.guna2Button1.TabIndex = 16;
@@ -370,6 +370,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.Visible = false;
+            this.dataGridViewTextBoxColumn2.Width = 17;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -437,6 +438,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 17;
             // 
             // guna2DataGridView1
             // 

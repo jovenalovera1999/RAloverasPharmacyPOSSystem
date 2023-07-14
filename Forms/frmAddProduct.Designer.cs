@@ -104,6 +104,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnSave.TabIndex = 22;
             this.btnSave.TabStop = false;
             this.btnSave.Text = "SAVE (F1)";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnClose
             // 
@@ -123,6 +124,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnClose.TabIndex = 23;
             this.btnClose.TabStop = false;
             this.btnClose.Text = "CLOSE (F2)";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // label12
             // 
@@ -177,10 +179,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtCode.BorderRadius = 3;
             this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtCode.DefaultText = "";
-            this.txtCode.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtCode.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtCode.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCode.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+            this.txtCode.DisabledState.FillColor = System.Drawing.Color.White;
+            this.txtCode.DisabledState.ForeColor = System.Drawing.Color.Black;
             this.txtCode.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCode.Enabled = false;
             this.txtCode.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtCode.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.txtCode.ForeColor = System.Drawing.Color.Black;
@@ -193,6 +196,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtCode.SelectedText = "";
             this.txtCode.Size = new System.Drawing.Size(320, 36);
             this.txtCode.TabIndex = 0;
+            this.txtCode.TabStop = false;
             // 
             // label14
             // 
@@ -228,6 +232,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.SelectedText = "";
             this.txtQuantity.Size = new System.Drawing.Size(320, 36);
             this.txtQuantity.TabIndex = 3;
+            this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantity_KeyPress);
             // 
             // label15
             // 
@@ -282,9 +287,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.BorderRadius = 3;
             this.txtDiscount.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtDiscount.DefaultText = "";
-            this.txtDiscount.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtDiscount.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtDiscount.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtDiscount.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+            this.txtDiscount.DisabledState.FillColor = System.Drawing.Color.White;
+            this.txtDiscount.DisabledState.ForeColor = System.Drawing.Color.Black;
             this.txtDiscount.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtDiscount.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtDiscount.Font = new System.Drawing.Font("Segoe UI", 9.5F);
@@ -298,6 +303,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.SelectedText = "";
             this.txtDiscount.Size = new System.Drawing.Size(320, 36);
             this.txtDiscount.TabIndex = 5;
+            this.txtDiscount.TextChanged += new System.EventHandler(this.txtDiscount_TextChanged);
+            this.txtDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiscount_KeyPress);
             // 
             // label17
             // 
@@ -333,6 +340,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPrice.SelectedText = "";
             this.txtPrice.Size = new System.Drawing.Size(320, 36);
             this.txtPrice.TabIndex = 4;
+            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
+            this.txtPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrice_KeyPress);
             // 
             // label19
             // 
@@ -387,10 +396,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscounted.BorderRadius = 3;
             this.txtDiscounted.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtDiscounted.DefaultText = "";
-            this.txtDiscounted.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtDiscounted.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtDiscounted.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtDiscounted.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+            this.txtDiscounted.DisabledState.FillColor = System.Drawing.Color.White;
+            this.txtDiscounted.DisabledState.ForeColor = System.Drawing.Color.Black;
             this.txtDiscounted.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtDiscounted.Enabled = false;
             this.txtDiscounted.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtDiscounted.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.txtDiscounted.ForeColor = System.Drawing.Color.Black;
@@ -403,6 +413,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscounted.SelectedText = "";
             this.txtDiscounted.Size = new System.Drawing.Size(320, 36);
             this.txtDiscounted.TabIndex = 6;
+            this.txtDiscounted.TabStop = false;
             // 
             // frmAddProduct
             // 
@@ -434,6 +445,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Name = "frmAddProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ADD PRODUCT";
+            this.Load += new System.EventHandler(this.frmAddProduct_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.ResumeLayout(false);

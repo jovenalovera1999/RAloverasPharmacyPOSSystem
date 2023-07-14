@@ -91,7 +91,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     if (user.InsertUser(profilePicture, this.txtFirstName.Text, this.txtMiddleName.Text, this.txtLastName.Text, this.txtAddress.Text, this.txtContactNumber.Text,
                         txtEmail.Text, this.txtUsername.Text, this.txtPassword.Text))
                     {
-                        MessageBox.Show("User successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("User was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         profilePicture = null;
                         this.txtFirstName.ResetText();

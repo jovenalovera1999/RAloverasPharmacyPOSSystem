@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace RAloverasPharmacyPOSSystem.Components
 {
-    class Values
+    class Value
     {
         public string serverName = "localhost";
         public string serverUser = "root";
         public string serverPass = "";
         public string port = "3307";
         public string database = "raloveraspharmacy_db";
+
+        // My values
 
         private static long myId;
         public long MyId
@@ -81,7 +83,7 @@ namespace RAloverasPharmacyPOSSystem.Components
         {
             get
             {
-                if(String.IsNullOrWhiteSpace(myMiddleName))
+                if (String.IsNullOrWhiteSpace(myMiddleName))
                 {
                     return string.Format("{0} {1}", myFirstName, myLastName);
                 }
@@ -90,6 +92,33 @@ namespace RAloverasPharmacyPOSSystem.Components
                     return string.Format("{0} {1}. {2}", myFirstName, myMiddleName[0], myLastName);
                 }
             }
+        }
+
+        // Get description id values
+
+        private long descriptionId;
+        public long DescriptionId
+        {
+            get { return descriptionId; }
+            set { descriptionId = value; }
+        }
+
+        // Get packaging unit id values
+
+        private long packagingUnitId;
+        public long PackagingUnitId
+        {
+            get { return packagingUnitId; }
+            set { packagingUnitId = value; }
+        }
+
+        // Get generic id values
+
+        private long genericId;
+        public long GenericId
+        {
+            get { return genericId; }
+            set { genericId = value; }
         }
     }
 }

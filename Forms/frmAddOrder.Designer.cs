@@ -116,7 +116,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridProducts.ReadOnly = true;
             this.gridProducts.RowHeadersVisible = false;
             this.gridProducts.RowTemplate.Height = 36;
-            this.gridProducts.Size = new System.Drawing.Size(863, 183);
+            this.gridProducts.Size = new System.Drawing.Size(863, 196);
             this.gridProducts.TabIndex = 1;
             this.gridProducts.TabStop = false;
             this.gridProducts.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -147,6 +147,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.clmProductId.Name = "clmProductId";
             this.clmProductId.ReadOnly = true;
             this.clmProductId.Visible = false;
+            this.clmProductId.Width = 17;
             // 
             // clmCode
             // 
@@ -257,12 +258,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
             this.guna2DataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.guna2DataGridView1.Location = new System.Drawing.Point(12, 270);
+            this.guna2DataGridView1.Location = new System.Drawing.Point(12, 283);
             this.guna2DataGridView1.Name = "guna2DataGridView1";
             this.guna2DataGridView1.ReadOnly = true;
             this.guna2DataGridView1.RowHeadersVisible = false;
             this.guna2DataGridView1.RowTemplate.Height = 36;
-            this.guna2DataGridView1.Size = new System.Drawing.Size(863, 205);
+            this.guna2DataGridView1.Size = new System.Drawing.Size(863, 175);
             this.guna2DataGridView1.TabIndex = 2;
             this.guna2DataGridView1.TabStop = false;
             this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -293,6 +294,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 17;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -345,7 +347,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 250);
+            this.label1.Location = new System.Drawing.Point(12, 263);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 17);
@@ -432,7 +434,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(551, -9);
+            this.label4.Location = new System.Drawing.Point(563, -9);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
@@ -455,7 +457,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.guna2TextBox1.ForeColor = System.Drawing.Color.Black;
             this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.guna2TextBox1.Location = new System.Drawing.Point(555, 16);
+            this.guna2TextBox1.Location = new System.Drawing.Point(567, 16);
             this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.guna2TextBox1.Name = "guna2TextBox1";
             this.guna2TextBox1.PasswordChar = '\0';

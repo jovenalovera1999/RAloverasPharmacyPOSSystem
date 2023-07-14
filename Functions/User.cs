@@ -11,7 +11,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
     class User
     {
         Components.Connection con = new Components.Connection();
-        Components.Values val = new Components.Values();
+        Components.Value val = new Components.Value();
 
         public bool LoginUser(string username, string password)
         {

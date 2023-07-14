@@ -8,7 +8,7 @@ namespace RAloverasPharmacyPOSSystem.Components
 {
     class Connection
     {
-        Components.Values val = new Components.Values();
+        Components.Value val = new Components.Value();
 
         public string conString()
         {

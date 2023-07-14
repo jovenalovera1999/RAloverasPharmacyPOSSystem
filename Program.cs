@@ -16,7 +16,7 @@ namespace RAloverasPharmacyPOSSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.frmDashboard());
+            Application.Run(new Forms.frmAddProduct());
         }
     }
 }

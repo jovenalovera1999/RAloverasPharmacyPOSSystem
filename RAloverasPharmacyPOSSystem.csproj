@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Connection.cs" />
-    <Compile Include="Components\Values.cs" />
+    <Compile Include="Components\Value.cs" />
     <Compile Include="Forms\frmAddOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +154,8 @@
     <Compile Include="Forms\frmUpdateUser.Designer.cs">
       <DependentUpon>frmUpdateUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Functions\Exist.cs" />
+    <Compile Include="Functions\Product.cs" />
     <Compile Include="Functions\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
