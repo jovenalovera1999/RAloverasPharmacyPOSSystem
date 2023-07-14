@@ -34,13 +34,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnAddUser = new Guna.UI2.WinForms.Guna2Button();
             this.gridUsers = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.clmUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmContactNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnPrevious = new Guna.UI2.WinForms.Guna2Button();
             this.btnNext = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridUsers)).BeginInit();
@@ -81,27 +74,19 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.OliveDrab;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.OliveDrab;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gridUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gridUsers.ColumnHeadersHeight = 36;
             this.gridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.gridUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmUserId,
-            this.clmFirstName,
-            this.clmMiddleName,
-            this.clmLastName,
-            this.clmAddress,
-            this.clmContactNumber,
-            this.clmEmail});
             this.gridUsers.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkOliveGreen;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridUsers.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridUsers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
@@ -134,55 +119,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridUsers.ThemeStyle.RowsStyle.Height = 36;
             this.gridUsers.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gridUsers.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // clmUserId
-            // 
-            this.clmUserId.HeaderText = "";
-            this.clmUserId.Name = "clmUserId";
-            this.clmUserId.ReadOnly = true;
-            this.clmUserId.Visible = false;
-            // 
-            // clmFirstName
-            // 
-            this.clmFirstName.HeaderText = "FIRST NAME";
-            this.clmFirstName.Name = "clmFirstName";
-            this.clmFirstName.ReadOnly = true;
-            this.clmFirstName.Width = 94;
-            // 
-            // clmMiddleName
-            // 
-            this.clmMiddleName.HeaderText = "MIDDLE NAME";
-            this.clmMiddleName.Name = "clmMiddleName";
-            this.clmMiddleName.ReadOnly = true;
-            this.clmMiddleName.Width = 108;
-            // 
-            // clmLastName
-            // 
-            this.clmLastName.HeaderText = "LAST NAME";
-            this.clmLastName.Name = "clmLastName";
-            this.clmLastName.ReadOnly = true;
-            this.clmLastName.Width = 92;
-            // 
-            // clmAddress
-            // 
-            this.clmAddress.HeaderText = "ADDRESS";
-            this.clmAddress.Name = "clmAddress";
-            this.clmAddress.ReadOnly = true;
-            this.clmAddress.Width = 86;
-            // 
-            // clmContactNumber
-            // 
-            this.clmContactNumber.HeaderText = "CONTACT NUMBER";
-            this.clmContactNumber.Name = "clmContactNumber";
-            this.clmContactNumber.ReadOnly = true;
-            this.clmContactNumber.Width = 132;
-            // 
-            // clmEmail
-            // 
-            this.clmEmail.HeaderText = "EMAIL";
-            this.clmEmail.Name = "clmEmail";
-            this.clmEmail.ReadOnly = true;
-            this.clmEmail.Width = 67;
             // 
             // btnPrevious
             // 
@@ -237,6 +173,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Name = "frmListUsers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LIST OF USERS";
+            this.Load += new System.EventHandler(this.frmListUsers_Load);
+            this.VisibleChanged += new System.EventHandler(this.frmListUsers_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.gridUsers)).EndInit();
             this.ResumeLayout(false);
 
@@ -248,12 +186,5 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2DataGridView gridUsers;
         private Guna.UI2.WinForms.Guna2Button btnPrevious;
         private Guna.UI2.WinForms.Guna2Button btnNext;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmUserId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmFirstName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMiddleName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmLastName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmContactNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmEmail;
     }
 }

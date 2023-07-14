@@ -286,7 +286,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.Animated = true;
             this.txtDiscount.BorderRadius = 3;
             this.txtDiscount.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDiscount.DefaultText = "";
+            this.txtDiscount.DefaultText = "0";
             this.txtDiscount.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.txtDiscount.DisabledState.FillColor = System.Drawing.Color.White;
             this.txtDiscount.DisabledState.ForeColor = System.Drawing.Color.Black;
@@ -395,7 +395,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscounted.Animated = true;
             this.txtDiscounted.BorderRadius = 3;
             this.txtDiscounted.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDiscounted.DefaultText = "";
+            this.txtDiscounted.DefaultText = "0";
             this.txtDiscounted.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.txtDiscounted.DisabledState.FillColor = System.Drawing.Color.White;
             this.txtDiscounted.DisabledState.ForeColor = System.Drawing.Color.Black;
@@ -446,6 +446,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ADD PRODUCT";
             this.Load += new System.EventHandler(this.frmAddProduct_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmAddProduct_KeyDown);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.ResumeLayout(false);

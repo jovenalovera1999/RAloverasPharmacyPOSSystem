@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace RAloverasPharmacyPOSSystem.Functions
 {
@@ -61,6 +62,37 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 Console.WriteLine("Error logging in user: " + ex.ToString());
                 return false;
+            }
+        }
+
+        public void LoadUsers(DataGridView grid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(con.conString()))
+            {
+                string sql = @"CALL loadUsers();";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    connection.Open();
+
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    dt.Clear();
+                    da.Fill(dt);
+
+                    grid.DataSource = dt;
+
+                    grid.Columns["userId"].Visible = false;
+                    grid.Columns["CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1))"].HeaderText = "FULL NAME";
+                    grid.Columns["address"].HeaderText = "ADDRESS";
+                    grid.Columns["contactNumber"].HeaderText = "CONTACT NUMBER";
+                    grid.Columns["email"].HeaderText = "EMAIL";
+                    grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
+                    grid.Columns["dateUpdated"].HeaderText = "DATE UPDATED";
+
+                    connection.Close();
+                }
             }
         }
 

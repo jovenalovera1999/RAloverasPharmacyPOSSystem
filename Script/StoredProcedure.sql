@@ -64,7 +64,7 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT id
+		SELECT descriptionId
 		FROM descriptions
 		WHERE `description` = pDescription;
 	END$$
@@ -82,7 +82,7 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT id
+		SELECT packagingUnitId
 		FROM packaging_units
 		WHERE packagingUnitName = pPackagingUnitName;
 	END$$
@@ -117,7 +117,7 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT id
+		SELECT genericId
 		FROM generics
 		WHERE genericName = pGenericName;
 	END$$
@@ -154,7 +154,7 @@ CREATE
     | COMMENT 'string'*/
 	BEGIN
 		INSERT INTO products(`code`, descriptionId, packagingUnitId, quantity, price, discount, discounted, genericId)
-		VALUES(pCode, pDescriptionId, pPackagingUnitId, pQuantity, pPrice, pDiscount, pDiscounted, pGeneric);
+		VALUES(pCode, pDescriptionId, pPackagingUnitId, pQuantity, pPrice, pDiscount, pDiscounted, pGenericId);
 	END$$
 
 DELIMITER ;
@@ -173,6 +173,88 @@ CREATE
 		SELECT `code`
 		FROM products
 		WHERE `code` = pCode;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadProducts`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), p.discount, FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
+		FROM products AS p
+		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		INNER JOIN generics AS g ON p.genericId = g.genericId
+		WHERE isDeleted = 0
+		ORDER BY d.description ASC;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadUsers`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT userId, CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1)), address, contactNumber, email, dateCreated, dateUpdated
+		FROM users
+		WHERE isDeleted = 0
+		ORDER BY lastName AND firstName AND lastName ASC;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`getProduct`(pProductId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, p.price, p.discount, p.discounted, g.genericName
+		FROM products AS p
+		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		INNER JOIN generics AS g ON p.genericId = g.genericId
+		WHERE p.productId = pProductId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`updateProduct`(pProductId BIGINT, pDescriptionId BIGINT, pPackagingUnitId BIGINT, pQuantity INT, pPrice DOUBLE,
+    pDiscount DOUBLE, pDiscounted DOUBLE, pGenericId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE products
+		SET descriptionId = pDescriptionId, packagingUnitId = pPackagingUnitId, quantity = pQuantity, price = pPrice, discount = pDiscount,
+		discounted = pDiscounted, genericId = pGenericId, dateUpdated = CURRENT_TIMESTAMP
+		WHERE productId = pProductId;
 	END$$
 
 DELIMITER ;

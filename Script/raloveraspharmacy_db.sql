@@ -4,15 +4,19 @@ CREATE TABLE users(
 	firstName VARCHAR(45) NOT NULL,
 	middleName VARCHAR(45) DEFAULT NULL,
 	lastName VARCHAR(45) NOT NULL,
-	address VARCHAR(45) NOT NULL,
+	`address` VARCHAR(45) NOT NULL,
 	contactNumber VARCHAR(45) DEFAULT NULL,
 	email VARCHAR(45) DEFAULT NULL,
 	username VARCHAR(45) NOT NULL,
 	`password` VARBINARY(255) NOT NULL,
+	isDeleted TINYINT(1) DEFAULT 0,
 	dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	dateUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(userId)
 );
+
+INSERT INTO users(firstName, middleName, lastName, `address`, contactNumber, email, username, `password`)
+VALUES("JOVEN JOSHUA", "CELIZ", "ALOVERA", "ROXAS CITY", "09123456789", "joven@email.com", "admin", AES_ENCRYPT("admin", "J.v3n!j.$hu4c.@l0ver4!#@"));
 
 CREATE TABLE descriptions(
 	descriptionId BIGINT NOT NULL AUTO_INCREMENT,
@@ -45,9 +49,10 @@ CREATE TABLE products(
 	packagingUnitId BIGINT NOT NULL,
 	quantity INT NOT NULL,
 	price DOUBLE NOT NULL,
-	discount DOUBLE DEFAULT NULL,
-	discounted DOUBLE DEFAULT NULL,
+	discount DOUBLE NOT NULL,
+	discounted DOUBLE NOT NULL,
 	genericId BIGINT NOT NULL,
+	isDeleted TINYINT(1) DEFAULT 0,
 	dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	dateUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(productId),
@@ -59,7 +64,7 @@ CREATE TABLE products(
 CREATE TABLE discounts(
 	discountId BIGINT NOT NULL AUTO_INCREMENT,
 	discount VARCHAR(45) NOT NULL,
-	percentage INT NOT NULL,
+	`percentage` INT NOT NULL,
 	dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	dateUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(discountId)
@@ -73,6 +78,7 @@ CREATE TABLE transactions(
 	discountId BIGINT DEFAULT NULL,
 	amount DOUBLE NOT NULL,
 	userId BIGINT NOT NULL,
+	isDeleted TINYINT(1) DEFAULT 0,
 	dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	dateUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(transactionId),

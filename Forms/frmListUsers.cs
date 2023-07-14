@@ -16,5 +16,18 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             InitializeComponent();
         }
+
+        Functions.User user = new Functions.User();
+
+        private void frmListUsers_Load(object sender, EventArgs e)
+        {
+            this.KeyPreview = true;
+            user.LoadUsers(this.gridUsers);
+        }
+
+        private void frmListUsers_VisibleChanged(object sender, EventArgs e)
+        {
+            this.gridUsers.ClearSelection();
+        }
     }
 }

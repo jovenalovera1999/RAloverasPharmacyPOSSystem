@@ -29,21 +29,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gridProducts = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.clmProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmPackagingUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmGeneric = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmExpirationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmDateAdded = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmDateUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddProduct = new Guna.UI2.WinForms.Guna2Button();
             this.btnNext = new Guna.UI2.WinForms.Guna2Button();
             this.btnPrevious = new Guna.UI2.WinForms.Guna2Button();
@@ -58,44 +47,31 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridProducts.AllowUserToDeleteRows = false;
             this.gridProducts.AllowUserToResizeColumns = false;
             this.gridProducts.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            this.gridProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.gridProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridProducts.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.OliveDrab;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.OliveDrab;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.OliveDrab;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gridProducts.ColumnHeadersHeight = 36;
-            this.gridProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.gridProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmProductId,
-            this.clmCode,
-            this.clmDescription,
-            this.clmPackagingUnit,
-            this.clmPrice,
-            this.clmQuantity,
-            this.clmGeneric,
-            this.clmExpirationDate,
-            this.clmDateAdded,
-            this.clmDateUpdated,
-            this.clmAction});
             this.gridProducts.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridProducts.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkOliveGreen;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridProducts.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gridProducts.Location = new System.Drawing.Point(12, 55);
             this.gridProducts.Name = "gridProducts";
@@ -116,94 +92,17 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridProducts.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.gridProducts.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridProducts.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.gridProducts.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.gridProducts.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridProducts.ThemeStyle.HeaderStyle.Height = 36;
             this.gridProducts.ThemeStyle.ReadOnly = true;
             this.gridProducts.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
             this.gridProducts.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.gridProducts.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridProducts.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.gridProducts.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.White;
             this.gridProducts.ThemeStyle.RowsStyle.Height = 36;
-            this.gridProducts.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gridProducts.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // clmProductId
-            // 
-            this.clmProductId.HeaderText = "";
-            this.clmProductId.Name = "clmProductId";
-            this.clmProductId.ReadOnly = true;
-            this.clmProductId.Visible = false;
-            this.clmProductId.Width = 17;
-            // 
-            // clmCode
-            // 
-            this.clmCode.HeaderText = "CODE";
-            this.clmCode.Name = "clmCode";
-            this.clmCode.ReadOnly = true;
-            this.clmCode.Width = 65;
-            // 
-            // clmDescription
-            // 
-            this.clmDescription.HeaderText = "DESCRIPTION";
-            this.clmDescription.Name = "clmDescription";
-            this.clmDescription.ReadOnly = true;
-            this.clmDescription.Width = 110;
-            // 
-            // clmPackagingUnit
-            // 
-            this.clmPackagingUnit.HeaderText = "PACKAGING UNIT";
-            this.clmPackagingUnit.Name = "clmPackagingUnit";
-            this.clmPackagingUnit.ReadOnly = true;
-            this.clmPackagingUnit.Width = 121;
-            // 
-            // clmPrice
-            // 
-            this.clmPrice.HeaderText = "PRICE";
-            this.clmPrice.Name = "clmPrice";
-            this.clmPrice.ReadOnly = true;
-            this.clmPrice.Width = 64;
-            // 
-            // clmQuantity
-            // 
-            this.clmQuantity.HeaderText = "QUANTITY";
-            this.clmQuantity.Name = "clmQuantity";
-            this.clmQuantity.ReadOnly = true;
-            this.clmQuantity.Width = 92;
-            // 
-            // clmGeneric
-            // 
-            this.clmGeneric.HeaderText = "GENERIC";
-            this.clmGeneric.Name = "clmGeneric";
-            this.clmGeneric.ReadOnly = true;
-            this.clmGeneric.Width = 83;
-            // 
-            // clmExpirationDate
-            // 
-            this.clmExpirationDate.HeaderText = "EXPIRATION DATE";
-            this.clmExpirationDate.Name = "clmExpirationDate";
-            this.clmExpirationDate.ReadOnly = true;
-            this.clmExpirationDate.Width = 123;
-            // 
-            // clmDateAdded
-            // 
-            this.clmDateAdded.HeaderText = "DATE ADDED";
-            this.clmDateAdded.Name = "clmDateAdded";
-            this.clmDateAdded.ReadOnly = true;
-            this.clmDateAdded.Width = 98;
-            // 
-            // clmDateUpdated
-            // 
-            this.clmDateUpdated.HeaderText = "DATE UPDATED";
-            this.clmDateUpdated.Name = "clmDateUpdated";
-            this.clmDateUpdated.ReadOnly = true;
-            this.clmDateUpdated.Width = 110;
-            // 
-            // clmAction
-            // 
-            this.clmAction.HeaderText = "ACTION";
-            this.clmAction.Name = "clmAction";
-            this.clmAction.ReadOnly = true;
-            this.clmAction.Width = 77;
+            this.gridProducts.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.YellowGreen;
+            this.gridProducts.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.gridProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridProducts_CellContentClick);
             // 
             // btnAddProduct
             // 
@@ -318,6 +217,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Text = "LIST OF PRODUCTS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmListProducts_Load);
+            this.VisibleChanged += new System.EventHandler(this.frmListProducts_VisibleChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmListProducts_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.gridProducts)).EndInit();
             this.ResumeLayout(false);
@@ -333,16 +233,5 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2Button btnPrevious;
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmProductId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmPackagingUnit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmGeneric;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmExpirationDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmDateAdded;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmDateUpdated;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmAction;
     }
 }

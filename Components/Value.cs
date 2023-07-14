@@ -120,5 +120,70 @@ namespace RAloverasPharmacyPOSSystem.Components
             get { return genericId; }
             set { genericId = value; }
         }
+
+        // Product values
+
+        private long productId;
+        public long ProductId
+        {
+            get { return productId; }
+            set { productId = value; }
+        }
+
+        private string productCode;
+        public string ProductCode
+        {
+            get { return productCode; }
+            set { productCode = value; }
+        }
+
+        private string productDescription;
+        public string ProductDescription
+        {
+            get { return productDescription; }
+            set { productDescription = value; }
+        }
+
+        private string productPackagingUnit;
+        public string ProductPackagingUnit
+        {
+            get { return productPackagingUnit; }
+            set { productPackagingUnit = value; }
+        }
+
+        private int productQuantity;
+        public int ProductQuantity
+        {
+            get { return productQuantity; }
+            set { productQuantity = value; }
+        }
+
+        private double productPrice;
+        public double ProductPrice
+        {
+            get { return productPrice; }
+            set { productPrice = value; }
+        }
+
+        private double productDiscount;
+        public double ProductDiscount
+        {
+            get { return productDiscount; }
+            set { productDiscount = value; }
+        }
+
+        private double productDiscounted;
+        public double ProductDiscounted
+        {
+            get { return productDiscounted; }
+            set { productDiscounted = value; }
+        }
+
+        private string productGeneric;
+        public string ProductGeneric
+        {
+            get { return productGeneric; }
+            set { productGeneric = value; }
+        }
     }
 }

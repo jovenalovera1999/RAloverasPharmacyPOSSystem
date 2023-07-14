@@ -30,15 +30,22 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void CalculateDiscount()
         {
-            if(String.IsNullOrWhiteSpace(this.txtPrice.Text) && String.IsNullOrWhiteSpace(this.txtDiscount.Text) || String.IsNullOrWhiteSpace(this.txtPrice.Text) ||
+            if(String.IsNullOrWhiteSpace(this.txtPrice.Text) && this.txtDiscount.Text == "0" || String.IsNullOrWhiteSpace(this.txtPrice.Text) ||
+                this.txtDiscount.Text == "0")
+            {
+                this.txtDiscount.Text = "0";
+                this.txtDiscounted.Text = "0";
+            }
+            else if(String.IsNullOrWhiteSpace(this.txtPrice.Text) && String.IsNullOrWhiteSpace(this.txtDiscount.Text) || String.IsNullOrWhiteSpace(this.txtPrice.Text) ||
                 String.IsNullOrWhiteSpace(this.txtDiscount.Text))
             {
-                this.txtDiscounted.Text = null;
+                this.txtDiscount.Text = "0";
+                this.txtDiscounted.Text = "0";
             }
             else
             {
-                double discounted = double.Parse(this.txtPrice.Text) * (double.Parse(this.txtDiscount.Text) / 100);
-                this.txtDiscounted.Text = discounted.ToString();
+                double discount = double.Parse(this.txtPrice.Text) * (double.Parse(this.txtDiscount.Text) / 100);
+                this.txtDiscounted.Text = (double.Parse(this.txtPrice.Text) - discount).ToString();
             }
         }
 
@@ -57,26 +64,60 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void SaveProduct()
         {
-            if (product.AddProduct(this.txtCode.Text, this.txtDescription.Text, this.txtPackagingUnit.Text, int.Parse(this.txtQuantity.Text), double.Parse(this.txtPrice.Text),
-                double.Parse(txtDiscount.Text), double.Parse(txtDiscounted.Text), this.txtGeneric.Text))
+            if(String.IsNullOrWhiteSpace(this.txtDescription.Text))
             {
-                MessageBox.Show("Product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Description is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtDescription.Focus();
+            }
+            else if(String.IsNullOrWhiteSpace(this.txtPackagingUnit.Text))
+            {
+                MessageBox.Show("Packaging unit is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtPackagingUnit.Focus();
+            }
+            else if(String.IsNullOrWhiteSpace(this.txtQuantity.Text))
+            {
+                MessageBox.Show("Quantity is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtQuantity.Focus();
+            }
+            else if(String.IsNullOrWhiteSpace(this.txtPrice.Text))
+            {
+                MessageBox.Show("Price is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtPrice.Focus();
+            }
+            else if(String.IsNullOrWhiteSpace(this.txtGeneric.Text))
+            {
+                MessageBox.Show("Generic is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtGeneric.Focus();
             }
             else
             {
-                MessageBox.Show("Failed to save product!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (product.InsertProduct(this.txtCode.Text, this.txtDescription.Text, this.txtPackagingUnit.Text, int.Parse(this.txtQuantity.Text),
+                double.Parse(this.txtPrice.Text), double.Parse(this.txtDiscount.Text), double.Parse(this.txtDiscounted.Text), this.txtGeneric.Text))
+                {
+                    MessageBox.Show("Product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.txtCode.ResetText();
-                this.txtDescription.ResetText();
-                this.txtPackagingUnit.ResetText();
-                this.txtQuantity.ResetText();
-                this.txtPrice.ResetText();
-                this.txtDiscount.ResetText();
-                this.txtDiscounted.ResetText();
-                this.txtGeneric.ResetText();
+                    Forms.frmListProducts listProducts = (Forms.frmListProducts)Application.OpenForms["frmListProducts"];
+                    DataGridView gridProducts = (DataGridView)listProducts.Controls["gridProducts"];
+                    product.LoadProducts(gridProducts);
+                    gridProducts.ClearSelection();
 
-                AutoGenNum();
-                this.txtDescription.Focus();
+                    this.txtCode.ResetText();
+                    this.txtDescription.ResetText();
+                    this.txtPackagingUnit.ResetText();
+                    this.txtQuantity.ResetText();
+                    this.txtPrice.ResetText();
+                    this.txtGeneric.ResetText();
+
+                    this.txtDiscount.Text = "0";
+                    this.txtDiscounted.Text = "0";
+
+                    AutoGenNum();
+                    this.txtDescription.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to save product!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -123,6 +164,18 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 {
                     e.Handled = true;
                 }
+            }
+        }
+
+        private void frmAddProduct_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F1)
+            {
+                SaveProduct();
+            }
+            else if(e.KeyCode == Keys.F2)
+            {
+                this.Close();
             }
         }
 
