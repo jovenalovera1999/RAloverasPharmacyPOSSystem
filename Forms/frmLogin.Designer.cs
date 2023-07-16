@@ -63,7 +63,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtUsername
             // 
-            this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtUsername.Animated = true;
             this.txtUsername.BorderRadius = 3;
             this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -87,7 +86,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(11, 70);
@@ -100,7 +98,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(11, 141);
@@ -113,7 +110,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtPassword
             // 
-            this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtPassword.Animated = true;
             this.txtPassword.BorderRadius = 3;
             this.txtPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -137,7 +133,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // btnLogin
             // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLogin.Animated = true;
             this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -157,7 +152,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // btnExit
             // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Animated = true;
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExit.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -194,7 +188,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN";
             this.Load += new System.EventHandler(this.frmLogin_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmLogin_KeyPress);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLogin_KeyDown);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.ResumeLayout(false);

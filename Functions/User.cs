@@ -44,7 +44,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             val.MyAddress = dt.Rows[0].Field<string>("address");
                             val.MyContactNumber = dt.Rows[0].Field<string>("contactNumber");
                             val.MyEmail = dt.Rows[0].Field<string>("email");
-                            val.MyUsername = dt.Rows[0].Field<string>("username");
+                            val.MyUsername = dt.Rows[0].Field<string>("CAST(AES_DECRYPT(username, \"J.v3n!j.$hu4c.@l0ver4!#@\") AS CHAR)");
                             val.MyPassword = dt.Rows[0].Field<string>("CAST(AES_DECRYPT(`password`, \"J.v3n!j.$hu4c.@l0ver4!#@\") AS CHAR)");
 
                             connection.Close();
@@ -97,13 +97,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
         }
 
         public bool InsertUser(byte[] profilePicture, string firstName, string middleName, string lastName, string address, string contactNumber, string email,
-            string username, string password)
+            string username)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
-                    string sql = @"CALL insertUser(@profilePicture, @firstName, @middleName, @lastName, @address, @contactNumber, @email, @username, @password);";
+                    string sql = @"CALL insertUser(@profilePicture, @firstName, @middleName, @lastName, @address, @contactNumber, @email, @username);";
 
                     using(MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
@@ -115,7 +115,6 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
                         cmd.Parameters.AddWithValue("@email", email);
                         cmd.Parameters.AddWithValue("@username", username);
-                        cmd.Parameters.AddWithValue("@password", password);
 
                         connection.Open();
 

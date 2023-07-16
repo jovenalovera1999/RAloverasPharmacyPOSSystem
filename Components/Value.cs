@@ -96,7 +96,7 @@ namespace RAloverasPharmacyPOSSystem.Components
 
         // Get description id values
 
-        private long descriptionId;
+        private static long descriptionId;
         public long DescriptionId
         {
             get { return descriptionId; }
@@ -105,7 +105,7 @@ namespace RAloverasPharmacyPOSSystem.Components
 
         // Get packaging unit id values
 
-        private long packagingUnitId;
+        private static long packagingUnitId;
         public long PackagingUnitId
         {
             get { return packagingUnitId; }
@@ -114,7 +114,7 @@ namespace RAloverasPharmacyPOSSystem.Components
 
         // Get generic id values
 
-        private long genericId;
+        private static long genericId;
         public long GenericId
         {
             get { return genericId; }
@@ -123,63 +123,63 @@ namespace RAloverasPharmacyPOSSystem.Components
 
         // Product values
 
-        private long productId;
+        private static long productId;
         public long ProductId
         {
             get { return productId; }
             set { productId = value; }
         }
 
-        private string productCode;
+        private static string productCode;
         public string ProductCode
         {
             get { return productCode; }
             set { productCode = value; }
         }
 
-        private string productDescription;
+        private static string productDescription;
         public string ProductDescription
         {
             get { return productDescription; }
             set { productDescription = value; }
         }
 
-        private string productPackagingUnit;
+        private static string productPackagingUnit;
         public string ProductPackagingUnit
         {
             get { return productPackagingUnit; }
             set { productPackagingUnit = value; }
         }
 
-        private int productQuantity;
+        private static int productQuantity;
         public int ProductQuantity
         {
             get { return productQuantity; }
             set { productQuantity = value; }
         }
 
-        private double productPrice;
+        private static double productPrice;
         public double ProductPrice
         {
             get { return productPrice; }
             set { productPrice = value; }
         }
 
-        private double productDiscount;
+        private static double productDiscount;
         public double ProductDiscount
         {
             get { return productDiscount; }
             set { productDiscount = value; }
         }
 
-        private double productDiscounted;
+        private static double productDiscounted;
         public double ProductDiscounted
         {
             get { return productDiscounted; }
             set { productDiscounted = value; }
         }
 
-        private string productGeneric;
+        private static string productGeneric;
         public string ProductGeneric
         {
             get { return productGeneric; }

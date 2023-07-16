@@ -3,16 +3,16 @@ DELIMITER $$
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
     PROCEDURE `raloveraspharmacy_db`.`insertUser`(pProfilePicture BLOB, pFirstName VARCHAR(45), pMiddleName VARCHAR(45), pLastName VARCHAR(45),
-    pAddress VARCHAR(45), pContactNumber VARCHAR(45), pEmail VARCHAR(45), pUsername VARCHAR(45), pPassword VARBINARY(255))
+    pAddress VARCHAR(45), pContactNumber VARCHAR(45), pEmail VARCHAR(45), pUsername VARBINARY(255))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		INSERT INTO users(profilePicture, firstName, middleName, lastName, address, contactNumber, email, username, `password`)
-		VALUES(pProfilePicture, pFirstName, pMiddleName, pLastName, pAddress, pContactNumber, pEmail, pUsername,
-		AES_ENCRYPT(pPassword, "J.v3n!j.$hu4c.@l0ver4!#@"));
+		INSERT INTO users(profilePicture, firstName, middleName, lastName, address, contactNumber, email, username)
+		VALUES(pProfilePicture, pFirstName, pMiddleName, pLastName, pAddress, pContactNumber, pEmail,
+        AES_ENCRYPT(pUsername, "J.v3n!j.$hu4c.@l0ver4!#@"));
 	END$$
 
 DELIMITER ;
@@ -38,17 +38,18 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`loginUser`(pUsername VARCHAR(45), pPassword VARBINARY(255))
+    PROCEDURE `raloveraspharmacy_db`.`loginUser`(pUsername VARBINARY(255), pPassword VARBINARY(255))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT userId, profilePicture, firstName, middleName, lastName, address, contactNumber, email, username,
-		CAST(AES_DECRYPT(`password`, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR)
+		SELECT userId, profilePicture, firstName, middleName, lastName, address, contactNumber, email,
+		CAST(AES_DECRYPT(username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR), CAST(AES_DECRYPT(`password`, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR)
 		FROM users
-		WHERE username = pUsername AND CAST(AES_DECRYPT(`password`, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR) = pPassword;
+		WHERE CAST(AES_DECRYPT(username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR) = pUsername
+		AND CAST(AES_DECRYPT(`password`, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR) = pPassword;
 	END$$
 
 DELIMITER ;
@@ -188,13 +189,14 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), p.discount, FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
+		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), CONCAT(p.discount, '%'),
+		FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
 		FROM products AS p
 		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
 		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
 		INNER JOIN generics AS g ON p.genericId = g.genericId
 		WHERE isDeleted = 0
-		ORDER BY d.description ASC;
+		ORDER BY CONCAT(d.description, p.code) ASC;
 	END$$
 
 DELIMITER ;
@@ -213,7 +215,7 @@ CREATE
 		SELECT userId, CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1)), address, contactNumber, email, dateCreated, dateUpdated
 		FROM users
 		WHERE isDeleted = 0
-		ORDER BY lastName AND firstName AND lastName ASC;
+		ORDER BY CONCAT(lastName, firstName, middleName) ASC;
 	END$$
 
 DELIMITER ;
@@ -255,6 +257,48 @@ CREATE
 		SET descriptionId = pDescriptionId, packagingUnitId = pPackagingUnitId, quantity = pQuantity, price = pPrice, discount = pDiscount,
 		discounted = pDiscounted, genericId = pGenericId, dateUpdated = CURRENT_TIMESTAMP
 		WHERE productId = pProductId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`deleteProduct`(pProductId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE products
+		SET isDeleted = 1
+		WHERE productId = pProductId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`searchProduct`(pKeyword VARCHAR(45))
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), CONCAT(p.discount, '%'),
+		FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
+		FROM products AS p
+		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		INNER JOIN generics AS g ON p.genericId = g.genericId
+		WHERE p.code LIKE pKeyword AND isDeleted = 0 OR d.description LIKE pKeyword AND isDeleted = 0
+		OR pu.packagingUnitName LIKE pKeyword AND isDeleted = 0 OR g.genericName LIKE pKeyword AND isDeleted = 0
+		ORDER BY d.description ASC;
 	END$$
 
 DELIMITER ;

@@ -60,19 +60,23 @@ namespace RAloverasPharmacyPOSSystem.Forms
             }
         }
 
-        private void frmLogin_KeyPress(object sender, KeyPressEventArgs e)
+        private void frmLogin_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyChar == (char)13)
+            if (e.KeyCode == Keys.Enter)
             {
                 LoginUser();
+            }
+            else if(e.KeyCode == Keys.Escape)
+            {
+                Application.Exit();
             }
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
-
             CapsLock();
+
             this.txtUsername.Focus();
         }
 

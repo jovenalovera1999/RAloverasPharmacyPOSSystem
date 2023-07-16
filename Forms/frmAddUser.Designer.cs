@@ -47,10 +47,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtConfirmPassword = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnUpload = new Guna.UI2.WinForms.Guna2Button();
             this.btnRemove = new Guna.UI2.WinForms.Guna2Button();
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
@@ -94,7 +90,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 221);
@@ -107,7 +102,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtFirstName.Animated = true;
             this.txtFirstName.BorderRadius = 3;
             this.txtFirstName.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -131,7 +125,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // picProfilePicture
             // 
-            this.picProfilePicture.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picProfilePicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picProfilePicture.ImageRotate = 0F;
             this.picProfilePicture.Location = new System.Drawing.Point(12, 93);
@@ -143,7 +136,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 291);
@@ -156,7 +148,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtMiddleName
             // 
-            this.txtMiddleName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtMiddleName.Animated = true;
             this.txtMiddleName.BorderRadius = 3;
             this.txtMiddleName.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -180,7 +171,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(12, 361);
@@ -193,7 +183,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtLastName
             // 
-            this.txtLastName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtLastName.Animated = true;
             this.txtLastName.BorderRadius = 3;
             this.txtLastName.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -217,7 +206,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(338, 221);
@@ -230,7 +218,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtAddress
             // 
-            this.txtAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtAddress.Animated = true;
             this.txtAddress.BorderRadius = 3;
             this.txtAddress.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -254,7 +241,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(339, 291);
@@ -267,7 +253,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtContactNumber
             // 
-            this.txtContactNumber.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtContactNumber.Animated = true;
             this.txtContactNumber.BorderRadius = 3;
             this.txtContactNumber.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -292,7 +277,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // label6
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(338, 361);
@@ -305,7 +289,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtEmail
             // 
-            this.txtEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtEmail.Animated = true;
             this.txtEmail.BorderRadius = 3;
             this.txtEmail.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -329,7 +312,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtUsername
             // 
-            this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtUsername.Animated = true;
             this.txtUsername.BorderRadius = 3;
             this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -353,7 +335,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // label7
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(664, 221);
@@ -364,83 +345,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label7.TabIndex = 36;
             this.label7.Text = "USERNAME";
             // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(664, 291);
-            this.label8.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.label8.Name = "label8";
-            this.label8.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.label8.Size = new System.Drawing.Size(75, 32);
-            this.label8.TabIndex = 38;
-            this.label8.Text = "PASSWORD";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtPassword.Animated = true;
-            this.txtPassword.BorderRadius = 3;
-            this.txtPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtPassword.DefaultText = "";
-            this.txtPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtPassword.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.txtPassword.ForeColor = System.Drawing.Color.Black;
-            this.txtPassword.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtPassword.Location = new System.Drawing.Point(668, 316);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.PlaceholderText = "";
-            this.txtPassword.SelectedText = "";
-            this.txtPassword.Size = new System.Drawing.Size(320, 36);
-            this.txtPassword.TabIndex = 7;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(664, 361);
-            this.label11.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.label11.Name = "label11";
-            this.label11.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.label11.Size = new System.Drawing.Size(136, 32);
-            this.label11.TabIndex = 40;
-            this.label11.Text = "CONFIRM PASSWORD";
-            // 
-            // txtConfirmPassword
-            // 
-            this.txtConfirmPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtConfirmPassword.Animated = true;
-            this.txtConfirmPassword.BorderRadius = 3;
-            this.txtConfirmPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtConfirmPassword.DefaultText = "";
-            this.txtConfirmPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtConfirmPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtConfirmPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtConfirmPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtConfirmPassword.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.txtConfirmPassword.ForeColor = System.Drawing.Color.Black;
-            this.txtConfirmPassword.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtConfirmPassword.Location = new System.Drawing.Point(668, 386);
-            this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.PasswordChar = '*';
-            this.txtConfirmPassword.PlaceholderText = "";
-            this.txtConfirmPassword.SelectedText = "";
-            this.txtConfirmPassword.Size = new System.Drawing.Size(320, 36);
-            this.txtConfirmPassword.TabIndex = 8;
-            // 
             // btnUpload
             // 
-            this.btnUpload.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnUpload.Animated = true;
             this.btnUpload.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpload.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -460,7 +366,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // btnRemove
             // 
-            this.btnRemove.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnRemove.Animated = true;
             this.btnRemove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRemove.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -480,7 +385,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Animated = true;
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -500,7 +404,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // btnClose
             // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Animated = true;
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -528,10 +431,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnUpload);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.txtConfirmPassword);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.label6);
@@ -583,10 +482,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2TextBox txtEmail;
         private Guna.UI2.WinForms.Guna2TextBox txtUsername;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private Guna.UI2.WinForms.Guna2TextBox txtPassword;
-        private System.Windows.Forms.Label label11;
-        private Guna.UI2.WinForms.Guna2TextBox txtConfirmPassword;
         private Guna.UI2.WinForms.Guna2Button btnUpload;
         private Guna.UI2.WinForms.Guna2Button btnRemove;
         private Guna.UI2.WinForms.Guna2Button btnSave;

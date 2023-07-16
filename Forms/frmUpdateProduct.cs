@@ -49,7 +49,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             }
         }
 
-        private void SaveProduct()
+        private void UpdateProduct()
         {
             if (String.IsNullOrWhiteSpace(this.txtDescription.Text))
             {
@@ -81,23 +81,22 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 if (product.UpdateProduct(val.ProductId, this.txtDescription.Text, this.txtPackagingUnit.Text, int.Parse(this.txtQuantity.Text),
                     double.Parse(this.txtPrice.Text), double.Parse(this.txtDiscount.Text), double.Parse(this.txtDiscounted.Text), this.txtGeneric.Text))
                 {
-                    MessageBox.Show("Product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Product was successfully updated!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Forms.frmListProducts listProducts = (Forms.frmListProducts)Application.OpenForms["frmListProducts"];
+                    Guna.UI2.WinForms.Guna2TextBox txtSearch = (Guna.UI2.WinForms.Guna2TextBox)listProducts.Controls["txtSearch"];
                     DataGridView gridProducts = (DataGridView)listProducts.Controls["gridProducts"];
-                    product.LoadProducts(gridProducts);
+                    
+                    if(String.IsNullOrWhiteSpace(txtSearch.Text))
+                    {
+                        product.LoadProducts(gridProducts);
+                    }
+                    else
+                    {
+                        product.SearchProduct(txtSearch.Text, gridProducts);
+                    }
+
                     gridProducts.ClearSelection();
-
-                    this.txtCode.ResetText();
-                    this.txtDescription.ResetText();
-                    this.txtPackagingUnit.ResetText();
-                    this.txtQuantity.ResetText();
-                    this.txtPrice.ResetText();
-                    this.txtGeneric.ResetText();
-
-                    this.txtDiscount.Text = "0";
-                    this.txtDiscounted.Text = "0";
-
                     this.txtDescription.Focus();
                 }
                 else
@@ -107,34 +106,88 @@ namespace RAloverasPharmacyPOSSystem.Forms
             }
         }
 
+        private void CloseUpdateProductForm()
+        {
+            Forms.frmListProducts listProducts = (Forms.frmListProducts)Application.OpenForms["frmListProducts"];
+            DataGridView gridProducts = (DataGridView)listProducts.Controls["gridProducts"];
+            gridProducts.ClearSelection();
+
+            this.Close();
+        }
+
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            // Allows 0-9 and backspace
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+                return;
+            }
         }
 
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            // Allows 0-9, backspace and period
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46)
+            {
+                e.Handled = true;
+                return;
+            }
+            // Checks to make sure only 1 period is allowed
+            if (e.KeyChar == 46)
+            {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1)
+                {
+                    e.Handled = true;
+                }
+            }
         }
 
         private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            // Allows 0-9, backspace and period
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46)
+            {
+                e.Handled = true;
+                return;
+            }
+            // Checks to make sure only 1 period is allowed
+            if (e.KeyChar == 46)
+            {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1)
+                {
+                    e.Handled = true;
+                }
+            }
         }
 
         private void frmUpdateProduct_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.F1)
+            {
+                UpdateProduct();
+            }
+            else if (e.KeyCode == Keys.F2)
+            {
+                CloseUpdateProductForm();
+            }
         }
 
         private void txtPrice_TextChanged(object sender, EventArgs e)
         {
-
+            CalculateDiscount();
         }
 
         private void txtDiscount_TextChanged(object sender, EventArgs e)
         {
+            CalculateDiscount();
+        }
 
+        private void frmUpdateProduct_VisibleChanged(object sender, EventArgs e)
+        {
+            Forms.frmListProducts listProducts = (Forms.frmListProducts)Application.OpenForms["frmListProducts"];
+            Guna.UI2.WinForms.Guna2TextBox txtSearch = (Guna.UI2.WinForms.Guna2TextBox)listProducts.Controls["txtSearch"];
+            txtSearch.Focus();
         }
 
         private void frmUpdateProduct_Load(object sender, EventArgs e)
@@ -156,12 +209,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            UpdateProduct();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            CloseUpdateProductForm();
         }
     }
 }
