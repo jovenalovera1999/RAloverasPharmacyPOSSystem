@@ -16,11 +16,18 @@ namespace RAloverasPharmacyPOSSystem.Components
 
         // My values
 
-        private static long myId;
-        public long MyId
+        private static long myUserId;
+        public long MyUserId
         {
-            get { return myId; }
-            set { myId = value; }
+            get { return myUserId; }
+            set { myUserId = value; }
+        }
+
+        private static byte[] myProfilePicture;
+        public byte[] MyProfilePicture
+        {
+            get { return myProfilePicture; }
+            set { myProfilePicture = value; }
         }
 
         private static string myFirstName;

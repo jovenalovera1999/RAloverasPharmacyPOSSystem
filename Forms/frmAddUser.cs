@@ -19,6 +19,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         }
 
         Functions.User user = new Functions.User();
+        Functions.Exist exist = new Functions.Exist();
 
         private void CapsLock()
         {
@@ -54,6 +55,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
             else if (String.IsNullOrWhiteSpace(this.txtUsername.Text))
             {
                 MessageBox.Show("Username is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtUsername.Focus();
+            }
+            else if(exist.IsUsernameExist(this.txtUsername.Text))
+            {
+                MessageBox.Show("Username is already exist!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                this.txtUsername.ResetText();
                 this.txtUsername.Focus();
             }
             else
@@ -99,6 +107,29 @@ namespace RAloverasPharmacyPOSSystem.Forms
             }
         }
 
+        private void UploadPicture()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "All files(*.*)|*.*|PNG Files(*.png)|*.png|JPG Files(*.jpg)|*.jpg";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                imgLocation = dialog.FileName.ToString();
+                this.picProfilePicture.ImageLocation = imgLocation;
+            }
+
+            this.txtFirstName.Focus();
+        }
+
+        private void RemovePicture()
+        {
+            imgLocation = string.Empty;
+            this.picProfilePicture.ImageLocation = null;
+            this.picProfilePicture.Image = null;
+
+            this.txtFirstName.Focus();
+        }
+
         private void frmAddUser_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1)
@@ -111,24 +142,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             }
             else if(e.KeyCode == Keys.F3)
             {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "All files(*.*)|*.*|PNG Files(*.png)|*.png|JPG Files(*.jpg)|*.jpg";
-
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    imgLocation = dialog.FileName.ToString();
-                    this.picProfilePicture.ImageLocation = imgLocation;
-                }
-
-                this.txtFirstName.Focus();
+                UploadPicture();
             }
             else if(e.KeyCode == Keys.F4)
             {
-                imgLocation = string.Empty;
-                this.picProfilePicture.ImageLocation = null;
-                this.picProfilePicture.Image = null;
-
-                this.txtFirstName.Focus();
+                RemovePicture();
             }
         }
 
@@ -177,25 +195,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
         string imgLocation = string.Empty;
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "All files(*.*)|*.*|PNG Files(*.png)|*.png|JPG Files(*.jpg)|*.jpg";
-
-            if(dialog.ShowDialog() == DialogResult.OK)
-            {
-                imgLocation = dialog.FileName.ToString();
-                this.picProfilePicture.ImageLocation = imgLocation;
-            }
-
-            this.txtFirstName.Focus();
+            UploadPicture();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            imgLocation = string.Empty;
-            this.picProfilePicture.ImageLocation = null;
-            this.picProfilePicture.Image = null;
-
-            this.txtFirstName.Focus();
+            RemovePicture();
         }
 
         private void btnSave_Click(object sender, EventArgs e)

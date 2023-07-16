@@ -34,10 +34,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         if(dt.Rows.Count > 0)
                         {
+                            connection.Close();
                             return true;
                         }
                         else
                         {
+                            connection.Close();
                             return false;
                         }
                     }
@@ -46,6 +48,87 @@ namespace RAloverasPharmacyPOSSystem.Functions
             catch(Exception ex)
             {
                 Console.WriteLine("Error checking if the code exist in database: " + ex.ToString());
+                return false;
+            }
+        }
+
+        public bool IsUsernameExist(string username)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    string sql = @"CALL checkUsernameIfExist(@username);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@username", username);
+
+                        connection.Open();
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            connection.Close();
+                            return true;
+                        }
+                        else
+                        {
+                            connection.Close();
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error checking if the username exist in database: " + ex.ToString());
+                return false;
+            }
+        }
+
+        public bool proceedUpdateUserWithExistingUsername(long userId, string username)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    string sql = @"CALL proceedUpdateUserWithExistingUsername(@userId, @username);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        cmd.Parameters.AddWithValue("@username", username);
+
+                        connection.Open();
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            connection.Close();
+                            return true;
+                        }
+                        else
+                        {
+                            connection.Close();
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error proceeding to update user with existing username in database: " + ex.ToString());
                 return false;
             }
         }

@@ -65,6 +65,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Focus();
         }
 
+        private void OpenProfileForm()
+        {
+            Forms.frmProfile profile = new Forms.frmProfile();
+            profile.ShowDialog();
+        }
+
         private void LogoutUser()
         {
             if (MessageBox.Show("Are you sure you want to logout?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -100,6 +106,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
             else if(e.KeyCode == Keys.F8)
             {
                 OpenListUsersForm();
+            }
+            else if(e.KeyCode == Keys.F11)
+            {
+                OpenProfileForm();
             }
             else if(e.KeyCode == Keys.F12)
             {
@@ -148,7 +158,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
-
+            OpenProfileForm();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

@@ -27,6 +27,45 @@ namespace RAloverasPharmacyPOSSystem.Forms
             addUser.ShowDialog();
         }
 
+        private void gridUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(this.gridUsers.Columns[e.ColumnIndex].Name == "btnResetPassword")
+            {
+                if(MessageBox.Show("Are you sure do you want to reset the password of this user?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    == DialogResult.Yes)
+                {
+                    if(user.ResetPasswordUser(long.Parse(this.gridUsers.SelectedCells[2].Value.ToString())))
+                    {
+                        MessageBox.Show("User's password has been reset to default!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        user.LoadUsers(this.gridUsers);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to reset the password of the user to default!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                this.gridUsers.ClearSelection();
+            }
+            else if(this.gridUsers.Columns[e.ColumnIndex].Name == "btnDelete")
+            {
+                if(MessageBox.Show("Are you sure you want to delete this user?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if(user.DeleteUser(long.Parse(this.gridUsers.SelectedCells[2].Value.ToString())))
+                    {
+                        MessageBox.Show("User was successfully deleted!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        user.LoadUsers(this.gridUsers);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete user!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                this.gridUsers.ClearSelection();
+            }
+        }
+
         private void frmListUsers_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;

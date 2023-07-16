@@ -37,7 +37,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         if(dt.Rows.Count > 0)
                         {
-                            val.MyId = dt.Rows[0].Field<long>("userId");
+                            val.MyUserId = dt.Rows[0].Field<long>("userId");
+                            val.MyProfilePicture = dt.Rows[0].Field<byte[]>("profilePicture");
                             val.MyFirstName = dt.Rows[0].Field<string>("firstName");
                             val.MyMiddleName = dt.Rows[0].Field<string>("middleName");
                             val.MyLastName = dt.Rows[0].Field<string>("lastName");
@@ -65,6 +66,36 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
+        public bool ResetPasswordUser(long userId)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    string sql = @"CALL resetUserPassword(@userId);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+
+                        connection.Open();
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error reseting the password of the user from database: " + ex.ToString());
+                return false;
+            }
+        }
+
         public void LoadUsers(DataGridView grid)
         {
             using (MySqlConnection connection = new MySqlConnection(con.conString()))
@@ -88,6 +119,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     grid.Columns["address"].HeaderText = "ADDRESS";
                     grid.Columns["contactNumber"].HeaderText = "CONTACT NUMBER";
                     grid.Columns["email"].HeaderText = "EMAIL";
+                    grid.Columns["CAST(AES_DECRYPT(username, \"J.v3n!j.$hu4c.@l0ver4!#@\") AS CHAR)"].HeaderText = "USERNAME";
                     grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
                     grid.Columns["dateUpdated"].HeaderText = "DATE UPDATED";
 
@@ -130,6 +162,77 @@ namespace RAloverasPharmacyPOSSystem.Functions
             catch(Exception ex)
             {
                 Console.WriteLine("Error inserting user to database: " + ex.ToString());
+                return false;
+            }
+        }
+
+        public bool UpdateUser(long userId, byte[] profilePicture, string firstName, string middleName, string lastName, string address, string contactNumber, string email,
+            string username, string password)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    string sql = @"CALL updateUser(@userId, @profilePicture, @firstName, @middleName, @lastName, @address, @contactNumber, @email,
+                                    @username, @password);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        cmd.Parameters.AddWithValue("@profilePicture", profilePicture);
+                        cmd.Parameters.AddWithValue("@firstName", firstName);
+                        cmd.Parameters.AddWithValue("@middleName", middleName);
+                        cmd.Parameters.AddWithValue("@lastName", lastName);
+                        cmd.Parameters.AddWithValue("@address", address);
+                        cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
+                        cmd.Parameters.AddWithValue("@email", email);
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+
+                        connection.Open();
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error updating user in database: " + ex.ToString());
+                return false;
+            }
+        }
+
+        public bool DeleteUser(long userId)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    string sql = @"CALL deleteUser(@userId);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+
+                        connection.Open();
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error deleting user in database: " + ex.ToString());
                 return false;
             }
         }

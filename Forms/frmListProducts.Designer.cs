@@ -74,6 +74,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridProducts.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gridProducts.Location = new System.Drawing.Point(12, 55);
+            this.gridProducts.MultiSelect = false;
             this.gridProducts.Name = "gridProducts";
             this.gridProducts.ReadOnly = true;
             this.gridProducts.RowHeadersVisible = false;

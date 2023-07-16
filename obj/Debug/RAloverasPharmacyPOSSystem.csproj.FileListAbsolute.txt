@@ -42,3 +42,4 @@ C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmAddOrderQuantity.resources
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmPayment.resources
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.csproj.AssemblyReference.cache
+C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmProfile.resources
