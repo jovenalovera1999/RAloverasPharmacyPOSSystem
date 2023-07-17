@@ -148,15 +148,15 @@ DELIMITER $$
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
     PROCEDURE `raloveraspharmacy_db`.`insertProduct`(pCode VARCHAR(45), pDescriptionId BIGINT, pPackagingUnitId BIGINT, pQuantity INT, pPrice DOUBLE,
-    pDiscount DOUBLE, pDiscounted DOUBLE, pGenericId BIGINT)
+    pDiscountId BIGINT, pDiscounted DOUBLE, pGenericId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		INSERT INTO products(`code`, descriptionId, packagingUnitId, quantity, price, discount, discounted, genericId)
-		VALUES(pCode, pDescriptionId, pPackagingUnitId, pQuantity, pPrice, pDiscount, pDiscounted, pGenericId);
+		INSERT INTO products(`code`, descriptionId, packagingUnitId, quantity, price, discountId, discounted, genericId)
+		VALUES(pCode, pDescriptionId, pPackagingUnitId, pQuantity, pPrice, pDiscountId, pDiscounted, pGenericId);
 	END$$
 
 DELIMITER ;
@@ -190,11 +190,12 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), CONCAT(p.discount, '%'),
+		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), CONCAT(dis.discount, '%'),
 		FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
 		FROM products AS p
 		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
 		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		INNER JOIN discounts AS dis ON p.discountId = dis.discountId
 		INNER JOIN generics AS g ON p.genericId = g.genericId
 		WHERE isDeleted = 0
 		ORDER BY CONCAT(d.description, p.code) ASC;
@@ -233,10 +234,11 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, p.price, p.discount, p.discounted, g.genericName
+		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, p.price, dis.discount, p.discounted, g.genericName
 		FROM products AS p
 		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
 		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		INNER JOIN discounts AS dis ON p.discountId = dis.discountId
 		INNER JOIN generics AS g ON p.genericId = g.genericId
 		WHERE p.productId = pProductId;
 	END$$
@@ -248,7 +250,7 @@ DELIMITER $$
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
     PROCEDURE `raloveraspharmacy_db`.`updateProduct`(pProductId BIGINT, pDescriptionId BIGINT, pPackagingUnitId BIGINT, pQuantity INT, pPrice DOUBLE,
-    pDiscount DOUBLE, pDiscounted DOUBLE, pGenericId BIGINT)
+    pDiscountId BIGINT, pDiscounted DOUBLE, pGenericId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -256,7 +258,7 @@ CREATE
     | COMMENT 'string'*/
 	BEGIN
 		UPDATE products
-		SET descriptionId = pDescriptionId, packagingUnitId = pPackagingUnitId, quantity = pQuantity, price = pPrice, discount = pDiscount,
+		SET descriptionId = pDescriptionId, packagingUnitId = pPackagingUnitId, quantity = pQuantity, price = pPrice, discountId = pDiscountId,
 		discounted = pDiscounted, genericId = pGenericId, dateUpdated = CURRENT_TIMESTAMP
 		WHERE productId = pProductId;
 	END$$
@@ -292,15 +294,16 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), CONCAT(p.discount, '%'),
+		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), CONCAT(dis.discount, '%'),
 		FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
 		FROM products AS p
 		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
 		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		INNER JOIN discounts AS dis ON p.discountId = dis.discountId
 		INNER JOIN generics AS g ON p.genericId = g.genericId
 		WHERE p.code LIKE pKeyword AND isDeleted = 0 OR d.description LIKE pKeyword AND isDeleted = 0
 		OR pu.packagingUnitName LIKE pKeyword AND isDeleted = 0 OR g.genericName LIKE pKeyword AND isDeleted = 0
-		ORDER BY d.description ASC;
+		ORDER BY CONCAT(d.description, p.code) ASC;
 	END$$
 
 DELIMITER ;
@@ -398,6 +401,93 @@ CREATE
 		WHERE userId = pUserId
 		AND CAST(AES_DECRYPT(username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR) = pUsername
 		AND isDeleted = 0;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`getDiscountId`(pDiscount DOUBLE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT discountId
+		FROM discounts
+		WHERE discount = pDiscount;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`insertDiscount`(pDiscount DOUBLE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		INSERT INTO discounts(discount)
+		VALUES(pDiscount);
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`insertUserForPayment`(pUserId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		INSERT INTO user_for_payments(userId)
+		VALUES(pUserId);
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`getUserForPaymentIdDesc`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT userForPaymentId
+		FROM user_for_payments
+		ORDER BY userForPaymentId DESC LIMIT 1;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`insertCart`(pUserForPaymentId BIGINT, pProductId BIGINT, pQuantity INT, pSubTotal DOUBLE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		INSERT INTO carts(userForPaymentId, productId, quantity, subTotal)
+		VALUES(pUserForPaymentId, pProductId, pQuantity, pSubTotal);
 	END$$
 
 DELIMITER ;

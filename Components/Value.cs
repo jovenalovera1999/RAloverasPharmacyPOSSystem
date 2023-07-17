@@ -119,6 +119,15 @@ namespace RAloverasPharmacyPOSSystem.Components
             set { packagingUnitId = value; }
         }
 
+        // Get discount id values
+
+        private static long discountId;
+        public long DiscountId
+        {
+            get { return discountId; }
+            set { discountId = value; }
+        }
+
         // Get generic id values
 
         private static long genericId;
@@ -126,6 +135,15 @@ namespace RAloverasPharmacyPOSSystem.Components
         {
             get { return genericId; }
             set { genericId = value; }
+        }
+
+        // Get user for payment id values
+
+        private static long userForPaymentId;
+        public long UserForPaymentId
+        {
+            get { return userForPaymentId; }
+            set { userForPaymentId = value; }
         }
 
         // Product values
@@ -191,6 +209,15 @@ namespace RAloverasPharmacyPOSSystem.Components
         {
             get { return productGeneric; }
             set { productGeneric = value; }
+        }
+
+        // Quantity values
+
+        private static int productCartQuantity;
+        public int ProductCartQuantity
+        {
+            get { return productCartQuantity; }
+            set { productCartQuantity = value; }
         }
     }
 }

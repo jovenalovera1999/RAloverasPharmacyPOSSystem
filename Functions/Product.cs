@@ -40,7 +40,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["packagingUnitName"].HeaderText = "PACKAGING UNIT";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
                         grid.Columns["FORMAT(p.price, 2)"].HeaderText = "PRICE";
-                        grid.Columns["CONCAT(p.discount, '%')"].HeaderText = "DISCOUNT (PERCENTAGE)";
+                        grid.Columns["CONCAT(dis.discount, '%')"].HeaderText = "DISCOUNT (PERCENTAGE)";
                         grid.Columns["FORMAT(p.discounted, 2)"].HeaderText = "DISCOUNTED";
                         grid.Columns["genericName"].HeaderText = "GENERIC";
                         grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
@@ -84,7 +84,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["packagingUnitName"].HeaderText = "PACKAGING UNIT";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
                         grid.Columns["FORMAT(p.price, 2)"].HeaderText = "PRICE";
-                        grid.Columns["CONCAT(p.discount, '%')"].HeaderText = "DISCOUNT (PERCENTAGE)";
+                        grid.Columns["CONCAT(dis.discount, '%')"].HeaderText = "DISCOUNT (PERCENTAGE)";
                         grid.Columns["FORMAT(p.discounted, 2)"].HeaderText = "DISCOUNTED";
                         grid.Columns["genericName"].HeaderText = "GENERIC";
                         grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
@@ -156,6 +156,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 bool isDescriptionExist = false;
                 bool isPackagingUnitExist = false;
+                bool isDiscountExist = false;
                 bool isGenericExist = false;
 
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
@@ -264,6 +265,57 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         }
                     }
 
+                    sql = @"CALL getDiscountId(@discount);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@discount", discount);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            isDiscountExist = true;
+                            val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                        }
+                    }
+
+                    if(isDiscountExist == false)
+                    {
+                        sql = @"CALL insertDiscount(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            dr.Close();
+                        }
+
+                        sql = @"CALL getDiscountId(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+
+                            dt.Clear();
+                            da.Fill(dt);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                isDiscountExist = true;
+                                val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                            }
+                        }
+                    }
+
                     sql = @"CALL getGenericId(@generic);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
@@ -324,7 +376,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@packagingUnitId", val.PackagingUnitId);
                         cmd.Parameters.AddWithValue("@quantity", quantity);
                         cmd.Parameters.AddWithValue("@price", price);
-                        cmd.Parameters.AddWithValue("@discount", discount);
+                        cmd.Parameters.AddWithValue("@discount", val.DiscountId);
                         cmd.Parameters.AddWithValue("@discounted", discounted);
                         cmd.Parameters.AddWithValue("@genericId", val.GenericId);
 
@@ -351,6 +403,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 bool isDescriptionExist = false;
                 bool isPackagingUnitExist = false;
+                bool isDiscountExist = false;
                 bool isGenericExist = false;
 
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
@@ -459,6 +512,57 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         }
                     }
 
+                    sql = @"CALL getDiscountId(@discount);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@discount", discount);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            isDiscountExist = true;
+                            val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                        }
+                    }
+
+                    if (isDiscountExist == false)
+                    {
+                        sql = @"CALL insertDiscount(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            dr.Close();
+                        }
+
+                        sql = @"CALL getDiscountId(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+
+                            dt.Clear();
+                            da.Fill(dt);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                isDiscountExist = true;
+                                val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                            }
+                        }
+                    }
+
                     sql = @"CALL getGenericId(@generic);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
@@ -519,7 +623,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@packagingUnitId", val.PackagingUnitId);
                         cmd.Parameters.AddWithValue("@quantity", quantity);
                         cmd.Parameters.AddWithValue("@price", price);
-                        cmd.Parameters.AddWithValue("@discount", discount);
+                        cmd.Parameters.AddWithValue("@discount", val.DiscountId);
                         cmd.Parameters.AddWithValue("@discounted", discounted);
                         cmd.Parameters.AddWithValue("@genericId", val.GenericId);
 

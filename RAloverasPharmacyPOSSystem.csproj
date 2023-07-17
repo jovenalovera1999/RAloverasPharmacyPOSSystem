@@ -161,6 +161,7 @@
       <DependentUpon>frmUpdateUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Functions\Exist.cs" />
+    <Compile Include="Functions\Order.cs" />
     <Compile Include="Functions\Product.cs" />
     <Compile Include="Functions\User.cs" />
     <Compile Include="Program.cs" />
