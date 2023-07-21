@@ -71,7 +71,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["description"].HeaderText = "DESCRIPTION";
                         grid.Columns["price"].HeaderText = "PRICE";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
-                        grid.Columns["subTotal"].HeaderText = "SUB TOTAL";
+                        grid.Columns["FORMAT(c.subTotal, 2)"].HeaderText = "SUB TOTAL";
 
                         connection.Close();
                     }

@@ -503,7 +503,7 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT c.cartId, d.description, p.price, c.quantity, c.subTotal
+		SELECT c.cartId, d.description, p.price, c.quantity, FORMAT(c.subTotal, 2)
 		FROM carts AS c
 		INNER JOIN products AS p ON c.productId = p.productId
 		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
@@ -526,6 +526,7 @@ CREATE
 		SELECT ufp.userForPaymentId, CONCAT(u.lastName, ', ', u.firstName, ' ', u.middleName)
 		FROM user_for_payments AS ufp
 		INNER JOIN users AS u ON ufp.userId = u.userId
+		WHERE ufp.isPaid = 0
 		ORDER BY ufp.userForPaymentId ASC;
 	END$$
 

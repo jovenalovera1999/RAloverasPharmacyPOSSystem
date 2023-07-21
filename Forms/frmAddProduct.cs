@@ -45,7 +45,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             else
             {
                 double discount = double.Parse(this.txtPrice.Text) * (double.Parse(this.txtDiscount.Text) / 100);
-                this.txtDiscounted.Text = (double.Parse(this.txtPrice.Text) - discount).ToString();
+                this.txtDiscounted.Text = (double.Parse(this.txtPrice.Text) - discount).ToString("0.00");
             }
         }
 
