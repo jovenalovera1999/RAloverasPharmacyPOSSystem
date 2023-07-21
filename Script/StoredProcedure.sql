@@ -491,3 +491,42 @@ CREATE
 	END$$
 
 DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadCartsForPayment`(pUserForPaymentId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT c.cartId, d.description, p.price, c.quantity, c.subTotal
+		FROM carts AS c
+		INNER JOIN products AS p ON c.productId = p.productId
+		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
+		WHERE c.userForPaymentId = pUserForPaymentId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadUsersForPayment`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT ufp.userForPaymentId, CONCAT(u.lastName, ', ', u.firstName, ' ', u.middleName)
+		FROM user_for_payments AS ufp
+		INNER JOIN users AS u ON ufp.userId = u.userId
+		ORDER BY ufp.userForPaymentId ASC;
+	END$$
+
+DELIMITER ;

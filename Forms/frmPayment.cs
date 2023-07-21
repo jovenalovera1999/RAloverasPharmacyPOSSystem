@@ -17,9 +17,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
             InitializeComponent();
         }
 
+        Functions.Payment payment = new Functions.Payment();
+
         private void frmPayment_Load(object sender, EventArgs e)
         {
-
+            payment.LoadUsersForPayment(this.gridForPaymentTransaction);
+            payment.LoadCartsForPayment(long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString()), this.gridCart);
         }
     }
 }

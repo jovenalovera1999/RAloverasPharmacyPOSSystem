@@ -5,87 +5,81 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace RAloverasPharmacyPOSSystem.Functions
 {
-    class Order
+    class Payment
     {
         Components.Connection con = new Components.Connection();
         Components.Value val = new Components.Value();
 
-        public bool InsertUserForPayment(long userId)
+        public void LoadUsersForPayment(DataGridView grid)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
-                    string sql = @"CALL insertUserForPayment(@userId);";
+                    string sql = @"loadUsersForPayment();";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
-                        cmd.Parameters.AddWithValue("@userId", userId);
-
                         connection.Open();
 
-                        MySqlDataReader dr = cmd.ExecuteReader();
-                        dr.Close();
-                    }
-
-                    sql = @"CALL getUserForPaymentIdDesc();";
-
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
 
-                        val.UserForPaymentId = dt.Rows[0].Field<long>("userForPaymentId");
+                        grid.DataSource = dt;
+                        grid.Columns["userForPaymentId"].Visible = false;
+                        grid.Columns["CONCAT(u.lastName, ', ', u.firstName, ' ', u.middleName)"].HeaderText = "FULL NAME";
 
                         connection.Close();
-
-                        return true;
                     }
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine("Error inserting user for payment to database: " + ex.ToString());
-                return false;
+                Console.WriteLine("Error loading users for payment from database: " + ex.ToString());
             }
         }
 
-        public bool ToPay(long userForPaymentId, long productId, int quantity, double subTotal)
+        public void LoadCartsForPayment(long userForPaymentId, DataGridView grid)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
-                    string sql = @"CALL insertCart(@userForPaymentId, @productId, @quantity, @subTotal);";
+                    string sql = @"CALL loadCartsForPayment(@userForPaymentId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@userForPaymentId", userForPaymentId);
-                        cmd.Parameters.AddWithValue("@productId", productId);
-                        cmd.Parameters.AddWithValue("@quantity", quantity);
-                        cmd.Parameters.AddWithValue("@subTotal", subTotal);
 
                         connection.Open();
 
-                        MySqlDataReader dr = cmd.ExecuteReader();
-                        dr.Close();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        grid.DataSource = dt;
+                        grid.Columns["cartId"].Visible = false;
+                        grid.Columns["description"].HeaderText = "DESCRIPTION";
+                        grid.Columns["price"].HeaderText = "PRICE";
+                        grid.Columns["quantity"].HeaderText = "QUANTITY";
+                        grid.Columns["subTotal"].HeaderText = "SUB TOTAL";
 
                         connection.Close();
-
-                        return true;
                     }
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine("Error inserting cart or to pay to database: " + ex.ToString());
-                return false;
+                Console.WriteLine("Error loading carts for payment from database: " + ex.ToString());
             }
         }
     }
