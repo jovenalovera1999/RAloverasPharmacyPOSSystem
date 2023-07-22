@@ -49,3 +49,4 @@ C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.csproj.AssemblyReference.cache

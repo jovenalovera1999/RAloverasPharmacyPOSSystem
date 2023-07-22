@@ -82,5 +82,137 @@ namespace RAloverasPharmacyPOSSystem.Functions
                 Console.WriteLine("Error loading carts for payment from database: " + ex.ToString());
             }
         }
+
+        public bool InsertTransaction(double totalAmountToPay, double discount, double discounted, double amount, double change)
+        {
+            try
+            {
+                bool isDiscountExist = false;
+
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    string sql = @"CALL getDiscountId(@discount);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@discount", discount);
+
+                        connection.Open();
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if(dt.Rows.Count > 0)
+                        {
+                            isDiscountExist = true;
+                            val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                        }
+                    }
+
+                    if(isDiscountExist == false)
+                    {
+                        sql = @"CALL insertDiscount(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            dr.Close();
+                        }
+
+                        sql = @"CALL getDiscountId(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+
+                            dt.Clear();
+                            da.Fill(dt);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                isDiscountExist = true;
+                                val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                            }
+                        }
+                    }
+
+                    sql = @"CALL insertTransaction(@totalAmountToPay, @discountId, @discounted, @amount, @change);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@totalAmountToPay", totalAmountToPay);
+                        cmd.Parameters.AddWithValue("@discountId", val.DiscountId);
+                        cmd.Parameters.AddWithValue("@discounted", discounted);
+                        cmd.Parameters.AddWithValue("@amount", amount);
+                        cmd.Parameters.AddWithValue("@change", change);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+                    }
+                    
+                    sql = @"CALL getTransactionIdDesc();";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        val.TransactionId = dt.Rows[0].Field<long>("transactionId");
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error inserting transaction to database and fetch transaction id in descending order limit to 1: " + ex.ToString());
+                return false;
+            }
+        }
+
+        public bool InsertTransactionIdToCarts(long cartId, long transactionId, long userForPaymentId)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    string sql = @"CALL insertTransactionIdToCarts(@cartId, @transactionId, @userForPaymentId);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@cartId", cartId);
+                        cmd.Parameters.AddWithValue("@transactionId", transactionId);
+                        cmd.Parameters.AddWithValue("@userForPaymentId", userForPaymentId);
+
+                        connection.Open();
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error inserting transaction id to carts in database: " + ex.ToString());
+                return false;
+            }
+        }
     }
 }

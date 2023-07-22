@@ -18,10 +18,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
             InitializeComponent();
         }
 
+        Components.Value val = new Components.Value();
         Functions.Payment payment = new Functions.Payment();
 
         private void CalculateTotalAmountToPay()
         {
+            this.gridCart.ClearSelection();
+
             double total = 0;
 
             for (int i = 0; i < this.gridCart.Rows.Count; i++)
@@ -102,7 +105,56 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if(this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
+            {
+                MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtAmount.Focus();
+            }
+            else if(this.txtDiscount.Text != "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text))
+            {
+                MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtAmount.Focus();
+            }
+            else
+            {
+                bool isInserted = false;
 
+                if (payment.InsertTransaction(double.Parse(this.txtTotalAmountToPay.Text), double.Parse(this.txtDiscount.Text), double.Parse(this.txtDiscounted.Text),
+                    double.Parse(this.txtAmount.Text), double.Parse(this.txtChange.Text)))
+                {
+                    for (int i = 0; i < this.gridCart.Rows.Count; i++)
+                    {
+                        if (payment.InsertTransactionIdToCarts(long.Parse(this.gridCart.Rows[i].Cells[0].Value.ToString()), val.TransactionId,
+                            long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString())))
+                        {
+                            if (i == this.gridCart.Rows.Count - 1)
+                            {
+                                isInserted = true;
+                            }
+                        }
+                    }
+
+                    if (isInserted == true)
+                    {
+                        MessageBox.Show("Transaction was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        payment.LoadUsersForPayment(this.gridForPaymentTransaction);
+                        payment.LoadCartsForPayment(long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString()), this.gridCart);
+
+                        this.txtDiscount.Text = "0";
+                        this.txtDiscounted.Text = "0";
+                        this.txtChange.Text = "0";
+
+                        this.txtAmount.ResetText();
+
+                        CalculateTotalAmountToPay();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to save transaction!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         public class Cart
@@ -115,47 +167,60 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            string totalAmountPaid = string.Empty;
-
-            if(this.txtDiscounted.Text == "0")
+            if (this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
             {
-                totalAmountPaid = this.txtTotalAmountToPay.Text;
+                MessageBox.Show("Failed to print, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtAmount.Focus();
+            }
+            else if (this.txtDiscount.Text != "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text))
+            {
+                MessageBox.Show("Failed to print, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtAmount.Focus();
             }
             else
             {
-                totalAmountPaid = this.txtDiscounted.Text;
-            }
+                string totalAmountPaid = string.Empty;
 
-            List<Cart> cart = new List<Cart>();
-            cart.Clear();
-
-            for(int i = 0; i < this.gridCart.Rows.Count; i++)
-            {
-                cart.Add(new Cart() 
+                if (this.txtDiscounted.Text == "0")
                 {
-                    description = this.gridCart.Rows[i].Cells[1].Value.ToString(),
-                    price = double.Parse(this.gridCart.Rows[i].Cells[2].Value.ToString()),
-                    quantity = int.Parse(this.gridCart.Rows[i].Cells[3].Value.ToString()),
-                    subTotal = double.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString())
-                });
+                    totalAmountPaid = this.txtTotalAmountToPay.Text;
+                }
+                else
+                {
+                    totalAmountPaid = this.txtDiscounted.Text;
+                }
+
+                List<Cart> cart = new List<Cart>();
+                cart.Clear();
+
+                for (int i = 0; i < this.gridCart.Rows.Count; i++)
+                {
+                    cart.Add(new Cart()
+                    {
+                        description = this.gridCart.Rows[i].Cells[1].Value.ToString(),
+                        price = double.Parse(this.gridCart.Rows[i].Cells[2].Value.ToString()),
+                        quantity = int.Parse(this.gridCart.Rows[i].Cells[3].Value.ToString()),
+                        subTotal = double.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString())
+                    });
+                }
+
+                Forms.frmPrintReceipt printReceipt = new Forms.frmPrintReceipt();
+                ReportViewer rprtReceipt = (ReportViewer)printReceipt.Controls["rprtReceipt"];
+
+                ReportDataSource source = new ReportDataSource("dsCart", cart);
+                rprtReceipt.LocalReport.DataSources.Clear();
+                rprtReceipt.LocalReport.DataSources.Add(source);
+
+                ReportParameterCollection parameters = new ReportParameterCollection();
+                parameters.Add(new ReportParameter("pDateToday", DateTime.Now.ToString("D")));
+                parameters.Add(new ReportParameter("pTotal", totalAmountPaid));
+                parameters.Add(new ReportParameter("pAmount", this.txtAmount.Text));
+                parameters.Add(new ReportParameter("pDiscount", string.Format("{0}%", this.txtDiscount.Text)));
+                parameters.Add(new ReportParameter("pChange", this.txtChange.Text));
+                rprtReceipt.LocalReport.SetParameters(parameters);
+
+                printReceipt.ShowDialog();
             }
-
-            Forms.frmPrintReceipt printReceipt = new Forms.frmPrintReceipt();
-            ReportViewer rprtReceipt = (ReportViewer)printReceipt.Controls["rprtReceipt"];
-
-            ReportDataSource source = new ReportDataSource("dsCart", cart);
-            rprtReceipt.LocalReport.DataSources.Clear();
-            rprtReceipt.LocalReport.DataSources.Add(source);
-
-            ReportParameterCollection parameters = new ReportParameterCollection();
-            parameters.Add(new ReportParameter("pDateToday", DateTime.Now.ToString("D")));
-            parameters.Add(new ReportParameter("pTotal", totalAmountPaid));
-            parameters.Add(new ReportParameter("pAmount", this.txtAmount.Text));
-            parameters.Add(new ReportParameter("pDiscount", string.Format("{0}%", this.txtDiscount.Text)));
-            parameters.Add(new ReportParameter("pChange", this.txtChange.Text));
-            rprtReceipt.LocalReport.SetParameters(parameters);
-
-            printReceipt.ShowDialog();
         }
     }
 }

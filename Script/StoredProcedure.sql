@@ -507,7 +507,8 @@ CREATE
 		FROM carts AS c
 		INNER JOIN products AS p ON c.productId = p.productId
 		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
-		WHERE c.userForPaymentId = pUserForPaymentId;
+		WHERE c.userForPaymentId = pUserForPaymentId
+		ORDER BY d.description ASC;
 	END$$
 
 DELIMITER ;
@@ -528,6 +529,63 @@ CREATE
 		INNER JOIN users AS u ON ufp.userId = u.userId
 		WHERE ufp.isPaid = 0
 		ORDER BY ufp.userForPaymentId ASC;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`insertTransaction`(pTotalAmountToPay DOUBLE, pDiscountId BIGINT, pDiscounted DOUBLE, pAmount DOUBLE, pChange DOUBLE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		INSERT INTO transactions(totalAmountToPay, discountId, discounted, amount, `change`)
+		VALUES(pTotalAmountToPay, pDiscountId, pDiscounted, pAmount, pChange);
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`getTransactionIdDesc`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT transactionId
+		FROM transactions
+		ORDER BY transactionId DESC LIMIT 1;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`insertTransactionIdToCarts`(pCartId BIGINT, pTransactionId BIGINT, pUserForPaymentId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE carts
+		SET transactionId = pTransactionId
+		WHERE cartId = pCartId;
+		
+		UPDATE user_for_payments
+		SET isPaid = 1
+		WHERE userForPaymentId = pUserForPaymentId;
 	END$$
 
 DELIMITER ;

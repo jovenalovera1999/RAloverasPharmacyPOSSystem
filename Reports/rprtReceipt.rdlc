@@ -773,13 +773,15 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>2.76042in</Height>
+        <Height>2.6875in</Height>
         <Style />
       </Body>
       <Width>4in</Width>
       <Page>
-        <PageHeight>2.76042in</PageHeight>
+        <PageHeight>4in</PageHeight>
         <PageWidth>4in</PageWidth>
+        <InteractiveHeight>4in</InteractiveHeight>
+        <InteractiveWidth>4in</InteractiveWidth>
         <LeftMargin>0cm</LeftMargin>
         <RightMargin>0cm</RightMargin>
         <TopMargin>0cm</TopMargin>

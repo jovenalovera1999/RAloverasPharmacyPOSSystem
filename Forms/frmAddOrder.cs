@@ -38,7 +38,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     if (order.ToPay(val.UserForPaymentId, long.Parse(this.gridCart.Rows[i].Cells[1].Value.ToString()),
                         int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()), double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString())))
                     {
-                        if (i <= this.gridCart.Rows.Count)
+                        if (i == this.gridCart.Rows.Count - 1)
                         {
                             isInserted = true;
                         }

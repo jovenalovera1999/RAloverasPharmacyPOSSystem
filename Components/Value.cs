@@ -146,6 +146,15 @@ namespace RAloverasPharmacyPOSSystem.Components
             set { userForPaymentId = value; }
         }
 
+        // Get transaction id values
+
+        private static long transactionId;
+        public long TransactionId
+        {
+            get { return transactionId; }
+            set { transactionId = value; }
+        }
+
         // Product values
 
         private static long productId;
