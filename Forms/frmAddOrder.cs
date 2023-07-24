@@ -23,42 +23,49 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void ToPay()
         {
-            bool isUserForPaymentInserted = false;
-            bool isInserted = false;
-
-            if (order.InsertUserForPayment(val.MyUserId))
+            if (this.gridCart.Rows.Count < 1)
             {
-                isUserForPaymentInserted = true;
-            }
-
-            if (isUserForPaymentInserted == true)
-            {
-                for (int i = 0; i < this.gridCart.Rows.Count; i++)
-                {
-                    if (order.ToPay(val.UserForPaymentId, long.Parse(this.gridCart.Rows[i].Cells[1].Value.ToString()),
-                        int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()), double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString())))
-                    {
-                        if (i == this.gridCart.Rows.Count - 1)
-                        {
-                            isInserted = true;
-                        }
-                    }
-                }
-            }
-
-            if (isInserted == true)
-            {
-                MessageBox.Show("Transaction has been sent for payment!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadProductsWithOrWithoutSearch();
-
-                this.gridCart.Rows.Clear();
-                this.txtTotalAmountToPay.Text = "0.00";
-
-                this.gridAvailableProducts.Focus();
+                MessageBox.Show("Failed to send to payment transaction, there are no products added!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("Failed to send transaction for payment!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                bool isUserForPaymentInserted = false;
+                bool isInserted = false;
+
+                if (order.InsertUserForPayment(val.MyUserId))
+                {
+                    isUserForPaymentInserted = true;
+                }
+
+                if (isUserForPaymentInserted == true)
+                {
+                    for (int i = 0; i < this.gridCart.Rows.Count; i++)
+                    {
+                        if (order.ToPay(val.UserForPaymentId, long.Parse(this.gridCart.Rows[i].Cells[1].Value.ToString()),
+                            int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()), double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString())))
+                        {
+                            if (i == this.gridCart.Rows.Count - 1)
+                            {
+                                isInserted = true;
+                            }
+                        }
+                    }
+                }
+
+                if (isInserted == true)
+                {
+                    MessageBox.Show("Transaction has been sent for payment!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadProductsWithOrWithoutSearch();
+
+                    this.gridCart.Rows.Clear();
+                    this.txtTotalAmountToPay.Text = "0.00";
+
+                    this.gridAvailableProducts.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to send transaction for payment!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

@@ -20,6 +20,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         Components.Value val = new Components.Value();
         Functions.Payment payment = new Functions.Payment();
+        Functions.Product product = new Functions.Product();
 
         private void CalculateTotalAmountToPay()
         {
@@ -29,7 +30,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
             for (int i = 0; i < this.gridCart.Rows.Count; i++)
             {
-                total += double.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString());
+                total += double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString());
             }
 
             this.txtTotalAmountToPay.Text = total.ToString("0.00");
@@ -71,46 +72,32 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtChange.Text = (total == 0) ? "0" : total.ToString("0.00");
         }
 
-        private void gridForPaymentTransaction_MouseClick(object sender, MouseEventArgs e)
-        {
-            payment.LoadCartsForPayment(long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString()), this.gridCart);
-            this.gridCart.ClearSelection();
-
-            CalculateTotalAmountToPay();
-        }
-
-        private void frmPayment_VisibleChanged(object sender, EventArgs e)
-        {
-            this.gridCart.ClearSelection();
-        }
-
-        private void txtDiscount_TextChanged(object sender, EventArgs e)
-        {
-            CalculateDiscount();
-            CalculatePayment();
-        }
-
-        private void txtAmount_TextChanged(object sender, EventArgs e)
-        {
-            CalculatePayment();
-        }
-
-        private void frmPayment_Load(object sender, EventArgs e)
+        private void LoadCarts()
         {
             payment.LoadUsersForPayment(this.gridForPaymentTransaction);
-            payment.LoadCartsForPayment(long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString()), this.gridCart);
 
-            CalculateTotalAmountToPay();
+            if (this.gridForPaymentTransaction.Rows.Count > 0)
+            {
+                payment.LoadCartsForPaymentWithFilter(long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString()), this.gridCart);
+            }
+            else
+            {
+                payment.LoadCartsForPaymentWithoutFilter(this.gridCart);
+            }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void SaveTransaction()
         {
-            if(this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
+            if (this.gridCart.Rows.Count < 1)
+            {
+                MessageBox.Show("Failed to save transaction, there are no products!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
             {
                 MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
             }
-            else if(this.txtDiscount.Text != "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text))
+            else if (this.txtDiscount.Text != "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text))
             {
                 MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
@@ -120,16 +107,20 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 bool isInserted = false;
 
                 if (payment.InsertTransaction(double.Parse(this.txtTotalAmountToPay.Text), double.Parse(this.txtDiscount.Text), double.Parse(this.txtDiscounted.Text),
-                    double.Parse(this.txtAmount.Text), double.Parse(this.txtChange.Text)))
+                    double.Parse(this.txtAmount.Text), double.Parse(this.txtChange.Text), val.MyUserId))
                 {
                     for (int i = 0; i < this.gridCart.Rows.Count; i++)
                     {
                         if (payment.InsertTransactionIdToCarts(long.Parse(this.gridCart.Rows[i].Cells[0].Value.ToString()), val.TransactionId,
                             long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString())))
                         {
-                            if (i == this.gridCart.Rows.Count - 1)
+                            if(product.DeductProduct(long.Parse(this.gridCart.Rows[i].Cells[1].Value.ToString()),
+                                int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString())))
                             {
-                                isInserted = true;
+                                if (i == this.gridCart.Rows.Count - 1)
+                                {
+                                    isInserted = true;
+                                }
                             }
                         }
                     }
@@ -138,8 +129,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     {
                         MessageBox.Show("Transaction was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        payment.LoadUsersForPayment(this.gridForPaymentTransaction);
-                        payment.LoadCartsForPayment(long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString()), this.gridCart);
+                        LoadCarts();
 
                         this.txtDiscount.Text = "0";
                         this.txtDiscounted.Text = "0";
@@ -149,25 +139,25 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
                         CalculateTotalAmountToPay();
                     }
+                    else
+                    {
+                        MessageBox.Show("Failed to save transaction!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Failed to save transaction!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to insert transaction!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        public class Cart
+        private void PrintReceipt()
         {
-            public string description { get; set; }
-            public double price { get; set; }
-            public int quantity { get; set; }
-            public double subTotal { get; set; }
-        }
-
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            if (this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
+            if(this.gridCart.Rows.Count < 1)
+            {
+                MessageBox.Show("Failed to print, there are no products!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
             {
                 MessageBox.Show("Failed to print, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
@@ -197,10 +187,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 {
                     cart.Add(new Cart()
                     {
-                        description = this.gridCart.Rows[i].Cells[1].Value.ToString(),
-                        price = double.Parse(this.gridCart.Rows[i].Cells[2].Value.ToString()),
-                        quantity = int.Parse(this.gridCart.Rows[i].Cells[3].Value.ToString()),
-                        subTotal = double.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString())
+                        description = this.gridCart.Rows[i].Cells[2].Value.ToString(),
+                        price = double.Parse(this.gridCart.Rows[i].Cells[3].Value.ToString()),
+                        quantity = int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()),
+                        subTotal = double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString())
                     });
                 }
 
@@ -221,6 +211,88 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
                 printReceipt.ShowDialog();
             }
+        }
+
+        private void gridForPaymentTransaction_MouseClick(object sender, MouseEventArgs e)
+        {
+            payment.LoadCartsForPaymentWithFilter(long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString()), this.gridCart);
+            this.gridCart.ClearSelection();
+
+            CalculateTotalAmountToPay();
+        }
+
+        private void frmPayment_VisibleChanged(object sender, EventArgs e)
+        {
+            this.gridCart.ClearSelection();
+        }
+
+        private void txtDiscount_TextChanged(object sender, EventArgs e)
+        {
+            CalculateDiscount();
+            CalculatePayment();
+        }
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+            CalculatePayment();
+        }
+
+        private void frmPayment_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F1)
+            {
+                SaveTransaction();
+            }
+            else if(e.KeyCode == Keys.F2)
+            {
+                PrintReceipt();
+            }
+        }
+
+        private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allows 0-9, backspace and period
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allows 0-9 and backspace
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void frmPayment_Load(object sender, EventArgs e)
+        {
+            this.KeyPreview = true;
+
+            LoadCarts();
+            CalculateTotalAmountToPay();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveTransaction();
+        }
+
+        public class Cart
+        {
+            public string description { get; set; }
+            public double price { get; set; }
+            public int quantity { get; set; }
+            public double subTotal { get; set; }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            PrintReceipt();
         }
     }
 }

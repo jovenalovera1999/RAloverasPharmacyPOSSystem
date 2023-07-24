@@ -360,7 +360,7 @@ CREATE
 		UPDATE users
 		SET profilePicture = pProfilePicture, firstName = pFirstName, middleName = pMiddleName, lastName = pLastName,
 		`address` = pAddress, contactNumber = pContactNumber, email = pEmail, username = AES_ENCRYPT(pUsername, "J.v3n!j.$hu4c.@l0ver4!#@"),
-		`password` = AES_ENCRYPT(pPassword, "J.v3n!j.$hu4c.@l0ver4!#@")
+		`password` = AES_ENCRYPT(pPassword, "J.v3n!j.$hu4c.@l0ver4!#@"), dateUpdated = CURRENT_TIMESTAMP
 		WHERE userId = pUserId;
 	END$$
 
@@ -496,19 +496,39 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`loadCartsForPayment`(pUserForPaymentId BIGINT)
+    PROCEDURE `raloveraspharmacy_db`.`loadCartsForPaymentWithFilter`(pUserForPaymentId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT c.cartId, d.description, p.price, c.quantity, FORMAT(c.subTotal, 2)
+		SELECT c.cartId, c.productId, d.description, p.price, c.quantity, FORMAT(c.subTotal, 2)
 		FROM carts AS c
 		INNER JOIN products AS p ON c.productId = p.productId
 		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
 		WHERE c.userForPaymentId = pUserForPaymentId
 		ORDER BY d.description ASC;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadCartsForPaymentWithoutFilter`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT c.cartId, c.productId, d.description, p.price, c.quantity, FORMAT(c.subTotal, 2)
+		FROM carts AS c
+		INNER JOIN products AS p ON c.productId = p.productId
+		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
+		LIMIT 0;
 	END$$
 
 DELIMITER ;
@@ -537,15 +557,16 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`insertTransaction`(pTotalAmountToPay DOUBLE, pDiscountId BIGINT, pDiscounted DOUBLE, pAmount DOUBLE, pChange DOUBLE)
+    PROCEDURE `raloveraspharmacy_db`.`insertTransaction`(pTotalAmountToPay DOUBLE, pDiscountId BIGINT, pDiscounted DOUBLE, pAmount DOUBLE, pChange DOUBLE,
+    pUserId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		INSERT INTO transactions(totalAmountToPay, discountId, discounted, amount, `change`)
-		VALUES(pTotalAmountToPay, pDiscountId, pDiscounted, pAmount, pChange);
+		INSERT INTO transactions(totalAmountToPay, discountId, discounted, amount, `change`, userId)
+		VALUES(pTotalAmountToPay, pDiscountId, pDiscounted, pAmount, pChange, pUserId);
 	END$$
 
 DELIMITER ;
@@ -586,6 +607,24 @@ CREATE
 		UPDATE user_for_payments
 		SET isPaid = 1
 		WHERE userForPaymentId = pUserForPaymentId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`deductProductQuantity`(pProductId BIGINT, pQuantity INT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE products AS p
+		SET p.quantity = p.quantity - pQuantity
+		WHERE p.productId = pProductId;
 	END$$
 
 DELIMITER ;

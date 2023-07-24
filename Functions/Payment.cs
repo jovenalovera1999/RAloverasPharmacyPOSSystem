@@ -46,13 +46,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public void LoadCartsForPayment(long userForPaymentId, DataGridView grid)
+        public void LoadCartsForPaymentWithFilter(long userForPaymentId, DataGridView grid)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
-                    string sql = @"CALL loadCartsForPayment(@userForPaymentId);";
+                    string sql = @"CALL loadCartsForPaymentWithFilter(@userForPaymentId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
@@ -68,6 +68,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         grid.DataSource = dt;
                         grid.Columns["cartId"].Visible = false;
+                        grid.Columns["productId"].Visible = false;
                         grid.Columns["description"].HeaderText = "DESCRIPTION";
                         grid.Columns["price"].HeaderText = "PRICE";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
@@ -83,7 +84,43 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public bool InsertTransaction(double totalAmountToPay, double discount, double discounted, double amount, double change)
+        public void LoadCartsForPaymentWithoutFilter(DataGridView grid)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    string sql = @"CALL loadCartsForPaymentWithoutFilter();";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        connection.Open();
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        grid.DataSource = dt;
+                        grid.Columns["cartId"].Visible = false;
+                        grid.Columns["productId"].Visible = false;
+                        grid.Columns["description"].HeaderText = "DESCRIPTION";
+                        grid.Columns["price"].HeaderText = "PRICE";
+                        grid.Columns["quantity"].HeaderText = "QUANTITY";
+                        grid.Columns["FORMAT(c.subTotal, 2)"].HeaderText = "SUB TOTAL";
+
+                        connection.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error loading carts for payment from database: " + ex.ToString());
+            }
+        }
+
+        public bool InsertTransaction(double totalAmountToPay, double discount, double discounted, double amount, double change, long userId)
         {
             try
             {
@@ -144,7 +181,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         }
                     }
 
-                    sql = @"CALL insertTransaction(@totalAmountToPay, @discountId, @discounted, @amount, @change);";
+                    sql = @"CALL insertTransaction(@totalAmountToPay, @discountId, @discounted, @amount, @change, @userId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
@@ -153,6 +190,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@discounted", discounted);
                         cmd.Parameters.AddWithValue("@amount", amount);
                         cmd.Parameters.AddWithValue("@change", change);
+                        cmd.Parameters.AddWithValue("@userId", userId);
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();

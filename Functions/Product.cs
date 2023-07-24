@@ -672,5 +672,36 @@ namespace RAloverasPharmacyPOSSystem.Functions
                 return false;
             }
         }
+
+        public bool DeductProduct(long productId, int quantity)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    string sql = @"CALL deductProductQuantity(@productId, @quantity);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@productId", productId);
+                        cmd.Parameters.AddWithValue("@quantity", quantity);
+
+                        connection.Open();
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error deducting product in database: " + ex.ToString());
+                return false;
+            }
+        }
     }
 }
