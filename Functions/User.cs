@@ -115,7 +115,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     grid.DataSource = dt;
 
                     grid.Columns["userId"].Visible = false;
-                    grid.Columns["CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1))"].HeaderText = "FULL NAME";
+                    grid.Columns["CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(lastName, ', ', firstName) ELSE CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1), '.') END"].HeaderText = "FULL NAME";
                     grid.Columns["address"].HeaderText = "ADDRESS";
                     grid.Columns["contactNumber"].HeaderText = "CONTACT NUMBER";
                     grid.Columns["email"].HeaderText = "EMAIL";

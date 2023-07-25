@@ -16,5 +16,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             InitializeComponent();
         }
+
+        private void frmHistory_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

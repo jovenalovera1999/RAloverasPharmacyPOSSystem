@@ -40,7 +40,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void CalculateDiscount()
         {
-            if(String.IsNullOrWhiteSpace(this.txtDiscount.Text))
+            if(String.IsNullOrWhiteSpace(this.txtDiscount.Text) || double.IsNaN(double.Parse(this.txtDiscount.Text)))
             {
                 this.txtDiscount.Text = "0";
                 this.txtDiscounted.Text = "0";
@@ -56,7 +56,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             double total = 0;
 
-            if (String.IsNullOrWhiteSpace(this.txtAmount.Text))
+            if (String.IsNullOrWhiteSpace(this.txtAmount.Text) || double.IsNaN(double.Parse(this.txtAmount.Text)))
             {
                 total = 0;
             }
@@ -257,15 +257,33 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 e.Handled = true;
                 return;
             }
+
+            // Checks to make sure only 1 period is allowed
+            if (e.KeyChar == 46)
+            {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1)
+                {
+                    e.Handled = true;
+                }
+            }
         }
 
         private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Allows 0-9 and backspace
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8)
+            // Allows 0-9, backspace and period
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46)
             {
                 e.Handled = true;
                 return;
+            }
+
+            // Checks to make sure only 1 period is allowed
+            if (e.KeyChar == 46)
+            {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1)
+                {
+                    e.Handled = true;
+                }
             }
         }
 

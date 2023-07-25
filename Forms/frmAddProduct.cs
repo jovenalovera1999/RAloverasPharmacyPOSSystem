@@ -42,6 +42,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 this.txtDiscount.Text = "0";
                 this.txtDiscounted.Text = "0";
             }
+            else if(double.IsNaN(double.Parse(this.txtPrice.Text)) || double.IsNaN(double.Parse(this.txtDiscount.Text)))
+            {
+                this.txtDiscounted.Text = "0";
+            }
             else
             {
                 double discount = double.Parse(this.txtPrice.Text) * (double.Parse(this.txtDiscount.Text) / 100);

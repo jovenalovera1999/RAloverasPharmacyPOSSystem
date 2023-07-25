@@ -214,7 +214,9 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT userId, CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1)), address, contactNumber, email,
+		SELECT userId,
+		CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(lastName, ', ', firstName) ELSE CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1), '.') END,
+		`address`, contactNumber, email,
 		CAST(AES_DECRYPT(username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR), dateCreated, dateUpdated
 		FROM users
 		WHERE isDeleted = 0
@@ -503,10 +505,13 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT c.cartId, c.productId, d.description, p.price, c.quantity, FORMAT(c.subTotal, 2)
+		SELECT c.cartId, c.productId, d.description,
+		CASE WHEN dis.discount = 0 THEN FORMAT(p.price, 2) ELSE FORMAT(p.discounted, 2) END,
+		c.quantity, FORMAT(c.subTotal, 2)
 		FROM carts AS c
 		INNER JOIN products AS p ON c.productId = p.productId
 		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN discounts AS dis ON p.discountId = dis.discountId
 		WHERE c.userForPaymentId = pUserForPaymentId
 		ORDER BY d.description ASC;
 	END$$
@@ -544,7 +549,8 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT ufp.userForPaymentId, CONCAT(u.lastName, ', ', u.firstName, ' ', u.middleName)
+		SELECT ufp.userForPaymentId,
+		CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END
 		FROM user_for_payments AS ufp
 		INNER JOIN users AS u ON ufp.userId = u.userId
 		WHERE ufp.isPaid = 0
@@ -625,6 +631,29 @@ CREATE
 		UPDATE products AS p
 		SET p.quantity = p.quantity - pQuantity
 		WHERE p.productId = pProductId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadSalesWithDateRange`(pFrom TIMESTAMP, pTo TIMESTAMP)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT DISTINCT(t.transactionId), FORMAT(t.totalAmountToPay, 2), FORMAT(d.discount, 0), FORMAT(t.discounted, 2), FORMAT(t.amount, 2), FORMAT(t.change, 2),
+		CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END
+		FROM transactions AS t
+		INNER JOIN discounts AS d ON t.discountId = d.discountId
+		INNER JOIN carts AS c ON t.transactionId = c.transactionId
+		INNER JOIN user_for_payments AS ufp ON c.userForPaymentId = ufp.userForPaymentId
+		INNER JOIN users AS u ON t.userId = u.userId
+		WHERE t.dateCreated >= pFrom AND t.dateCreated <= pTo AND ufp.isPaid = 1 AND t.isDeleted = 0;
 	END$$
 
 DELIMITER ;

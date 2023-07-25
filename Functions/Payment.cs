@@ -34,7 +34,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         grid.DataSource = dt;
                         grid.Columns["userForPaymentId"].Visible = false;
-                        grid.Columns["CONCAT(u.lastName, ', ', u.firstName, ' ', u.middleName)"].HeaderText = "FULL NAME";
+                        grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "FULL NAME";
 
                         connection.Close();
                     }
@@ -70,7 +70,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["cartId"].Visible = false;
                         grid.Columns["productId"].Visible = false;
                         grid.Columns["description"].HeaderText = "DESCRIPTION";
-                        grid.Columns["price"].HeaderText = "PRICE";
+                        grid.Columns["CASE WHEN dis.discount = 0 THEN FORMAT(p.price, 2) ELSE FORMAT(p.discounted, 2) END"].HeaderText = "PRICE";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
                         grid.Columns["FORMAT(c.subTotal, 2)"].HeaderText = "SUB TOTAL";
 
