@@ -65,6 +65,18 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Focus();
         }
 
+        private void OpenListSalesForm()
+        {
+            this.pnlMain.Controls.Clear();
+            Forms.frmListSales listSales = new Forms.frmListSales();
+            listSales.TopLevel = false;
+            this.pnlMain.Controls.Add(listSales);
+            listSales.Dock = DockStyle.Fill;
+            listSales.Show();
+
+            this.Focus();
+        }
+
         private void OpenProfileForm()
         {
             Forms.frmProfile profile = new Forms.frmProfile();
@@ -106,6 +118,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
             else if(e.KeyCode == Keys.F8)
             {
                 OpenListUsersForm();
+            }
+            else if(e.KeyCode == Keys.F10)
+            {
+                OpenListSalesForm();
             }
             else if(e.KeyCode == Keys.F11)
             {
@@ -151,9 +167,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         }
 
-        private void btnHistory_Click(object sender, EventArgs e)
+        private void btnSales_Click(object sender, EventArgs e)
         {
-
+            OpenListSalesForm();
         }
 
         private void btnProfile_Click(object sender, EventArgs e)

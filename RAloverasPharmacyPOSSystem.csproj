@@ -130,17 +130,23 @@
     <Compile Include="Forms\frmDashboard.Designer.cs">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmHistory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmHistory.Designer.cs">
-      <DependentUpon>frmHistory.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\frmListProducts.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmListProducts.Designer.cs">
       <DependentUpon>frmListProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmListSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmListSales.Designer.cs">
+      <DependentUpon>frmListSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmListSalesCart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmListSalesCart.Designer.cs">
+      <DependentUpon>frmListSalesCart.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmListUsers.cs">
       <SubType>Form</SubType>
@@ -185,10 +191,10 @@
       <DependentUpon>frmUpdateUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Functions\Exist.cs" />
-    <Compile Include="Functions\History.cs" />
     <Compile Include="Functions\Order.cs" />
     <Compile Include="Functions\Payment.cs" />
     <Compile Include="Functions\Product.cs" />
+    <Compile Include="Functions\Sale.cs" />
     <Compile Include="Functions\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -207,11 +213,14 @@
     <EmbeddedResource Include="Forms\frmDashboard.resx">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmHistory.resx">
-      <DependentUpon>frmHistory.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmListProducts.resx">
       <DependentUpon>frmListProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmListSales.resx">
+      <DependentUpon>frmListSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmListSalesCart.resx">
+      <DependentUpon>frmListSalesCart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmListUsers.resx">
       <DependentUpon>frmListUsers.cs</DependentUpon>

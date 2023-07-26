@@ -639,21 +639,198 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`loadSalesWithDateRange`(pFrom TIMESTAMP, pTo TIMESTAMP)
+    PROCEDURE `raloveraspharmacy_db`.`loadSalesWithDateRange`(pFrom DATE, pTo DATE)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT DISTINCT(t.transactionId), FORMAT(t.totalAmountToPay, 2), FORMAT(d.discount, 0), FORMAT(t.discounted, 2), FORMAT(t.amount, 2), FORMAT(t.change, 2),
-		CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END
-		FROM transactions AS t
-		INNER JOIN discounts AS d ON t.discountId = d.discountId
-		INNER JOIN carts AS c ON t.transactionId = c.transactionId
-		INNER JOIN user_for_payments AS ufp ON c.userForPaymentId = ufp.userForPaymentId
-		INNER JOIN users AS u ON t.userId = u.userId
-		WHERE t.dateCreated >= pFrom AND t.dateCreated <= pTo AND ufp.isPaid = 1 AND t.isDeleted = 0;
+		SELECT
+			t.transactionId, FORMAT(t.totalAmountToPay, 2), CONCAT(FORMAT(d.discount, 0), '%'), FORMAT(t.discounted, 2),
+			FORMAT(t.amount, 2), FORMAT(t.change, 2),
+			CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
+			t.dateCreated
+		FROM
+			transactions AS t
+		INNER JOIN
+			discounts AS d ON t.discountId = d.discountId
+		INNER JOIN
+			users AS u ON t.userId = u.userId
+		WHERE
+			t.dateCreated BETWEEN pFrom AND pTo AND t.isDeleted = 0 OR t.dateCreated BETWEEN pTo AND pFrom AND t.isDeleted = 0
+		ORDER BY
+			t.transactionId DESC;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadSalesWithoutDateRange`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			t.transactionId, FORMAT(t.totalAmountToPay, 2), CONCAT(FORMAT(d.discount, 0), '%'), FORMAT(t.discounted, 2),
+			FORMAT(t.amount, 2), FORMAT(t.change, 2),
+			CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
+			t.dateCreated
+		FROM
+			transactions AS t
+		INNER JOIN
+			discounts AS d ON t.discountId = d.discountId
+		INNER JOIN
+			users AS u ON t.userId = u.userId
+		WHERE
+			t.isDeleted = 0
+		ORDER BY
+			t.transactionId DESC;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`sumTotalSalesWithDateRange`(pFrom DATE, pTo DATE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			SUM(CASE WHEN discounted = 0 THEN totalAmountToPay ELSE discounted END)
+		FROM
+			transactions
+		WHERE
+			dateCreated BETWEEN pFrom AND pTo AND isDeleted = 0 OR dateCreated BETWEEN pTo AND pFrom AND isDeleted = 0;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`sumTotalSalesWithoutDateRange`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			SUM(CASE WHEN discounted = 0 THEN totalAmountToPay ELSE discounted END)
+		FROM
+			transactions
+		WHERE
+			isDeleted = 0;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`countTransactionsWithDateRange`(pFrom DATE, pTo DATE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			COUNT(transactionId)
+		FROM
+			transactions
+		WHERE
+			dateCreated BETWEEN pFrom AND pTo AND isDeleted = 0 OR dateCreated BETWEEN pTo AND pFrom AND isDeleted = 0;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`countTransactionsWithoutDateRange`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			COUNT(transactionId)
+		FROM
+			transactions
+		WHERE
+			isDeleted = 0;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadSalesCart`(pTransactionId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			c.cartId, c.productId, d.description,
+			CASE WHEN dis.discount = 0 THEN FORMAT(p.price, 2) ELSE FORMAT(p.discounted, 2) END,
+			c.quantity, FORMAT(c.subTotal, 2),
+			CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
+			c.dateCreated
+		FROM
+			carts AS c
+		INNER JOIN
+			products AS p ON c.productId = p.productId
+		INNER JOIN
+			descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN
+			discounts AS dis ON p.discountId = dis.discountId
+		INNER JOIN
+			user_for_payments AS ufp ON c.userForPaymentId = ufp.userForPaymentId
+		INNER JOIN
+			users AS u ON ufp.userId = u.userId
+		WHERE
+			c.transactionId = pTransactionId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`getTransactionId`(pTransactionId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			transactionId
+		FROM
+			transactions
+		WHERE
+			transactionId = pTransactionId;
 	END$$
 
 DELIMITER ;

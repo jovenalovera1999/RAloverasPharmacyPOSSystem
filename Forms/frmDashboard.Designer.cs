@@ -32,7 +32,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnHistory = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSales = new Guna.UI2.WinForms.Guna2Button();
             this.btnExit = new Guna.UI2.WinForms.Guna2Button();
             this.btnReports = new Guna.UI2.WinForms.Guna2Button();
             this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
@@ -70,7 +70,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.Color.OliveDrab;
-            this.guna2Panel2.Controls.Add(this.btnHistory);
+            this.guna2Panel2.Controls.Add(this.btnSales);
             this.guna2Panel2.Controls.Add(this.btnExit);
             this.guna2Panel2.Controls.Add(this.btnReports);
             this.guna2Panel2.Controls.Add(this.btnLogout);
@@ -85,24 +85,24 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.guna2Panel2.Size = new System.Drawing.Size(137, 539);
             this.guna2Panel2.TabIndex = 2;
             // 
-            // btnHistory
+            // btnSales
             // 
-            this.btnHistory.Animated = true;
-            this.btnHistory.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHistory.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnHistory.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnHistory.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnHistory.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnHistory.FillColor = System.Drawing.Color.OliveDrab;
-            this.btnHistory.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnHistory.ForeColor = System.Drawing.Color.White;
-            this.btnHistory.Location = new System.Drawing.Point(0, 183);
-            this.btnHistory.Name = "btnHistory";
-            this.btnHistory.Size = new System.Drawing.Size(137, 36);
-            this.btnHistory.TabIndex = 13;
-            this.btnHistory.TabStop = false;
-            this.btnHistory.Text = "HISTORY (F10)";
-            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
+            this.btnSales.Animated = true;
+            this.btnSales.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSales.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSales.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSales.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSales.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSales.FillColor = System.Drawing.Color.OliveDrab;
+            this.btnSales.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.btnSales.ForeColor = System.Drawing.Color.White;
+            this.btnSales.Location = new System.Drawing.Point(0, 183);
+            this.btnSales.Name = "btnSales";
+            this.btnSales.Size = new System.Drawing.Size(137, 36);
+            this.btnSales.TabIndex = 13;
+            this.btnSales.TabStop = false;
+            this.btnSales.Text = "SALES (F10)";
+            this.btnSales.Click += new System.EventHandler(this.btnSales_Click);
             // 
             // btnExit
             // 
@@ -305,6 +305,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2Button btnProfile;
         private Guna.UI2.WinForms.Guna2Button btnReports;
         private Guna.UI2.WinForms.Guna2Button btnPayment;
-        private Guna.UI2.WinForms.Guna2Button btnHistory;
+        private Guna.UI2.WinForms.Guna2Button btnSales;
     }
 }
