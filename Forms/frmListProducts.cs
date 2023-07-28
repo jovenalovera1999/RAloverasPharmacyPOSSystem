@@ -110,5 +110,15 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             OpenAddProductForm();
         }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            product.NextPage(this.gridProducts);
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            product.PreviousPage(this.gridProducts);
+        }
     }
 }

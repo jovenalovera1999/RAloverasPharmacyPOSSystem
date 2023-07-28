@@ -42,6 +42,16 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridSales.ClearSelection();
         }
 
+        private void dateFrom_ValueChanged(object sender, EventArgs e)
+        {
+            LoadSalesSumCount();
+        }
+
+        private void dateTo_ValueChanged(object sender, EventArgs e)
+        {
+            LoadSalesSumCount();
+        }
+
         private void frmListSales_Load(object sender, EventArgs e)
         {
             LoadSalesSumCount();
@@ -52,16 +62,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             btnView.Text = "VIEW";
             btnView.UseColumnTextForButtonValue = true;
             this.gridSales.Columns.Insert(0, btnView);
-        }
-
-        private void dateFrom_ValueChanged(object sender, EventArgs e)
-        {
-            LoadSalesSumCount();
-        }
-
-        private void dateTo_ValueChanged(object sender, EventArgs e)
-        {
-            LoadSalesSumCount();
         }
 
         private void gridSales_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -82,6 +82,16 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     this.Close();
                 }
             }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            sale.NextPage(this.gridSales);
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            sale.PreviousPage(this.gridSales);
         }
     }
 }

@@ -35,6 +35,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Close();
         }
 
+        private void frmListSalesCart_VisibleChanged(object sender, EventArgs e)
+        {
+            this.gridSalesCart.ClearSelection();
+        }
+
         private void frmListSalesCart_KeyDown(object sender, KeyEventArgs e)
         {
             BackToListSalesForm();

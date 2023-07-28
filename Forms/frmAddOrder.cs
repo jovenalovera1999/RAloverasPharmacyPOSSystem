@@ -155,6 +155,16 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridAvailableProducts.Focus();
         }
 
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            product.NextPageAtOrder(this.gridAvailableProducts);
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            product.PreviousPageAtOrder(this.gridAvailableProducts);
+        }
+
         private void btnToPay_Click(object sender, EventArgs e)
         {
             ToPay();

@@ -14,6 +14,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
         Components.Connection con = new Components.Connection();
         Components.Value val = new Components.Value();
 
+        MySqlDataAdapter da;
+        DataTable dt;
+        int scollVal = 0;
+        int totalRows = 0;
+        int maxRecords = 25;
+
         public void LoadSalesWithDateRange(DateTime from, DateTime to, DataGridView grid)
         {
             try
@@ -29,13 +35,18 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         connection.Open();
 
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
+                        da = new MySqlDataAdapter(cmd);
+                        dt = new DataTable();
 
                         dt.Clear();
-                        da.Fill(dt);
+                        totalRows = da.Fill(dt);
+
+                        dt.Clear();
+                        da.Fill(scollVal, maxRecords, dt);
 
                         grid.DataSource = dt;
+                        grid.ClearSelection();
+
                         grid.Columns["transactionId"].Visible = false;
                         grid.Columns["FORMAT(t.totalAmountToPay, 2)"].HeaderText = "AMOUNT TO PAY";
                         grid.Columns["CONCAT(FORMAT(d.discount, 0), '%')"].HeaderText = "DISCOUNT";
@@ -67,13 +78,18 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         connection.Open();
 
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
+                        da = new MySqlDataAdapter(cmd);
+                        dt = new DataTable();
 
                         dt.Clear();
-                        da.Fill(dt);
+                        totalRows = da.Fill(dt);
+
+                        dt.Clear();
+                        da.Fill(scollVal, maxRecords, dt);
 
                         grid.DataSource = dt;
+                        grid.ClearSelection();
+
                         grid.Columns["transactionId"].Visible = false;
                         grid.Columns["FORMAT(t.totalAmountToPay, 2)"].HeaderText = "AMOUNT TO PAY";
                         grid.Columns["CONCAT(FORMAT(d.discount, 0), '%')"].HeaderText = "DISCOUNT";
@@ -91,6 +107,36 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 Console.WriteLine("Error loading sales without date range from database: " + ex.ToString());
             }
+        }
+
+        public void NextPage(DataGridView grid)
+        {
+            scollVal += maxRecords;
+
+            if(scollVal >= totalRows)
+            {
+                scollVal = totalRows;
+            }
+
+            dt.Clear();
+            da.Fill(scollVal, maxRecords, dt);
+
+            grid.ClearSelection();
+        }
+
+        public void PreviousPage(DataGridView grid)
+        {
+            scollVal -= maxRecords;
+
+            if(scollVal <= 0)
+            {
+                scollVal = 0;
+            }
+
+            dt.Clear();
+            da.Fill(scollVal, maxRecords, dt);
+
+            grid.ClearSelection();
         }
 
         public void SumTotalSalesWithDateRange(DateTime from, DateTime to, Label lbl)
@@ -240,6 +286,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         da.Fill(dt);
 
                         grid.DataSource = dt;
+                        grid.ClearSelection();
+
                         grid.Columns["cartId"].Visible = false;
                         grid.Columns["productId"].Visible = false;
                         grid.Columns["description"].HeaderText = "DESCRIPTION";

@@ -289,6 +289,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnPrevious.TabIndex = 51;
             this.btnPrevious.TabStop = false;
             this.btnPrevious.Text = "<<";
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // btnNext
             // 
@@ -308,6 +309,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnNext.TabIndex = 50;
             this.btnNext.TabStop = false;
             this.btnNext.Text = ">>";
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // frmListSales
             // 

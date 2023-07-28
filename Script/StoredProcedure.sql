@@ -214,13 +214,17 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT userId,
-		CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(lastName, ', ', firstName) ELSE CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1), '.') END,
-		`address`, contactNumber, email,
-		CAST(AES_DECRYPT(username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR), dateCreated, dateUpdated
-		FROM users
-		WHERE isDeleted = 0
-		ORDER BY CONCAT(lastName, firstName, middleName) ASC;
+		SELECT 
+			userId,
+			CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(lastName, ', ', firstName) ELSE CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1), '.') END,
+			`address`, contactNumber, email,
+			CAST(AES_DECRYPT(username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR), dateCreated, dateUpdated
+		FROM
+			users
+		WHERE
+			isDeleted = 0
+		ORDER BY
+			lastName ASC;
 	END$$
 
 DELIMITER ;

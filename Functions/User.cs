@@ -14,6 +14,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
         Components.Connection con = new Components.Connection();
         Components.Value val = new Components.Value();
 
+        MySqlDataAdapter da;
+        DataTable dt;
+        int scollVal = 0;
+        int totalRows = 0;
+        int maxRecords = 25;
+
         public bool LoginUser(string username, string password)
         {
             try
@@ -106,13 +112,17 @@ namespace RAloverasPharmacyPOSSystem.Functions
                 {
                     connection.Open();
 
-                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
+                    da = new MySqlDataAdapter(cmd);
+                    dt = new DataTable();
 
                     dt.Clear();
-                    da.Fill(dt);
+                    totalRows = da.Fill(dt);
+
+                    dt.Clear();
+                    da.Fill(scollVal, maxRecords, dt);
 
                     grid.DataSource = dt;
+                    grid.ClearSelection();
 
                     grid.Columns["userId"].Visible = false;
                     grid.Columns["CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(lastName, ', ', firstName) ELSE CONCAT(lastName, ', ', firstName, ' ', LEFT(middleName, 1), '.') END"].HeaderText = "FULL NAME";
@@ -126,6 +136,36 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     connection.Close();
                 }
             }
+        }
+
+        public void NextPage(DataGridView grid)
+        {
+            scollVal += maxRecords;
+
+            if(scollVal >= totalRows)
+            {
+                scollVal = totalRows;
+            }
+
+            dt.Clear();
+            da.Fill(scollVal, maxRecords, dt);
+
+            grid.ClearSelection();
+        }
+
+        public void PreviousPage(DataGridView grid)
+        {
+            scollVal -= maxRecords;
+
+            if(scollVal <= 0)
+            {
+                scollVal = 0;
+            }
+
+            dt.Clear();
+            da.Fill(scollVal, maxRecords, dt);
+
+            grid.ClearSelection();
         }
 
         public bool InsertUser(byte[] profilePicture, string firstName, string middleName, string lastName, string address, string contactNumber, string email,
