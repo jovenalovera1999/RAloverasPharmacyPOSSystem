@@ -51,3 +51,4 @@ C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\Microsoft.ReportViewer.WinForms.dll
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmListSales.resources
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmListSalesCart.resources
+C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.csproj.AssemblyReference.cache

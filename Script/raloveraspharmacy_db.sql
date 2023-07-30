@@ -72,6 +72,7 @@ CREATE TABLE products(
 
 CREATE TABLE transactions(
 	transactionId BIGINT NOT NULL AUTO_INCREMENT,
+	transactionNo VARCHAR(45) NOT NULL,
 	totalAmountToPay DOUBLE NOT NULL,
 	discountId BIGINT DEFAULT NULL,
 	discounted DOUBLE NOT NULL,

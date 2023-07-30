@@ -575,16 +575,18 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`insertTransaction`(pTotalAmountToPay DOUBLE, pDiscountId BIGINT, pDiscounted DOUBLE, pAmount DOUBLE, pChange DOUBLE,
-    pUserId BIGINT)
+    PROCEDURE `raloveraspharmacy_db`.`insertTransaction`(pTransactionNo VARCHAR(45), pTotalAmountToPay DOUBLE, pDiscountId BIGINT, pDiscounted DOUBLE,
+    pAmount DOUBLE, pChange DOUBLE, pUserId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		INSERT INTO transactions(totalAmountToPay, discountId, discounted, amount, `change`, userId)
-		VALUES(pTotalAmountToPay, pDiscountId, pDiscounted, pAmount, pChange, pUserId);
+		INSERT INTO
+			transactions(transactionNo, totalAmountToPay, discountId, discounted, amount, `change`, userId)
+		VALUES
+			(pTransactionNo, pTotalAmountToPay, pDiscountId, pDiscounted, pAmount, pChange, pUserId);
 	END$$
 
 DELIMITER ;
@@ -843,6 +845,27 @@ CREATE
 			transactions
 		WHERE
 			transactionId = pTransactionId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`checkTransactionNoIfExist`(pTransactionNo VARCHAR(45))
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			transactionNo
+		FROM
+			transactions
+		WHERE
+			transactionNo = pTransactionNo;
 	END$$
 
 DELIMITER ;

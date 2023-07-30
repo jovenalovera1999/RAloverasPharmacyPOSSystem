@@ -144,7 +144,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
                 this.txtPassword.Focus();
             }
-            else if(exist.proceedUpdateUserWithExistingUsername(val.MyUserId, this.txtUsername.Text))
+            else if(exist.ProceedUpdateUserWithExistingUsername(val.MyUserId, this.txtUsername.Text))
             {
                 SaveProcedure();
             }

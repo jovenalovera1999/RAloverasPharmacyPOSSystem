@@ -121,7 +121,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public bool InsertTransaction(double totalAmountToPay, double discount, double discounted, double amount, double change, long userId)
+        public bool InsertTransaction(string transactionNo, double totalAmountToPay, double discount, double discounted, double amount, double change, long userId)
         {
             try
             {
@@ -182,10 +182,11 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         }
                     }
 
-                    sql = @"CALL insertTransaction(@totalAmountToPay, @discountId, @discounted, @amount, @change, @userId);";
+                    sql = @"CALL insertTransaction(@transactionNo, @totalAmountToPay, @discountId, @discounted, @amount, @change, @userId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
+                        cmd.Parameters.AddWithValue("@transactionNo", transactionNo);
                         cmd.Parameters.AddWithValue("@totalAmountToPay", totalAmountToPay);
                         cmd.Parameters.AddWithValue("@discountId", val.DiscountId);
                         cmd.Parameters.AddWithValue("@discounted", discounted);

@@ -92,7 +92,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public bool proceedUpdateUserWithExistingUsername(long userId, string username)
+        public bool ProceedUpdateUserWithExistingUsername(long userId, string username)
         {
             try
             {
@@ -129,6 +129,46 @@ namespace RAloverasPharmacyPOSSystem.Functions
             catch(Exception ex)
             {
                 Console.WriteLine("Error proceeding to update user with existing username in database: " + ex.ToString());
+                return false;
+            }
+        }
+
+        public bool IsTransactionNoExist(string transactionNo)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    connection.Open();
+
+                    string sql = @"checkTransactionNoIfExist(@transactionNo);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@transactionNo", transactionNo);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            connection.Close();
+                            return true;
+                        }
+                        else
+                        {
+                            connection.Close();
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error checking if the transaction no exist in database: " + ex.ToString());
                 return false;
             }
         }

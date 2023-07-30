@@ -57,7 +57,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     LoadProductsWithOrWithoutSearch();
 
                     this.gridCart.Rows.Clear();
+
                     this.txtTotalAmountToPay.Text = "0.00";
+                    this.txtDiscount.Text = "0";
 
                     this.gridAvailableProducts.Focus();
                 }

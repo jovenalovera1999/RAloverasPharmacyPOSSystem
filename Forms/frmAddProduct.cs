@@ -200,7 +200,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
             if (exist.IsCodeExist(this.txtCode.Text))
             {
-                ResetText();
+                this.txtCode.ResetText();
                 AutoGenNum();
             }
 

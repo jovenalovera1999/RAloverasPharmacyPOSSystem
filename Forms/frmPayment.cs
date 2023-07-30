@@ -21,6 +21,22 @@ namespace RAloverasPharmacyPOSSystem.Forms
         Components.Value val = new Components.Value();
         Functions.Payment payment = new Functions.Payment();
         Functions.Product product = new Functions.Product();
+        Functions.Exist exist = new Functions.Exist();
+
+        string transactionNo = string.Empty;
+
+        private void AutoGenNum()
+        {
+            Random number = new Random();
+            var generateId = new StringBuilder();
+
+            while (generateId.Length < 9)
+            {
+                generateId.Append(number.Next(10).ToString());
+            }
+
+            transactionNo = generateId.ToString();
+        }
 
         private void CalculateTotalAmountToPay()
         {
@@ -75,7 +91,15 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void LoadCarts()
         {
             payment.LoadUsersForPayment(this.gridForPaymentTransaction);
-            this.txtDiscount.Text = this.gridForPaymentTransaction.SelectedCells[2].Value.ToString();
+
+            if(this.gridForPaymentTransaction.Rows.Count < 1)
+            {
+                this.txtDiscount.Text = "0";
+            }
+            else
+            {
+                this.txtDiscount.Text = this.gridForPaymentTransaction.SelectedCells[2].Value.ToString();
+            }
 
             if (this.gridForPaymentTransaction.Rows.Count > 0)
             {
@@ -93,6 +117,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 MessageBox.Show("Failed to save transaction, there are no products!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else if (String.IsNullOrWhiteSpace(this.txtAmount.Text))
+            {
+                MessageBox.Show("Failed to save transaction, input amount first!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtAmount.Focus();
+            }
             else if (this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
             {
                 MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -107,8 +136,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 bool isInserted = false;
 
-                if (payment.InsertTransaction(double.Parse(this.txtTotalAmountToPay.Text), double.Parse(this.txtDiscount.Text), double.Parse(this.txtDiscounted.Text),
-                    double.Parse(this.txtAmount.Text), double.Parse(this.txtChange.Text), val.MyUserId))
+                if (payment.InsertTransaction(transactionNo, double.Parse(this.txtTotalAmountToPay.Text), double.Parse(this.txtDiscount.Text),
+                    double.Parse(this.txtDiscounted.Text), double.Parse(this.txtAmount.Text), double.Parse(this.txtChange.Text), val.MyUserId))
                 {
                     for (int i = 0; i < this.gridCart.Rows.Count; i++)
                     {
@@ -158,6 +187,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 MessageBox.Show("Failed to print, there are no products!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else if(String.IsNullOrWhiteSpace(this.txtAmount.Text))
+            {
+                MessageBox.Show("Failed to print, input amount first!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtAmount.Focus();
+            }
             else if (this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
             {
                 MessageBox.Show("Failed to print, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -203,9 +237,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 rprtReceipt.LocalReport.DataSources.Add(source);
 
                 ReportParameterCollection parameters = new ReportParameterCollection();
-                parameters.Add(new ReportParameter("pDateToday", DateTime.Now.ToString("D")));
+                parameters.Add(new ReportParameter("pTransactionNo", transactionNo));
+                parameters.Add(new ReportParameter("pDateToday", DateTime.Now.ToString("g")));
                 parameters.Add(new ReportParameter("pTotal", totalAmountPaid));
-                parameters.Add(new ReportParameter("pAmount", this.txtAmount.Text));
+                parameters.Add(new ReportParameter("pAmount", double.Parse(this.txtAmount.Text).ToString("0.00")));
                 parameters.Add(new ReportParameter("pDiscount", string.Format("{0}%", this.txtDiscount.Text)));
                 parameters.Add(new ReportParameter("pChange", this.txtChange.Text));
                 rprtReceipt.LocalReport.SetParameters(parameters);
@@ -297,6 +332,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void frmPayment_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
+
+            AutoGenNum();
+
+            if(exist.IsTransactionNoExist(transactionNo))
+            {
+                AutoGenNum();
+            }
 
             LoadCarts();
             CalculateTotalAmountToPay();
