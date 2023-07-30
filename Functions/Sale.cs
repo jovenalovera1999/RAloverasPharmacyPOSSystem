@@ -26,14 +26,14 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL loadSalesWithDateRange(@from, @to);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@from", from);
                         cmd.Parameters.AddWithValue("@to", to);
-
-                        connection.Open();
 
                         da = new MySqlDataAdapter(cmd);
                         dt = new DataTable();
@@ -72,12 +72,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL loadSalesWithoutDateRange();";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
-                        connection.Open();
-
                         da = new MySqlDataAdapter(cmd);
                         dt = new DataTable();
 
@@ -145,14 +145,14 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL sumTotalSalesWithDateRange(@from, @to);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@from", from);
                         cmd.Parameters.AddWithValue("@to", to);
-
-                        connection.Open();
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
@@ -178,12 +178,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL sumTotalSalesWithoutDateRange();";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
-                        connection.Open();
-
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
 
@@ -208,14 +208,14 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL countTransactionsWithDateRange(@from, @to);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@from", from);
                         cmd.Parameters.AddWithValue("@to", to);
-
-                        connection.Open();
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
@@ -241,12 +241,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL countTransactionsWithoutDateRange();";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
-                        connection.Open();
-
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
 
@@ -271,13 +271,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using(MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL loadSalesCart(@transactionId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@transactionId", transactionId);
-
-                        connection.Open();
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
@@ -313,13 +313,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL getTransactionId(@transactionId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@transactionId", transactionId);
-
-                        connection.Open();
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();

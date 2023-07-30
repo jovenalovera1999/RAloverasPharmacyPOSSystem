@@ -13,19 +13,73 @@ namespace RAloverasPharmacyPOSSystem.Functions
         Components.Connection con = new Components.Connection();
         Components.Value val = new Components.Value();
 
-        public bool InsertUserForPayment(long userId)
+        public bool InsertUserForPayment(long userId, double discount)
         {
             try
             {
+                bool isDiscountExist = false;
+
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
-                    string sql = @"CALL insertUserForPayment(@userId);";
+                    connection.Open();
+
+                    string sql = @"CALL getDiscountId(@discount);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@discount", discount);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if(dt.Rows.Count > 0)
+                        {
+                            isDiscountExist = true;
+                            val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                        }
+                    }
+
+                    if(isDiscountExist == false)
+                    {
+                        sql = @"CALL insertDiscount(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            dr.Close();
+                        }
+
+                        sql = @"CALL getDiscountId(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+
+                            dt.Clear();
+                            da.Fill(dt);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                isDiscountExist = true;
+                                val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                            }
+                        }
+                    }
+                    
+                    sql = @"CALL insertUserForPayment(@userId, @discountId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@userId", userId);
-
-                        connection.Open();
+                        cmd.Parameters.AddWithValue("@discountId", val.DiscountId);
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();
@@ -62,6 +116,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL insertCart(@userForPaymentId, @productId, @quantity, @subTotal);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
@@ -70,8 +126,6 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@productId", productId);
                         cmd.Parameters.AddWithValue("@quantity", quantity);
                         cmd.Parameters.AddWithValue("@subTotal", subTotal);
-
-                        connection.Open();
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();

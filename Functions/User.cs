@@ -26,14 +26,14 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL loginUser(@username, @password);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
-
-                        connection.Open();
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
@@ -78,13 +78,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL resetUserPassword(@userId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@userId", userId);
-
-                        connection.Open();
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();
@@ -106,12 +106,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
         {
             using (MySqlConnection connection = new MySqlConnection(con.conString()))
             {
+                connection.Open();
+
                 string sql = @"CALL loadUsers();";
 
                 using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                 {
-                    connection.Open();
-
                     da = new MySqlDataAdapter(cmd);
                     dt = new DataTable();
 
@@ -175,6 +175,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL insertUser(@profilePicture, @firstName, @middleName, @lastName, @address, @contactNumber, @email, @username);";
 
                     using(MySqlCommand cmd = new MySqlCommand(sql, connection))
@@ -187,8 +189,6 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
                         cmd.Parameters.AddWithValue("@email", email);
                         cmd.Parameters.AddWithValue("@username", username);
-
-                        connection.Open();
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();
@@ -213,6 +213,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL updateUser(@userId, @profilePicture, @firstName, @middleName, @lastName, @address, @contactNumber, @email,
                                     @username, @password);";
 
@@ -228,8 +230,6 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@email", email);
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
-
-                        connection.Open();
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();
@@ -253,13 +253,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL deleteUser(@userId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@userId", userId);
-
-                        connection.Open();
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();

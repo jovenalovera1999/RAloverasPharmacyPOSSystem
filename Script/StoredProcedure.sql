@@ -450,15 +450,15 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`insertUserForPayment`(pUserId BIGINT)
+    PROCEDURE `raloveraspharmacy_db`.`insertUserForPayment`(pUserId BIGINT, pDiscountId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		INSERT INTO user_for_payments(userId)
-		VALUES(pUserId);
+		INSERT INTO user_for_payments(userId, discountId)
+		VALUES(pUserId, pDiscountId);
 	END$$
 
 DELIMITER ;
@@ -553,12 +553,20 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT ufp.userForPaymentId,
-		CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END
-		FROM user_for_payments AS ufp
-		INNER JOIN users AS u ON ufp.userId = u.userId
-		WHERE ufp.isPaid = 0
-		ORDER BY ufp.userForPaymentId ASC;
+		SELECT
+			ufp.userForPaymentId,
+			CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
+			d.discount
+		FROM
+			user_for_payments AS ufp
+		INNER JOIN
+			users AS u ON ufp.userId = u.userId
+		INNER JOIN
+			discounts AS d ON ufp.discountId = d.discountId
+		WHERE
+			ufp.isPaid = 0
+		ORDER BY
+			ufp.userForPaymentId ASC;
 	END$$
 
 DELIMITER ;

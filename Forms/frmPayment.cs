@@ -40,7 +40,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void CalculateDiscount()
         {
-            if(String.IsNullOrWhiteSpace(this.txtDiscount.Text) || double.IsNaN(double.Parse(this.txtDiscount.Text)))
+            if(String.IsNullOrWhiteSpace(this.txtDiscount.Text) || double.IsNaN(double.Parse(this.txtDiscount.Text)) || this.txtDiscount.Text == "0")
             {
                 this.txtDiscount.Text = "0";
                 this.txtDiscounted.Text = "0";
@@ -75,6 +75,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void LoadCarts()
         {
             payment.LoadUsersForPayment(this.gridForPaymentTransaction);
+            this.txtDiscount.Text = this.gridForPaymentTransaction.SelectedCells[2].Value.ToString();
 
             if (this.gridForPaymentTransaction.Rows.Count > 0)
             {
@@ -216,9 +217,14 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void gridForPaymentTransaction_MouseClick(object sender, MouseEventArgs e)
         {
             payment.LoadCartsForPaymentWithFilter(long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString()), this.gridCart);
+
+            this.txtDiscount.Text = this.gridForPaymentTransaction.SelectedCells[2].Value.ToString();
             this.gridCart.ClearSelection();
 
+            this.txtAmount.ResetText();
+
             CalculateTotalAmountToPay();
+            CalculateDiscount();
         }
 
         private void frmPayment_VisibleChanged(object sender, EventArgs e)
@@ -234,6 +240,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
+            CalculateDiscount();
             CalculatePayment();
         }
 
@@ -293,6 +300,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
             LoadCarts();
             CalculateTotalAmountToPay();
+            CalculateDiscount();
         }
 
         private void btnSave_Click(object sender, EventArgs e)

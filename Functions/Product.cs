@@ -26,12 +26,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL loadProducts();";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
-                        connection.Open();
-
                         da = new MySqlDataAdapter(cmd);
                         dt = new DataTable();
 
@@ -72,13 +72,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL searchProduct(@keyword);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@keyword", string.Format("%{0}%", keyword));
-
-                        connection.Open();
 
                         da = new MySqlDataAdapter(cmd);
                         dt = new DataTable();
@@ -180,13 +180,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL getProduct(@productId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@productId", productId);
-
-                        connection.Open();
 
                         da = new MySqlDataAdapter(cmd);
                         dt = new DataTable();
@@ -235,13 +235,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL getDescriptionId(@description);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@description", description);
-
-                        connection.Open();
 
                         da = new MySqlDataAdapter(cmd);
                         dt = new DataTable();
@@ -482,13 +482,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL getDescriptionId(@description);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@description", description);
-
-                        connection.Open();
 
                         da = new MySqlDataAdapter(cmd);
                         dt = new DataTable();
@@ -723,13 +723,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL deleteProduct(@productId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@productId", productId);
-
-                        connection.Open();
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();
@@ -753,14 +753,14 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL deductProductQuantity(@productId, @quantity);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@productId", productId);
                         cmd.Parameters.AddWithValue("@quantity", quantity);
-
-                        connection.Open();
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();

@@ -20,12 +20,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"loadUsersForPayment();";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
-                        connection.Open();
-
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
 
@@ -34,7 +34,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         grid.DataSource = dt;
                         grid.Columns["userForPaymentId"].Visible = false;
-                        grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "FULL NAME";
+                        grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "CLERK";
+                        grid.Columns["discount"].HeaderText = "DISCOUNT";
 
                         connection.Close();
                     }
@@ -52,13 +53,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL loadCartsForPaymentWithFilter(@userForPaymentId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@userForPaymentId", userForPaymentId);
-
-                        connection.Open();
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
@@ -90,12 +91,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL loadCartsForPaymentWithoutFilter();";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
-                        connection.Open();
-
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
 
@@ -128,13 +129,13 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL getDiscountId(@discount);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.AddWithValue("@discount", discount);
-
-                        connection.Open();
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
@@ -227,6 +228,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
+                    connection.Open();
+
                     string sql = @"CALL insertTransactionIdToCarts(@cartId, @transactionId, @userForPaymentId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
@@ -234,8 +237,6 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@cartId", cartId);
                         cmd.Parameters.AddWithValue("@transactionId", transactionId);
                         cmd.Parameters.AddWithValue("@userForPaymentId", userForPaymentId);
-
-                        connection.Open();
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();

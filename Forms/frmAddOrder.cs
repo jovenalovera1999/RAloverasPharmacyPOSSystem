@@ -27,17 +27,16 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 MessageBox.Show("Failed to send to payment transaction, there are no products added!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else if(String.IsNullOrWhiteSpace(this.txtDiscount.Text))
+            {
+                MessageBox.Show("Discount is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtDiscount.Focus();
+            }
             else
             {
-                bool isUserForPaymentInserted = false;
                 bool isInserted = false;
 
-                if (order.InsertUserForPayment(val.MyUserId))
-                {
-                    isUserForPaymentInserted = true;
-                }
-
-                if (isUserForPaymentInserted == true)
+                if (order.InsertUserForPayment(val.MyUserId, double.Parse(this.txtDiscount.Text)))
                 {
                     for (int i = 0; i < this.gridCart.Rows.Count; i++)
                     {
