@@ -84,6 +84,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridProducts.ClearSelection();
         }
 
+        private void frmListProducts_Leave(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frmListProducts_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;

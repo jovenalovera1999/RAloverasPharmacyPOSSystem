@@ -3,16 +3,18 @@ DELIMITER $$
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
     PROCEDURE `raloveraspharmacy_db`.`insertUser`(pProfilePicture BLOB, pFirstName VARCHAR(45), pMiddleName VARCHAR(45), pLastName VARCHAR(45),
-    pAddress VARCHAR(45), pContactNumber VARCHAR(45), pEmail VARCHAR(45), pUsername VARBINARY(255))
+    pAddress VARCHAR(45), pContactNumber VARCHAR(45), pEmail VARCHAR(45), pUsername VARBINARY(255), pUserLevelId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		INSERT INTO users(profilePicture, firstName, middleName, lastName, address, contactNumber, email, username)
-		VALUES(pProfilePicture, pFirstName, pMiddleName, pLastName, pAddress, pContactNumber, pEmail,
-        AES_ENCRYPT(pUsername, "J.v3n!j.$hu4c.@l0ver4!#@"));
+		INSERT INTO 
+			users(profilePicture, firstName, middleName, lastName, address, contactNumber, email, username, userLevelId)
+		VALUES
+			(pProfilePicture, pFirstName, pMiddleName, pLastName, pAddress, pContactNumber, pEmail,
+			AES_ENCRYPT(pUsername, "J.v3n!j.$hu4c.@l0ver4!#@"), pUserLevelId);
 	END$$
 
 DELIMITER ;
@@ -45,12 +47,17 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT userId, profilePicture, firstName, middleName, lastName, address, contactNumber, email,
-		CAST(AES_DECRYPT(username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR), CAST(AES_DECRYPT(`password`, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR)
-		FROM users
-		WHERE CAST(AES_DECRYPT(username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR) = pUsername
-		AND CAST(AES_DECRYPT(`password`, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR) = pPassword
-		AND isDeleted = 0;
+		SELECT
+			u.userId, u.profilePicture, u.firstName, u.middleName, u.lastName, u.address, u.contactNumber, u.email,
+			CAST(AES_DECRYPT(u.username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR), CAST(AES_DECRYPT(u.password, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR),
+			ul.userLevel
+		FROM
+			users AS u
+		INNER JOIN
+			user_levels AS ul ON u.userLevelId = ul.userLevelId
+		WHERE
+			CAST(AES_DECRYPT(u.username, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR) = pUsername
+			AND CAST(AES_DECRYPT(u.password, "J.v3n!j.$hu4c.@l0ver4!#@") AS CHAR) = pPassword AND u.isDeleted = 0;
 	END$$
 
 DELIMITER ;
@@ -866,6 +873,46 @@ CREATE
 			transactions
 		WHERE
 			transactionNo = pTransactionNo;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadUserLevels`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			userLevel
+		FROM
+			user_levels;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`getUserLevel`(pUserLevel VARCHAR(45))
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			userLevelId
+		FROM
+			user_levels
+		WHERE
+			userLevel = pUserLevel;
 	END$$
 
 DELIMITER ;

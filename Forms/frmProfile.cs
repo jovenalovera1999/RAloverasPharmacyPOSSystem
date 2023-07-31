@@ -229,6 +229,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtEmail.Text = val.MyEmail;
             this.txtUsername.Text = val.MyUsername;
             this.txtPassword.Text = val.MyPassword;
+            this.txtUserLevel.Text = val.MyUserLevel;
         }
 
         string imgLocation = string.Empty;

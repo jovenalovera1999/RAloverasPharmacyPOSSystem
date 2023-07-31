@@ -51,8 +51,9 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             val.MyAddress = dt.Rows[0].Field<string>("address");
                             val.MyContactNumber = dt.Rows[0].Field<string>("contactNumber");
                             val.MyEmail = dt.Rows[0].Field<string>("email");
-                            val.MyUsername = dt.Rows[0].Field<string>("CAST(AES_DECRYPT(username, \"J.v3n!j.$hu4c.@l0ver4!#@\") AS CHAR)");
-                            val.MyPassword = dt.Rows[0].Field<string>("CAST(AES_DECRYPT(`password`, \"J.v3n!j.$hu4c.@l0ver4!#@\") AS CHAR)");
+                            val.MyUsername = dt.Rows[0].Field<string>("CAST(AES_DECRYPT(u.username, \"J.v3n!j.$hu4c.@l0ver4!#@\") AS CHAR)");
+                            val.MyPassword = dt.Rows[0].Field<string>("CAST(AES_DECRYPT(u.password, \"J.v3n!j.$hu4c.@l0ver4!#@\") AS CHAR)");
+                            val.MyUserLevel = dt.Rows[0].Field<string>("userLevel");
 
                             connection.Close();
                             return true;
@@ -99,6 +100,37 @@ namespace RAloverasPharmacyPOSSystem.Functions
             {
                 Console.WriteLine("Error reseting the password of the user from database: " + ex.ToString());
                 return false;
+            }
+        }
+
+        public void LoadUserLevels(ComboBox cmb)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    connection.Open();
+
+                    string sql = @"CALL loadUserLevels();";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        MySqlDataReader dr = cmd.ExecuteReader();
+
+                        while(dr.Read())
+                        {
+                            string userLevels = dr.GetString("userLevel");
+                            cmb.Items.Add(userLevels);
+                        }
+
+                        dr.Close();
+                        connection.Close();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error loading user levels from database: " + ex.ToString());
             }
         }
 
@@ -169,7 +201,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
         }
 
         public bool InsertUser(byte[] profilePicture, string firstName, string middleName, string lastName, string address, string contactNumber, string email,
-            string username)
+            string username, string userLevel)
         {
             try
             {
@@ -177,7 +209,25 @@ namespace RAloverasPharmacyPOSSystem.Functions
                 {
                     connection.Open();
 
-                    string sql = @"CALL insertUser(@profilePicture, @firstName, @middleName, @lastName, @address, @contactNumber, @email, @username);";
+                    string sql = @"CALL getUserLevel(@userLevel);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@userLevel", userLevel);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if(dt.Rows.Count > 0)
+                        {
+                            val.UserLevelId = dt.Rows[0].Field<long>("userLevelId");
+                        }
+                    }
+                    
+                    sql = @"CALL insertUser(@profilePicture, @firstName, @middleName, @lastName, @address, @contactNumber, @email, @username, @userLevelId);";
 
                     using(MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
@@ -189,6 +239,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
                         cmd.Parameters.AddWithValue("@email", email);
                         cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@userLevelId", val.UserLevelId);
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();

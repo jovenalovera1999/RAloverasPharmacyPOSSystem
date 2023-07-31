@@ -1,3 +1,16 @@
+CREATE TABLE user_levels(
+	userLevelId BIGINT NOT NULL AUTO_INCREMENT,
+	userLevel VARCHAR(45) NOT NULL,
+	PRIMARY KEY(userLevelId)
+);
+
+INSERT INTO
+	user_levels(userLevel)
+VALUES
+	("ADMIN"),
+	("OWNER"),
+	("EMPLOYEE");
+
 CREATE TABLE users(
 	userId BIGINT NOT NULL AUTO_INCREMENT,
 	profilePicture BLOB DEFAULT NULL,
@@ -9,14 +22,18 @@ CREATE TABLE users(
 	email VARCHAR(45) DEFAULT NULL,
 	username VARBINARY(255) NOT NULL,
 	`password` VARBINARY(255) NOT NULL DEFAULT AES_ENCRYPT("user123", "J.v3n!j.$hu4c.@l0ver4!#@"),
+	userLevelId BIGINT NOT NULL,
 	isDeleted TINYINT(1) NOT NULL DEFAULT 0,
 	dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	dateUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY(userId)
+	PRIMARY KEY(userId),
+	FOREIGN KEY(userLevelId) REFERENCES user_levels(userLevelId) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-INSERT INTO users(firstName, middleName, lastName, `address`, contactNumber, email, username, `password`)
-VALUES("JOVEN JOSHUA", "CELIZ", "ALOVERA", "ROXAS CITY", "09123456789", "joven@email.com", AES_ENCRYPT("ADMIN", "J.v3n!j.$hu4c.@l0ver4!#@"), AES_ENCRYPT("admin", "J.v3n!j.$hu4c.@l0ver4!#@"));
+INSERT INTO
+	users(firstName, middleName, lastName, `address`, contactNumber, email, username, `password`, userLevelId)
+VALUES
+	("JOVEN JOSHUA", "CELIZ", "ALOVERA", "ROXAS CITY", "09123456789", "joven@email.com", AES_ENCRYPT("ADMIN", "J.v3n!j.$hu4c.@l0ver4!#@"), AES_ENCRYPT("admin", "J.v3n!j.$hu4c.@l0ver4!#@"), 1);
 
 CREATE TABLE descriptions(
 	descriptionId BIGINT NOT NULL AUTO_INCREMENT,

@@ -66,6 +66,24 @@ namespace RAloverasPharmacyPOSSystem.Forms
             }
         }
 
+        private void frmListUsers_VisibleChanged(object sender, EventArgs e)
+        {
+            this.gridUsers.ClearSelection();
+        }
+
+        private void frmListUsers_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                OpenAddUserForm();
+            }
+        }
+
+        private void frmListUsers_Leave(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frmListUsers_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
@@ -86,19 +104,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridUsers.Columns.Insert(1, btnDelete);
 
             this.Focus();
-        }
-
-        private void frmListUsers_VisibleChanged(object sender, EventArgs e)
-        {
-            this.gridUsers.ClearSelection();
-        }
-
-        private void frmListUsers_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.F1)
-            {
-                OpenAddUserForm();
-            }
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)

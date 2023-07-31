@@ -134,6 +134,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             LoadProductsWithOrWithoutSearch();
         }
 
+        private void frmAddOrder_Leave(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
@@ -169,11 +174,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void btnToPay_Click(object sender, EventArgs e)
         {
             ToPay();
-        }
-
-        private void frmAddOrder_Leave(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

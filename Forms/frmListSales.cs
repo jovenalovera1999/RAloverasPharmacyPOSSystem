@@ -52,6 +52,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             LoadSalesSumCount();
         }
 
+        private void frmListSales_Leave(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frmListSales_Load(object sender, EventArgs e)
         {
             this.dateFrom.Value = DateTime.Now;

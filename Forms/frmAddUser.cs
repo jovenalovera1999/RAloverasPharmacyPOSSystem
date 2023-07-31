@@ -76,7 +76,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 }
 
                 if (user.InsertUser(profilePicture, this.txtFirstName.Text, this.txtMiddleName.Text, this.txtLastName.Text, this.txtAddress.Text, this.txtContactNumber.Text,
-                    txtEmail.Text, this.txtUsername.Text))
+                    txtEmail.Text, this.txtUsername.Text, this.cmbUserLevel.Text))
                 {
                     MessageBox.Show("User was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -86,6 +86,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     gridUsers.ClearSelection();
 
                     profilePicture = null;
+                    this.cmbUserLevel.Text = null;
                     this.txtFirstName.ResetText();
                     this.txtMiddleName.ResetText();
                     this.txtLastName.ResetText();
@@ -188,6 +189,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             CapsLock();
             this.KeyPreview = true;
+
+            user.LoadUserLevels(this.cmbUserLevel);
 
             this.txtFirstName.Focus();
         }

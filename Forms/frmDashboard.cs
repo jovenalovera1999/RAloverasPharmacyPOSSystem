@@ -17,6 +17,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             InitializeComponent();
         }
 
+        Components.Value val = new Components.Value();
+
         private void OpenOrderForm()
         {
             this.pnlMain.Controls.Clear();
@@ -103,43 +105,78 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void frmDashboard_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.F5)
+            if(val.MyUserLevel == "EMPLOYEE")
             {
-                OpenOrderForm();
+                if (e.KeyCode == Keys.F5)
+                {
+                    OpenOrderForm();
+                }
+                else if (e.KeyCode == Keys.F7)
+                {
+                    OpenListProductsForm();
+                }
+                else if (e.KeyCode == Keys.F10)
+                {
+                    OpenProfileForm();
+                }
+                else if (e.KeyCode == Keys.F11)
+                {
+                    LogoutUser();
+                }
+                else if (e.KeyCode == Keys.Escape)
+                {
+                    ExitApplication();
+                }
             }
-            else if(e.KeyCode == Keys.F6)
+            else
             {
-                OpenPaymentForm();
-            }
-            else if(e.KeyCode == Keys.F7)
-            {
-                OpenListProductsForm();
-            }
-            else if(e.KeyCode == Keys.F8)
-            {
-                OpenListUsersForm();
-            }
-            else if(e.KeyCode == Keys.F10)
-            {
-                OpenListSalesForm();
-            }
-            else if(e.KeyCode == Keys.F11)
-            {
-                OpenProfileForm();
-            }
-            else if(e.KeyCode == Keys.F12)
-            {
-                LogoutUser();
-            }
-            else if(e.KeyCode == Keys.Escape)
-            {
-                ExitApplication();
+                if (e.KeyCode == Keys.F5)
+                {
+                    OpenOrderForm();
+                }
+                else if (e.KeyCode == Keys.F6)
+                {
+                    OpenPaymentForm();
+                }
+                else if (e.KeyCode == Keys.F7)
+                {
+                    OpenListProductsForm();
+                }
+                else if (e.KeyCode == Keys.F8)
+                {
+                    OpenListUsersForm();
+                }
+                else if (e.KeyCode == Keys.F9)
+                {
+                    OpenListSalesForm();
+                }
+                else if (e.KeyCode == Keys.F10)
+                {
+                    OpenProfileForm();
+                }
+                else if (e.KeyCode == Keys.F11)
+                {
+                    LogoutUser();
+                }
+                else if (e.KeyCode == Keys.Escape)
+                {
+                    ExitApplication();
+                }
             }
         }
 
         private void frmDashboard_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
+
+            if(val.MyUserLevel == "EMPLOYEE")
+            {
+                this.btnPayment.Visible = false;
+                this.btnUsers.Visible = false;
+                this.btnSales.Visible = false;
+
+                this.btnProducts.Location = new Point(0, 39);
+            }
         }
 
         private void btnOrder_Click(object sender, EventArgs e)

@@ -332,6 +332,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Text = "LIST OF SALES";
             this.Load += new System.EventHandler(this.frmListSales_Load);
             this.VisibleChanged += new System.EventHandler(this.frmListSales_VisibleChanged);
+            this.Leave += new System.EventHandler(this.frmListSales_Leave);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel2.PerformLayout();

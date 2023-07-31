@@ -329,6 +329,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             }
         }
 
+        private void frmPayment_Leave(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frmPayment_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;

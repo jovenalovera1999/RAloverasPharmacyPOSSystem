@@ -86,6 +86,13 @@ namespace RAloverasPharmacyPOSSystem.Components
             set { myPassword = value; }
         }
 
+        private static string myUserLevel;
+        public string MyUserLevel
+        {
+            get { return myUserLevel; }
+            set { myUserLevel = value; }
+        }
+
         public string MyFullName
         {
             get
@@ -153,6 +160,15 @@ namespace RAloverasPharmacyPOSSystem.Components
         {
             get { return transactionId; }
             set { transactionId = value; }
+        }
+
+        // Get user level id values
+
+        private static long userLevelId;
+        public long UserLevelId
+        {
+            get { return userLevelId; }
+            set { userLevelId = value; }
         }
 
         // Product values

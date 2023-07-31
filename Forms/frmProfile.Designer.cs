@@ -56,6 +56,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblConfirmPassword = new System.Windows.Forms.Label();
             this.txtConfirmPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtUserLevel = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfilePicture)).BeginInit();
             this.SuspendLayout();
@@ -528,12 +530,51 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtConfirmPassword.TabIndex = 8;
             this.txtConfirmPassword.Visible = false;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(664, 95);
+            this.label11.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label11.Name = "label11";
+            this.label11.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            this.label11.Size = new System.Drawing.Size(77, 32);
+            this.label11.TabIndex = 93;
+            this.label11.Text = "USER LEVEL";
+            // 
+            // txtUserLevel
+            // 
+            this.txtUserLevel.Animated = true;
+            this.txtUserLevel.BorderRadius = 3;
+            this.txtUserLevel.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtUserLevel.DefaultText = "";
+            this.txtUserLevel.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+            this.txtUserLevel.DisabledState.FillColor = System.Drawing.Color.White;
+            this.txtUserLevel.DisabledState.ForeColor = System.Drawing.Color.Black;
+            this.txtUserLevel.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtUserLevel.Enabled = false;
+            this.txtUserLevel.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
+            this.txtUserLevel.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.txtUserLevel.ForeColor = System.Drawing.Color.Black;
+            this.txtUserLevel.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
+            this.txtUserLevel.Location = new System.Drawing.Point(668, 120);
+            this.txtUserLevel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUserLevel.Name = "txtUserLevel";
+            this.txtUserLevel.PasswordChar = '\0';
+            this.txtUserLevel.PlaceholderText = "";
+            this.txtUserLevel.SelectedText = "";
+            this.txtUserLevel.Size = new System.Drawing.Size(320, 36);
+            this.txtUserLevel.TabIndex = 92;
+            this.txtUserLevel.TabStop = false;
+            // 
             // frmProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1005, 474);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.txtUserLevel);
             this.Controls.Add(this.lblConfirmPassword);
             this.Controls.Add(this.txtConfirmPassword);
             this.Controls.Add(this.label8);
@@ -603,5 +644,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2TextBox txtPassword;
         private System.Windows.Forms.Label lblConfirmPassword;
         private Guna.UI2.WinForms.Guna2TextBox txtConfirmPassword;
+        private System.Windows.Forms.Label label11;
+        private Guna.UI2.WinForms.Guna2TextBox txtUserLevel;
     }
 }

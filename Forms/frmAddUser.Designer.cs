@@ -51,6 +51,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnRemove = new Guna.UI2.WinForms.Guna2Button();
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
             this.btnClose = new Guna.UI2.WinForms.Guna2Button();
+            this.cmbUserLevel = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfilePicture)).BeginInit();
             this.SuspendLayout();
@@ -421,12 +423,45 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnClose.Text = "CLOSE (F2)";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // cmbUserLevel
+            // 
+            this.cmbUserLevel.BackColor = System.Drawing.Color.Transparent;
+            this.cmbUserLevel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+            this.cmbUserLevel.BorderRadius = 3;
+            this.cmbUserLevel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbUserLevel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbUserLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUserLevel.FocusedColor = System.Drawing.Color.OliveDrab;
+            this.cmbUserLevel.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
+            this.cmbUserLevel.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.cmbUserLevel.ForeColor = System.Drawing.Color.Black;
+            this.cmbUserLevel.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
+            this.cmbUserLevel.ItemHeight = 30;
+            this.cmbUserLevel.Location = new System.Drawing.Point(669, 316);
+            this.cmbUserLevel.Name = "cmbUserLevel";
+            this.cmbUserLevel.Size = new System.Drawing.Size(320, 36);
+            this.cmbUserLevel.TabIndex = 7;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(666, 291);
+            this.label8.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label8.Name = "label8";
+            this.label8.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            this.label8.Size = new System.Drawing.Size(77, 32);
+            this.label8.TabIndex = 46;
+            this.label8.Text = "USER LEVEL";
+            // 
             // frmAddUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1005, 474);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cmbUserLevel);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnRemove);
@@ -486,5 +521,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2Button btnRemove;
         private Guna.UI2.WinForms.Guna2Button btnSave;
         private Guna.UI2.WinForms.Guna2Button btnClose;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbUserLevel;
+        private System.Windows.Forms.Label label8;
     }
 }

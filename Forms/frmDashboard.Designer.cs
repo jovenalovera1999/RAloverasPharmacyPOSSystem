@@ -34,7 +34,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.btnSales = new Guna.UI2.WinForms.Guna2Button();
             this.btnExit = new Guna.UI2.WinForms.Guna2Button();
-            this.btnReports = new Guna.UI2.WinForms.Guna2Button();
             this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
             this.btnProducts = new Guna.UI2.WinForms.Guna2Button();
             this.btnProfile = new Guna.UI2.WinForms.Guna2Button();
@@ -72,7 +71,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.guna2Panel2.BackColor = System.Drawing.Color.OliveDrab;
             this.guna2Panel2.Controls.Add(this.btnSales);
             this.guna2Panel2.Controls.Add(this.btnExit);
-            this.guna2Panel2.Controls.Add(this.btnReports);
             this.guna2Panel2.Controls.Add(this.btnLogout);
             this.guna2Panel2.Controls.Add(this.btnProducts);
             this.guna2Panel2.Controls.Add(this.btnProfile);
@@ -96,12 +94,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnSales.FillColor = System.Drawing.Color.OliveDrab;
             this.btnSales.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnSales.ForeColor = System.Drawing.Color.White;
-            this.btnSales.Location = new System.Drawing.Point(0, 183);
+            this.btnSales.Location = new System.Drawing.Point(0, 147);
             this.btnSales.Name = "btnSales";
             this.btnSales.Size = new System.Drawing.Size(137, 36);
             this.btnSales.TabIndex = 13;
             this.btnSales.TabStop = false;
-            this.btnSales.Text = "SALES (F10)";
+            this.btnSales.Text = "SALES (F9)";
             this.btnSales.Click += new System.EventHandler(this.btnSales_Click);
             // 
             // btnExit
@@ -124,25 +122,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnExit.Text = "EXIT (ESC)";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // btnReports
-            // 
-            this.btnReports.Animated = true;
-            this.btnReports.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReports.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnReports.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnReports.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnReports.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnReports.FillColor = System.Drawing.Color.OliveDrab;
-            this.btnReports.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnReports.ForeColor = System.Drawing.Color.White;
-            this.btnReports.Location = new System.Drawing.Point(0, 147);
-            this.btnReports.Name = "btnReports";
-            this.btnReports.Size = new System.Drawing.Size(137, 36);
-            this.btnReports.TabIndex = 11;
-            this.btnReports.TabStop = false;
-            this.btnReports.Text = "REPORTS (F9)";
-            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
-            // 
             // btnLogout
             // 
             this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -160,7 +139,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnLogout.Size = new System.Drawing.Size(137, 36);
             this.btnLogout.TabIndex = 9;
             this.btnLogout.TabStop = false;
-            this.btnLogout.Text = "LOGOUT (F12)";
+            this.btnLogout.Text = "LOGOUT (F11)";
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // btnProducts
@@ -199,7 +178,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnProfile.Size = new System.Drawing.Size(137, 36);
             this.btnProfile.TabIndex = 10;
             this.btnProfile.TabStop = false;
-            this.btnProfile.Text = "PROFILE (F11)";
+            this.btnProfile.Text = "PROFILE (F10)";
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
             // btnUsers
@@ -303,7 +282,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2Button btnExit;
         private Guna.UI2.WinForms.Guna2Panel pnlMain;
         private Guna.UI2.WinForms.Guna2Button btnProfile;
-        private Guna.UI2.WinForms.Guna2Button btnReports;
         private Guna.UI2.WinForms.Guna2Button btnPayment;
         private Guna.UI2.WinForms.Guna2Button btnSales;
     }
