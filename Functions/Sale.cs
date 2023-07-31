@@ -48,6 +48,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.ClearSelection();
 
                         grid.Columns["transactionId"].Visible = false;
+                        grid.Columns["transactionNo"].HeaderText = "TRANSACTION NO.";
                         grid.Columns["FORMAT(t.totalAmountToPay, 2)"].HeaderText = "AMOUNT TO PAY";
                         grid.Columns["CONCAT(FORMAT(d.discount, 0), '%')"].HeaderText = "DISCOUNT";
                         grid.Columns["FORMAT(t.discounted, 2)"].HeaderText = "DISCOUNTED";
@@ -91,6 +92,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.ClearSelection();
 
                         grid.Columns["transactionId"].Visible = false;
+                        grid.Columns["transactionNo"].HeaderText = "TRANSACTION NO.";
                         grid.Columns["FORMAT(t.totalAmountToPay, 2)"].HeaderText = "AMOUNT TO PAY";
                         grid.Columns["CONCAT(FORMAT(d.discount, 0), '%')"].HeaderText = "DISCOUNT";
                         grid.Columns["FORMAT(t.discounted, 2)"].HeaderText = "DISCOUNTED";
@@ -294,7 +296,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["CASE WHEN dis.discount = 0 THEN FORMAT(p.price, 2) ELSE FORMAT(p.discounted, 2) END"].HeaderText = "PRICE";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
                         grid.Columns["FORMAT(c.subTotal, 2)"].HeaderText = "SUB TOTAL";
-                        grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "STAFF HANDLED";
+                        grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "CLERK";
                         grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
 
                         connection.Close();

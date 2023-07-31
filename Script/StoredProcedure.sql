@@ -661,7 +661,7 @@ CREATE
     | COMMENT 'string'*/
 	BEGIN
 		SELECT
-			t.transactionId, FORMAT(t.totalAmountToPay, 2), CONCAT(FORMAT(d.discount, 0), '%'), FORMAT(t.discounted, 2),
+			t.transactionId, t.transactionNo, FORMAT(t.totalAmountToPay, 2), CONCAT(FORMAT(d.discount, 0), '%'), FORMAT(t.discounted, 2),
 			FORMAT(t.amount, 2), FORMAT(t.change, 2),
 			CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
 			t.dateCreated
@@ -691,7 +691,7 @@ CREATE
     | COMMENT 'string'*/
 	BEGIN
 		SELECT
-			t.transactionId, FORMAT(t.totalAmountToPay, 2), CONCAT(FORMAT(d.discount, 0), '%'), FORMAT(t.discounted, 2),
+			t.transactionId, t.transactionNo, FORMAT(t.totalAmountToPay, 2), CONCAT(FORMAT(d.discount, 0), '%'), FORMAT(t.discounted, 2),
 			FORMAT(t.amount, 2), FORMAT(t.change, 2),
 			CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
 			t.dateCreated

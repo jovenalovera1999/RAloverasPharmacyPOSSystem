@@ -52,7 +52,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.rprtReceipt.LocalReport.ReportEmbeddedResource = "RAloverasPharmacyPOSSystem.Reports.rprtReceipt.rdlc";
             this.rprtReceipt.Location = new System.Drawing.Point(12, 12);
             this.rprtReceipt.Name = "rprtReceipt";
-            this.rprtReceipt.Size = new System.Drawing.Size(352, 501);
+            this.rprtReceipt.Size = new System.Drawing.Size(374, 501);
             this.rprtReceipt.TabIndex = 0;
             this.rprtReceipt.ZoomMode = Microsoft.Reporting.WinForms.ZoomMode.FullPage;
             // 
@@ -68,7 +68,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnClose.FillColor = System.Drawing.Color.OliveDrab;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(254, 519);
+            this.btnClose.Location = new System.Drawing.Point(276, 519);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(110, 36);
             this.btnClose.TabIndex = 16;
@@ -81,11 +81,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(376, 567);
+            this.ClientSize = new System.Drawing.Size(398, 567);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.rprtReceipt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MinimumSize = new System.Drawing.Size(376, 567);
+            this.MinimumSize = new System.Drawing.Size(398, 567);
             this.Name = "frmPrintReceipt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PRINT RECEIPT";

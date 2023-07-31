@@ -19,18 +19,23 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void AddToCart()
         {
-            if(String.IsNullOrWhiteSpace(this.txtQuantity.Text))
+            Forms.frmAddOrder addOrder = (Forms.frmAddOrder)Application.OpenForms["frmAddOrder"];
+            DataGridView gridAvailableProducts = (DataGridView)addOrder.Controls["gridAvailableProducts"];
+            DataGridView gridCart = (DataGridView)addOrder.Controls["gridCart"];
+            Guna.UI2.WinForms.Guna2TextBox txtTotalAmountToPay = (Guna.UI2.WinForms.Guna2TextBox)addOrder.Controls["txtTotalAmountToPay"];
+
+            if (String.IsNullOrWhiteSpace(this.txtQuantity.Text))
             {
                 MessageBox.Show("Quantity is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtQuantity.Focus();
             }
+            else if(int.Parse(gridAvailableProducts.SelectedCells[5].Value.ToString()) - int.Parse(this.txtQuantity.Text) < 0)
+            {
+                MessageBox.Show("Failed to add to cart, insufficiet supply!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtQuantity.Focus();
+            }
             else
             {
-                Forms.frmAddOrder addOrder = (Forms.frmAddOrder)Application.OpenForms["frmAddOrder"];
-                DataGridView gridAvailableProducts = (DataGridView)addOrder.Controls["gridAvailableProducts"];
-                DataGridView gridCart = (DataGridView)addOrder.Controls["gridCart"];
-                Guna.UI2.WinForms.Guna2TextBox txtTotalAmountToPay = (Guna.UI2.WinForms.Guna2TextBox)addOrder.Controls["txtTotalAmountToPay"];
-
                 int n = gridCart.Rows.Add();
                 gridCart.Rows[n].Cells[1].Value = gridAvailableProducts.SelectedCells[1].Value;
                 gridCart.Rows[n].Cells[2].Value = gridAvailableProducts.SelectedCells[3].Value;

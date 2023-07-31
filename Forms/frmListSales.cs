@@ -54,6 +54,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void frmListSales_Load(object sender, EventArgs e)
         {
+            this.dateFrom.Value = DateTime.Now;
+            this.dateTo.Value = DateTime.Now;
+
             LoadSalesSumCount();
 
             DataGridViewButtonColumn btnView = new DataGridViewButtonColumn();

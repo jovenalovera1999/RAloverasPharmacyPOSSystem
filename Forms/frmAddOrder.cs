@@ -170,5 +170,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             ToPay();
         }
+
+        private void frmAddOrder_Leave(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
