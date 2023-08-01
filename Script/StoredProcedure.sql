@@ -197,15 +197,23 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), CONCAT(dis.discount, '%'),
-		FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
-		FROM products AS p
-		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
-		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
-		INNER JOIN discounts AS dis ON p.discountId = dis.discountId
-		INNER JOIN generics AS g ON p.genericId = g.genericId
-		WHERE isDeleted = 0
-		ORDER BY CONCAT(d.description, p.code) ASC;
+		SELECT
+			p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), dis.discount,
+			FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
+		FROM
+			products AS p
+		INNER JOIN
+			descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN
+			packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		INNER JOIN
+			discounts AS dis ON p.discountId = dis.discountId
+		INNER JOIN
+			generics AS g ON p.genericId = g.genericId
+		WHERE
+			p.isDeleted = 0
+		ORDER BY
+			d.description AND p.code ASC;
 	END$$
 
 DELIMITER ;
@@ -307,16 +315,24 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), CONCAT(dis.discount, '%'),
-		FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
-		FROM products AS p
-		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
-		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
-		INNER JOIN discounts AS dis ON p.discountId = dis.discountId
-		INNER JOIN generics AS g ON p.genericId = g.genericId
-		WHERE p.code LIKE pKeyword AND isDeleted = 0 OR d.description LIKE pKeyword AND isDeleted = 0
-		OR pu.packagingUnitName LIKE pKeyword AND isDeleted = 0 OR g.genericName LIKE pKeyword AND isDeleted = 0
-		ORDER BY CONCAT(d.description, p.code) ASC;
+		SELECT
+			p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), dis.discount,
+			FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
+		FROM
+			products AS p
+		INNER JOIN
+			descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN
+			packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		INNER JOIN
+			discounts AS dis ON p.discountId = dis.discountId
+		INNER JOIN
+			generics AS g ON p.genericId = g.genericId
+		WHERE
+			p.code LIKE pKeyword AND p.isDeleted = 0 OR d.description LIKE pKeyword AND p.isDeleted = 0
+			OR pu.packagingUnitName LIKE pKeyword AND p.isDeleted = 0 OR g.genericName LIKE pKeyword AND p.isDeleted = 0
+		ORDER BY
+			d.description AND p.code ASC;
 	END$$
 
 DELIMITER ;
@@ -913,6 +929,27 @@ CREATE
 			user_levels
 		WHERE
 			userLevel = pUserLevel;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`updateDiscountIdAfterPaymentTransaction`(pUserForPaymentId BIGINT, pDiscountId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE
+			user_for_payments
+		SET
+			discountId = pDiscountId
+		WHERE
+			userForPaymentId = pUserForPaymentId;
 	END$$
 
 DELIMITER ;

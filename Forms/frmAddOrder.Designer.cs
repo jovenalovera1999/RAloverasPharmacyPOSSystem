@@ -441,6 +441,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.SelectedText = "";
             this.txtDiscount.Size = new System.Drawing.Size(320, 36);
             this.txtDiscount.TabIndex = 0;
+            this.txtDiscount.TextChanged += new System.EventHandler(this.txtDiscount_TextChanged);
             // 
             // frmAddOrder
             // 

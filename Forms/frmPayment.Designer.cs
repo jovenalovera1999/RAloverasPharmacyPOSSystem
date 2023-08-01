@@ -113,9 +113,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.label3.Size = new System.Drawing.Size(160, 32);
+            this.label3.Size = new System.Drawing.Size(71, 32);
             this.label3.TabIndex = 10;
-            this.label3.Text = "DISCOUNT (PERCENTAGE)";
+            this.label3.Text = "DISCOUNT";
             // 
             // txtDiscount
             // 

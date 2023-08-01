@@ -27,9 +27,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 MessageBox.Show("Failed to send to payment transaction, there are no products added!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(String.IsNullOrWhiteSpace(this.txtDiscount.Text))
+            else if(double.Parse(this.txtTotalAmountToPay.Text) < 0)
             {
-                MessageBox.Show("Discount is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtDiscount.Focus();
             }
             else
@@ -132,6 +132,32 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadProductsWithOrWithoutSearch();
+        }
+
+        private void txtDiscount_TextChanged(object sender, EventArgs e)
+        {
+            double totalAmountToPay = 0;
+
+            for (int i = 0; i < gridCart.Rows.Count; i++)
+            {
+                totalAmountToPay += double.Parse(gridCart.Rows[i].Cells[5].Value.ToString());
+            }
+
+            txtTotalAmountToPay.Text = totalAmountToPay.ToString("0.00");
+
+            if (String.IsNullOrEmpty(this.txtDiscount.Text) || double.IsNaN(double.Parse(this.txtDiscount.Text)))
+            {
+                this.txtTotalAmountToPay.Text = totalAmountToPay.ToString("0.00");
+                this.txtDiscount.Text = "0";
+            }
+            else if(this.txtDiscount.Text != "0")
+            {
+                this.txtTotalAmountToPay.Text = (totalAmountToPay - double.Parse(this.txtDiscount.Text)).ToString("0.00");
+            }
+            else
+            {
+                this.txtTotalAmountToPay.Text = totalAmountToPay.ToString("0.00");
+            }
         }
 
         private void frmAddOrder_Leave(object sender, EventArgs e)

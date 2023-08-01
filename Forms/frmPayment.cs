@@ -63,8 +63,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             }
             else
             {
-                double discount = double.Parse(this.txtTotalAmountToPay.Text) * (double.Parse(this.txtDiscount.Text) / 100);
-                this.txtDiscounted.Text = (double.Parse(this.txtTotalAmountToPay.Text) - discount).ToString("0.00");
+                this.txtDiscounted.Text = (double.Parse(this.txtTotalAmountToPay.Text) - double.Parse(this.txtDiscount.Text)).ToString("0.00");
             }
         }
 
@@ -127,6 +126,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
             }
+            else if (double.Parse(this.txtDiscounted.Text) < 0)
+            {
+                MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtDiscount.Focus();
+            }
             else if (this.txtDiscount.Text != "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text))
             {
                 MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -155,7 +159,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
                         }
                     }
 
-                    if (isInserted == true)
+                    if (payment.UpdateDiscountIdAfterPaymentTransaction(long.Parse(this.gridForPaymentTransaction.SelectedCells[0].Value.ToString()),
+                        double.Parse(this.txtDiscount.Text)) && isInserted == true)
                     {
                         MessageBox.Show("Transaction was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -167,7 +172,17 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
                         this.txtAmount.ResetText();
 
+                        if(this.gridForPaymentTransaction.Rows.Count > 0)
+                        {
+                            this.txtDiscount.Text = this.gridForPaymentTransaction.SelectedCells[2].Value.ToString();
+                        }
+                        else
+                        {
+                            this.txtDiscount.Text = "0";
+                        }
+
                         CalculateTotalAmountToPay();
+                        CalculateDiscount();
                     }
                     else
                     {

@@ -50,7 +50,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["packagingUnitName"].HeaderText = "PACKAGING UNIT";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
                         grid.Columns["FORMAT(p.price, 2)"].HeaderText = "PRICE";
-                        grid.Columns["CONCAT(dis.discount, '%')"].HeaderText = "DISCOUNT (PERCENTAGE)";
+                        grid.Columns["discount"].HeaderText = "DISCOUNT";
                         grid.Columns["FORMAT(p.discounted, 2)"].HeaderText = "DISCOUNTED";
                         grid.Columns["genericName"].HeaderText = "GENERIC";
                         grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
@@ -98,7 +98,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["packagingUnitName"].HeaderText = "PACKAGING UNIT";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
                         grid.Columns["FORMAT(p.price, 2)"].HeaderText = "PRICE";
-                        grid.Columns["CONCAT(dis.discount, '%')"].HeaderText = "DISCOUNT (PERCENTAGE)";
+                        grid.Columns["discount"].HeaderText = "DISCOUNT";
                         grid.Columns["FORMAT(p.discounted, 2)"].HeaderText = "DISCOUNTED";
                         grid.Columns["genericName"].HeaderText = "GENERIC";
                         grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
@@ -188,8 +188,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         cmd.Parameters.AddWithValue("@productId", productId);
 
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
@@ -243,8 +243,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         cmd.Parameters.AddWithValue("@description", description);
 
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
@@ -274,8 +274,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         {
                             cmd.Parameters.AddWithValue("@description", description);
 
-                            da = new MySqlDataAdapter(cmd);
-                            dt = new DataTable();
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
 
                             dt.Clear();
                             da.Fill(dt);
@@ -294,8 +294,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
@@ -325,8 +325,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         {
                             cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
-                            da = new MySqlDataAdapter(cmd);
-                            dt = new DataTable();
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
 
                             dt.Clear();
                             da.Fill(dt);
@@ -345,8 +345,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         cmd.Parameters.AddWithValue("@discount", discount);
 
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
@@ -376,8 +376,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         {
                             cmd.Parameters.AddWithValue("@discount", discount);
 
-                            da = new MySqlDataAdapter(cmd);
-                            dt = new DataTable();
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
 
                             dt.Clear();
                             da.Fill(dt);
@@ -396,8 +396,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         cmd.Parameters.AddWithValue("@generic", generic);
 
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
@@ -427,8 +427,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         {
                             cmd.Parameters.AddWithValue("@generic", generic);
 
-                            da = new MySqlDataAdapter(cmd);
-                            dt = new DataTable();
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
 
                             dt.Clear();
                             da.Fill(dt);
@@ -490,8 +490,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         cmd.Parameters.AddWithValue("@description", description);
 
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
@@ -521,8 +521,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         {
                             cmd.Parameters.AddWithValue("@description", description);
 
-                            da = new MySqlDataAdapter(cmd);
-                            dt = new DataTable();
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
 
                             dt.Clear();
                             da.Fill(dt);
@@ -541,8 +541,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
@@ -572,8 +572,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         {
                             cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
-                            da = new MySqlDataAdapter(cmd);
-                            dt = new DataTable();
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
 
                             dt.Clear();
                             da.Fill(dt);
@@ -592,8 +592,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         cmd.Parameters.AddWithValue("@discount", discount);
 
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
@@ -623,8 +623,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         {
                             cmd.Parameters.AddWithValue("@discount", discount);
 
-                            da = new MySqlDataAdapter(cmd);
-                            dt = new DataTable();
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
 
                             dt.Clear();
                             da.Fill(dt);
@@ -643,8 +643,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     {
                         cmd.Parameters.AddWithValue("@generic", generic);
 
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
 
                         dt.Clear();
                         da.Fill(dt);
@@ -674,8 +674,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         {
                             cmd.Parameters.AddWithValue("@generic", generic);
 
-                            da = new MySqlDataAdapter(cmd);
-                            dt = new DataTable();
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
 
                             dt.Clear();
                             da.Fill(dt);

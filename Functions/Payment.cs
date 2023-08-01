@@ -254,5 +254,89 @@ namespace RAloverasPharmacyPOSSystem.Functions
                 return false;
             }
         }
+
+        public bool UpdateDiscountIdAfterPaymentTransaction(long userForPaymentId, double discount)
+        {
+            try
+            {
+                bool isDiscountExist = false;
+
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    connection.Open();
+
+                    string sql = @"CALL getDiscountId(@discount);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@discount", discount);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if(dt.Rows.Count > 0)
+                        {
+                            isDiscountExist = true;
+                            val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                        }
+                    }
+
+                    if (isDiscountExist == false)
+                    {
+                        sql = @"CALL insertDiscount(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            dr.Close();
+                        }
+
+                        sql = @"CALL getDiscountId(@discount);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@discount", discount);
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+
+                            dt.Clear();
+                            da.Fill(dt);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                isDiscountExist = true;
+                                val.DiscountId = dt.Rows[0].Field<long>("discountId");
+                            }
+                        }
+                    }
+
+                    sql = @"CALL updateDiscountIdAfterPaymentTransaction(@userForPaymentId, @discountId);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@userForPaymentId", userForPaymentId);
+                        cmd.Parameters.AddWithValue("@discountId", val.DiscountId);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error updating discount id after payment transaction in database: " + ex.ToString());
+                return false;
+            }
+        }
     }
 }

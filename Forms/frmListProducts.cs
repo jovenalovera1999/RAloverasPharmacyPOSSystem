@@ -17,6 +17,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             InitializeComponent();
         }
 
+        Components.Value val = new Components.Value();
         Functions.Product product = new Functions.Product();
 
         private void OpenAddProductForm()
@@ -94,19 +95,22 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.KeyPreview = true;
             product.LoadProducts(this.gridProducts);
 
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
-            btnUpdate.HeaderText = "ACTION";
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Text = "UPDATE";
-            btnUpdate.UseColumnTextForButtonValue = true;
-            this.gridProducts.Columns.Insert(0, btnUpdate);
+            if(val.MyUserLevel == "ADMIN")
+            {
+                DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
+                btnUpdate.HeaderText = "ACTION";
+                btnUpdate.Name = "btnUpdate";
+                btnUpdate.Text = "UPDATE";
+                btnUpdate.UseColumnTextForButtonValue = true;
+                this.gridProducts.Columns.Insert(0, btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-            btnDelete.HeaderText = "";
-            btnDelete.Name = "btnDelete";
-            btnDelete.Text = "DELETE";
-            btnDelete.UseColumnTextForButtonValue = true;
-            this.gridProducts.Columns.Insert(1, btnDelete);
+                DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+                btnDelete.HeaderText = "";
+                btnDelete.Name = "btnDelete";
+                btnDelete.Text = "DELETE";
+                btnDelete.UseColumnTextForButtonValue = true;
+                this.gridProducts.Columns.Insert(1, btnDelete);
+            }
 
             this.txtSearch.Focus();
         }
