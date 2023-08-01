@@ -41,7 +41,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     for (int i = 0; i < this.gridCart.Rows.Count; i++)
                     {
                         if (order.ToPay(val.UserForPaymentId, long.Parse(this.gridCart.Rows[i].Cells[1].Value.ToString()),
-                            int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()), double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString())))
+                            int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()), double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString())) &&
+                            product.DeductProduct(long.Parse(this.gridCart.Rows[i].Cells[1].Value.ToString()), int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString())))
                         {
                             if (i == this.gridCart.Rows.Count - 1)
                             {
