@@ -8,7 +8,7 @@ namespace RAloverasPharmacyPOSSystem.Components
 {
     class Value
     {
-        public string serverName = "localhost";
+        public string serverName = "192.168.1.11";
         public string serverUser = "devjov";
         public string serverPass = "nohacking143161096";
         public string port = "3307";
