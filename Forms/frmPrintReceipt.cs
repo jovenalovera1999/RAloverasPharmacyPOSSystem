@@ -17,8 +17,17 @@ namespace RAloverasPharmacyPOSSystem.Forms
             InitializeComponent();
         }
 
+        private void frmPrintReceipt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
+
         private void frmPrintReceipt_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
             this.rprtReceipt.RefreshReport();
         }
 

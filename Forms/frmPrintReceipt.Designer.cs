@@ -30,7 +30,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.CartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rprtReceipt = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnClose = new Guna.UI2.WinForms.Guna2Button();
@@ -46,9 +46,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.rprtReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            reportDataSource2.Name = "dsCart";
-            reportDataSource2.Value = this.CartBindingSource;
-            this.rprtReceipt.LocalReport.DataSources.Add(reportDataSource2);
+            reportDataSource1.Name = "dsCart";
+            reportDataSource1.Value = this.CartBindingSource;
+            this.rprtReceipt.LocalReport.DataSources.Add(reportDataSource1);
             this.rprtReceipt.LocalReport.ReportEmbeddedResource = "RAloverasPharmacyPOSSystem.Reports.rprtReceipt.rdlc";
             this.rprtReceipt.Location = new System.Drawing.Point(12, 12);
             this.rprtReceipt.Name = "rprtReceipt";
@@ -90,6 +90,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PRINT RECEIPT";
             this.Load += new System.EventHandler(this.frmPrintReceipt_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPrintReceipt_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.CartBindingSource)).EndInit();
             this.ResumeLayout(false);
 
