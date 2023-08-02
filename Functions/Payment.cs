@@ -35,7 +35,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.DataSource = dt;
                         grid.Columns["userForPaymentId"].Visible = false;
                         grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "CLERK";
-                        grid.Columns["discount"].HeaderText = "DISCOUNT";
+                        grid.Columns["FORMAT(d.discount, 2)"].HeaderText = "DISCOUNT";
 
                         connection.Close();
                     }

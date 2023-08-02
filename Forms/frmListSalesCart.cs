@@ -45,6 +45,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             BackToListSalesForm();
         }
 
+        private void frmListSalesCart_Leave(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frmListSalesCart_Load(object sender, EventArgs e)
         {
             sale.LoadSalesCart(val.TransactionId, this.gridSalesCart);

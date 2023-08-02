@@ -56,7 +56,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void CalculateDiscount()
         {
-            if(String.IsNullOrWhiteSpace(this.txtDiscount.Text) || double.IsNaN(double.Parse(this.txtDiscount.Text)) || this.txtDiscount.Text == "0")
+            if(String.IsNullOrWhiteSpace(this.txtDiscount.Text) || double.IsNaN(double.Parse(this.txtDiscount.Text)) || double.Parse(this.txtDiscount.Text) == 0)
             {
                 this.txtDiscount.Text = "0";
                 this.txtDiscounted.Text = "0";
@@ -75,7 +75,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 total = 0;
             }
-            else if (this.txtDiscount.Text == "0")
+            else if (double.Parse(this.txtDiscount.Text) == 0)
             {
                 total = double.Parse(this.txtAmount.Text) - double.Parse(this.txtTotalAmountToPay.Text);
             }
@@ -121,17 +121,17 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 MessageBox.Show("Failed to save transaction, input amount first!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
             }
-            else if (this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
-            {
-                MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.txtAmount.Focus();
-            }
             else if (double.Parse(this.txtDiscounted.Text) < 0)
             {
                 MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtDiscount.Focus();
             }
-            else if (this.txtDiscount.Text != "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text))
+            else if (double.Parse(this.txtDiscount.Text) == 0 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
+            {
+                MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtAmount.Focus();
+            }
+            else if (double.Parse(this.txtDiscount.Text) != 0 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text))
             {
                 MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
@@ -210,12 +210,17 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 MessageBox.Show("Failed to print, input amount first!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
             }
-            else if (this.txtDiscount.Text == "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
+            else if(double.Parse(this.txtDiscounted.Text) < 0)
+            {
+                MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtDiscount.Focus();
+            }
+            else if (double.Parse(this.txtDiscount.Text) == 0 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text))
             {
                 MessageBox.Show("Failed to print, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
             }
-            else if (this.txtDiscount.Text != "0" && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text))
+            else if (double.Parse(this.txtDiscount.Text) != 0 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text))
             {
                 MessageBox.Show("Failed to print, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
@@ -224,7 +229,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 string totalAmountPaid = string.Empty;
 
-                if (this.txtDiscounted.Text == "0")
+                if (double.Parse(this.txtDiscounted.Text) == 0)
                 {
                     totalAmountPaid = this.txtTotalAmountToPay.Text;
                 }

@@ -53,6 +53,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["discount"].HeaderText = "DISCOUNT";
                         grid.Columns["FORMAT(p.discounted, 2)"].HeaderText = "DISCOUNTED";
                         grid.Columns["genericName"].HeaderText = "GENERIC";
+                        grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "ADDED BY";
                         grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
                         grid.Columns["dateUpdated"].HeaderText = "DATE UPDATED";
 
@@ -101,6 +102,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["discount"].HeaderText = "DISCOUNT";
                         grid.Columns["FORMAT(p.discounted, 2)"].HeaderText = "DISCOUNTED";
                         grid.Columns["genericName"].HeaderText = "GENERIC";
+                        grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "ADDED BY";
                         grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
                         grid.Columns["dateUpdated"].HeaderText = "DATE UPDATED";
 
@@ -224,7 +226,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public bool InsertProduct(string code, string description, string packagingUnit, int quantity, double price, double discount, double discounted, string generic)
+        public bool InsertProduct(string code, string description, string packagingUnit, int quantity, double price, double discount, double discounted, string generic,
+            long userId)
         {
             try
             {
@@ -441,7 +444,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         }
                     }
 
-                    sql = @"CALL insertProduct(@code, @descriptionId, @packagingUnitId, @quantity, @price, @discount, @discounted, @genericId);";
+                    sql = @"CALL insertProduct(@code, @descriptionId, @packagingUnitId, @quantity, @price, @discount, @discounted, @genericId, @userId);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
@@ -453,6 +456,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@discount", val.DiscountId);
                         cmd.Parameters.AddWithValue("@discounted", discounted);
                         cmd.Parameters.AddWithValue("@genericId", val.GenericId);
+                        cmd.Parameters.AddWithValue("@userId", userId);
 
                         MySqlDataReader dr = cmd.ExecuteReader();
                         dr.Close();

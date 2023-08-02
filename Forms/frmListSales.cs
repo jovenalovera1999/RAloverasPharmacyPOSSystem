@@ -60,7 +60,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void frmListSales_Load(object sender, EventArgs e)
         {
             this.dateFrom.Value = DateTime.Now;
-            this.dateTo.Value = DateTime.Now;
+            this.dateTo.Value = DateTime.Now.AddDays(1);
 
             LoadSalesSumCount();
 

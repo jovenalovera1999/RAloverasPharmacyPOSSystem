@@ -155,15 +155,15 @@ DELIMITER $$
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
     PROCEDURE `raloveraspharmacy_db`.`insertProduct`(pCode VARCHAR(45), pDescriptionId BIGINT, pPackagingUnitId BIGINT, pQuantity INT, pPrice DOUBLE,
-    pDiscountId BIGINT, pDiscounted DOUBLE, pGenericId BIGINT)
+    pDiscountId BIGINT, pDiscounted DOUBLE, pGenericId BIGINT, pUserId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		INSERT INTO products(`code`, descriptionId, packagingUnitId, quantity, price, discountId, discounted, genericId)
-		VALUES(pCode, pDescriptionId, pPackagingUnitId, pQuantity, pPrice, pDiscountId, pDiscounted, pGenericId);
+		INSERT INTO products(`code`, descriptionId, packagingUnitId, quantity, price, discountId, discounted, genericId, userId)
+		VALUES(pCode, pDescriptionId, pPackagingUnitId, pQuantity, pPrice, pDiscountId, pDiscounted, pGenericId, pUserId);
 	END$$
 
 DELIMITER ;
@@ -199,7 +199,9 @@ CREATE
 	BEGIN
 		SELECT
 			p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), dis.discount,
-			FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
+			FORMAT(p.discounted, 2), g.genericName,
+			CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
+			p.dateCreated, p.dateUpdated
 		FROM
 			products AS p
 		INNER JOIN
@@ -210,6 +212,8 @@ CREATE
 			discounts AS dis ON p.discountId = dis.discountId
 		INNER JOIN
 			generics AS g ON p.genericId = g.genericId
+		INNER JOIN
+			users AS u ON p.userId = u.userId
 		WHERE
 			p.isDeleted = 0
 		ORDER BY
@@ -317,7 +321,9 @@ CREATE
 	BEGIN
 		SELECT
 			p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), dis.discount,
-			FORMAT(p.discounted, 2), g.genericName, p.dateCreated, p.dateUpdated
+			FORMAT(p.discounted, 2), g.genericName,
+			CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
+			p.dateCreated, p.dateUpdated
 		FROM
 			products AS p
 		INNER JOIN
@@ -328,6 +334,8 @@ CREATE
 			discounts AS dis ON p.discountId = dis.discountId
 		INNER JOIN
 			generics AS g ON p.genericId = g.genericId
+		INNER JOIN
+			users AS u ON p.userId = u.userId
 		WHERE
 			p.code LIKE pKeyword AND p.isDeleted = 0 OR d.description LIKE pKeyword AND p.isDeleted = 0
 			OR pu.packagingUnitName LIKE pKeyword AND p.isDeleted = 0 OR g.genericName LIKE pKeyword AND p.isDeleted = 0
@@ -579,7 +587,7 @@ CREATE
 		SELECT
 			ufp.userForPaymentId,
 			CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
-			d.discount
+			FORMAT(d.discount, 2)
 		FROM
 			user_for_payments AS ufp
 		INNER JOIN

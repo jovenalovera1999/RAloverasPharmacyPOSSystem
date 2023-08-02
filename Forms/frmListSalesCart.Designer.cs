@@ -137,6 +137,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Load += new System.EventHandler(this.frmListSalesCart_Load);
             this.VisibleChanged += new System.EventHandler(this.frmListSalesCart_VisibleChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmListSalesCart_KeyDown);
+            this.Leave += new System.EventHandler(this.frmListSalesCart_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.gridSalesCart)).EndInit();
             this.ResumeLayout(false);
 

@@ -17,6 +17,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             InitializeComponent();
         }
 
+        Components.Value val = new Components.Value();
         Functions.Product product = new Functions.Product();
         Functions.Exist exist = new Functions.Exist();
 
@@ -100,7 +101,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             else
             {
                 if (product.InsertProduct(this.txtCode.Text, this.txtDescription.Text, this.txtPackagingUnit.Text, int.Parse(this.txtQuantity.Text),
-                double.Parse(this.txtPrice.Text), double.Parse(this.txtDiscount.Text), double.Parse(this.txtDiscounted.Text), this.txtGeneric.Text))
+                double.Parse(this.txtPrice.Text), double.Parse(this.txtDiscount.Text), double.Parse(this.txtDiscounted.Text), this.txtGeneric.Text, val.MyUserId))
                 {
                     MessageBox.Show("Product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
