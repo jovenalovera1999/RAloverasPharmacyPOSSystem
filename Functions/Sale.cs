@@ -162,7 +162,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        lbl.Text = double.Parse(cmd.ExecuteScalar().ToString()).ToString("0.00");
+                        lbl.Text = cmd.ExecuteScalar().ToString();
 
                         connection.Close();
                     }
