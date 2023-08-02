@@ -160,6 +160,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     {
                         MessageBox.Show("Transaction was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                        AutoGenNum();
+
+                        if (exist.IsTransactionNoExist(transactionNo))
+                        {
+                            AutoGenNum();
+                        }
+
                         LoadCarts();
 
                         this.txtDiscount.Text = "0";
@@ -252,7 +259,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 parameters.Add(new ReportParameter("pDateToday", DateTime.Now.ToString("g")));
                 parameters.Add(new ReportParameter("pTotal", totalAmountPaid));
                 parameters.Add(new ReportParameter("pAmount", double.Parse(this.txtAmount.Text).ToString("0.00")));
-                parameters.Add(new ReportParameter("pDiscount", string.Format("{0}%", this.txtDiscount.Text)));
+                parameters.Add(new ReportParameter("pDiscount", double.Parse(this.txtDiscount.Text).ToString("0.00")));
                 parameters.Add(new ReportParameter("pChange", this.txtChange.Text));
                 rprtReceipt.LocalReport.SetParameters(parameters);
 

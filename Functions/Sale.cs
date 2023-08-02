@@ -50,7 +50,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["transactionId"].Visible = false;
                         grid.Columns["transactionNo"].HeaderText = "TRANSACTION NO.";
                         grid.Columns["FORMAT(t.totalAmountToPay, 2)"].HeaderText = "AMOUNT TO PAY";
-                        grid.Columns["CONCAT(FORMAT(d.discount, 0), '%')"].HeaderText = "DISCOUNT";
+                        grid.Columns["FORMAT(d.discount, 2)"].HeaderText = "DISCOUNT";
                         grid.Columns["FORMAT(t.discounted, 2)"].HeaderText = "DISCOUNTED";
                         grid.Columns["FORMAT(t.amount, 2)"].HeaderText = "AMOUNT";
                         grid.Columns["FORMAT(t.change, 2)"].HeaderText = "CHANGE";
@@ -94,7 +94,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["transactionId"].Visible = false;
                         grid.Columns["transactionNo"].HeaderText = "TRANSACTION NO.";
                         grid.Columns["FORMAT(t.totalAmountToPay, 2)"].HeaderText = "AMOUNT TO PAY";
-                        grid.Columns["CONCAT(FORMAT(d.discount, 0), '%')"].HeaderText = "DISCOUNT";
+                        grid.Columns["FORMAT(d.discount, 2)"].HeaderText = "DISCOUNT";
                         grid.Columns["FORMAT(t.discounted, 2)"].HeaderText = "DISCOUNTED";
                         grid.Columns["FORMAT(t.amount, 2)"].HeaderText = "AMOUNT";
                         grid.Columns["FORMAT(t.change, 2)"].HeaderText = "CHANGE";
@@ -162,7 +162,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        lbl.Text = cmd.ExecuteScalar().ToString();
+                        lbl.Text = double.Parse(cmd.ExecuteScalar().ToString()).ToString("0.00");
 
                         connection.Close();
                     }
@@ -192,7 +192,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        lbl.Text = cmd.ExecuteScalar().ToString();
+                        lbl.Text = double.Parse(cmd.ExecuteScalar().ToString()).ToString("0.00");
 
                         connection.Close();
                     }
