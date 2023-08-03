@@ -93,6 +93,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void frmListProducts_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
+            this.txtSearch.CharacterCasing = CharacterCasing.Upper;
+
             product.LoadProducts(this.gridProducts);
 
             if(val.MyUserLevel == "ADMIN")

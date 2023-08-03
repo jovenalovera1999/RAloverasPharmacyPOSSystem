@@ -169,6 +169,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
+            this.txtSearch.CharacterCasing = CharacterCasing.Upper;
+
             product.LoadProducts(this.gridAvailableProducts);
 
             DataGridViewButtonColumn btnAddToCart = new DataGridViewButtonColumn();
