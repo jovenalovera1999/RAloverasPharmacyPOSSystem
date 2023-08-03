@@ -32,6 +32,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListUsers));
             this.btnAddUser = new Guna.UI2.WinForms.Guna2Button();
             this.gridUsers = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btnPrevious = new Guna.UI2.WinForms.Guna2Button();
@@ -177,6 +178,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Controls.Add(this.btnAddUser);
             this.Controls.Add(this.gridUsers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(887, 539);
             this.Name = "frmListUsers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

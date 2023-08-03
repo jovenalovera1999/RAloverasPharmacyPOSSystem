@@ -31,6 +31,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrintReceipt));
             this.CartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rprtReceipt = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnClose = new Guna.UI2.WinForms.Guna2Button();
@@ -85,6 +86,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.rprtReceipt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(398, 567);
             this.Name = "frmPrintReceipt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
