@@ -71,6 +71,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridUsers.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.gridUsers.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.OliveDrab;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -117,7 +118,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridUsers.ThemeStyle.HeaderStyle.Height = 36;
             this.gridUsers.ThemeStyle.ReadOnly = true;
             this.gridUsers.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.gridUsers.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.gridUsers.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Single;
             this.gridUsers.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridUsers.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.gridUsers.ThemeStyle.RowsStyle.Height = 36;

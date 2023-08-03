@@ -78,16 +78,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 if(sale.GetTransaction(long.Parse(this.gridSales.SelectedCells[1].Value.ToString())))
                 {
-                    Forms.frmDashboard dashboard = (Forms.frmDashboard)Application.OpenForms["frmDashboard"];
-                    Panel pnlMain = (Panel)dashboard.Controls["pnlMain"];
-
-                    pnlMain.Controls.Clear();
                     Forms.frmListSalesCart listSalesCart = new Forms.frmListSalesCart();
-                    listSalesCart.TopLevel = false;
-                    pnlMain.Controls.Add(listSalesCart);
-                    listSalesCart.Dock = DockStyle.Fill;
-                    listSalesCart.Show();
-                    this.Close();
+                    listSalesCart.ShowDialog();
                 }
             }
         }

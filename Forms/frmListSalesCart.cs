@@ -22,16 +22,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void BackToListSalesForm()
         {
-            Forms.frmDashboard dashboard = (Forms.frmDashboard)Application.OpenForms["frmDashboard"];
-            Panel pnlMain = (Panel)dashboard.Controls["pnlMain"];
-
-            pnlMain.Controls.Clear();
-            Forms.frmListSales listSales = new Forms.frmListSales();
-            listSales.TopLevel = false;
-            pnlMain.Controls.Add(listSales);
-            listSales.Dock = DockStyle.Fill;
-            listSales.Show();
-
             this.Close();
         }
 
