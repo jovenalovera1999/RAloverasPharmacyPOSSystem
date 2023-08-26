@@ -21,45 +21,37 @@ namespace RAloverasPharmacyPOSSystem.Forms
         Functions.Product product = new Functions.Product();
         Functions.Exist exist = new Functions.Exist();
 
-        private void CapsLock()
-        {
+        private void CapsLock() {
             this.txtCode.CharacterCasing = CharacterCasing.Upper;
             this.txtDescription.CharacterCasing = CharacterCasing.Upper;
             this.txtPackagingUnit.CharacterCasing = CharacterCasing.Upper;
             this.txtGeneric.CharacterCasing = CharacterCasing.Upper;
         }
 
-        private void CalculateDiscount()
-        {
+        private void CalculateDiscount() {
             if(String.IsNullOrWhiteSpace(this.txtPrice.Text) && this.txtDiscount.Text == "0" || String.IsNullOrWhiteSpace(this.txtPrice.Text) ||
-                this.txtDiscount.Text == "0")
-            {
+                this.txtDiscount.Text == "0") {
                 this.txtDiscount.Text = "0";
                 this.txtDiscounted.Text = "0";
             }
             else if(String.IsNullOrWhiteSpace(this.txtPrice.Text) && String.IsNullOrWhiteSpace(this.txtDiscount.Text) || String.IsNullOrWhiteSpace(this.txtPrice.Text) ||
-                String.IsNullOrWhiteSpace(this.txtDiscount.Text))
-            {
+                String.IsNullOrWhiteSpace(this.txtDiscount.Text)) {
                 this.txtDiscount.Text = "0";
                 this.txtDiscounted.Text = "0";
             }
-            else if(double.IsNaN(double.Parse(this.txtPrice.Text)) || double.IsNaN(double.Parse(this.txtDiscount.Text)))
-            {
+            else if(double.IsNaN(double.Parse(this.txtPrice.Text)) || double.IsNaN(double.Parse(this.txtDiscount.Text))) {
                 this.txtDiscounted.Text = "0";
             }
-            else
-            {
+            else {
                 this.txtDiscounted.Text = (double.Parse(this.txtPrice.Text) - double.Parse(this.txtDiscount.Text)).ToString("0.00");
             }
         }
 
-        private void AutoGenNum()
-        {
+        private void AutoGenNum() {
             Random number = new Random();
             var generateId = new StringBuilder();
 
-            while(generateId.Length < 9)
-            {
+            while(generateId.Length < 9) {
                 generateId.Append(number.Next(10).ToString());
             }
 
@@ -68,41 +60,28 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void SaveProduct()
         {
-            if(String.IsNullOrWhiteSpace(this.txtDescription.Text))
-            {
+            if(String.IsNullOrWhiteSpace(this.txtDescription.Text)) {
                 MessageBox.Show("Description is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtDescription.Focus();
-            }
-            else if(String.IsNullOrWhiteSpace(this.txtPackagingUnit.Text))
-            {
+            } else if(String.IsNullOrWhiteSpace(this.txtPackagingUnit.Text)) {
                 MessageBox.Show("Packaging unit is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtPackagingUnit.Focus();
-            }
-            else if(String.IsNullOrWhiteSpace(this.txtQuantity.Text))
-            {
+            } else if(String.IsNullOrWhiteSpace(this.txtQuantity.Text)) {
                 MessageBox.Show("Quantity is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtQuantity.Focus();
-            }
-            else if(String.IsNullOrWhiteSpace(this.txtPrice.Text))
-            {
+            } else if(String.IsNullOrWhiteSpace(this.txtPrice.Text)) {
                 MessageBox.Show("Price is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtPrice.Focus();
-            }
-            else if(String.IsNullOrWhiteSpace(this.txtGeneric.Text))
-            {
+            } else if(String.IsNullOrWhiteSpace(this.txtGeneric.Text)) {
                 MessageBox.Show("Generic is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtGeneric.Focus();
-            }
-            else if(double.Parse(this.txtDiscounted.Text) < 0)
-            {
+            } else if(double.Parse(this.txtDiscounted.Text) < 0) {
                 MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtDiscount.Focus();
-            }
-            else
-            {
+            } else {
                 if (product.InsertProduct(this.txtCode.Text, this.txtDescription.Text, this.txtPackagingUnit.Text, int.Parse(this.txtQuantity.Text),
-                double.Parse(this.txtPrice.Text), double.Parse(this.txtDiscount.Text), double.Parse(this.txtDiscounted.Text), this.txtGeneric.Text, val.MyUserId))
-                {
+                    double.Parse(this.txtPrice.Text), double.Parse(this.txtDiscount.Text), double.Parse(this.txtDiscounted.Text), this.txtGeneric.Text,
+                    this.txtSupplier.Text, double.Parse(this.txtPriceFromSupplier.Text), val.MyUserId)) {
                     MessageBox.Show("Product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Forms.frmListProducts listProducts = (Forms.frmListProducts)Application.OpenForms["frmListProducts"];
@@ -116,15 +95,15 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     this.txtQuantity.ResetText();
                     this.txtPrice.ResetText();
                     this.txtGeneric.ResetText();
+                    this.txtSupplier.ResetText();
+                    this.txtPriceFromSupplier.ResetText();
 
                     this.txtDiscount.Text = "0";
                     this.txtDiscounted.Text = "0";
 
                     AutoGenNum();
                     this.txtDescription.Focus();
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("Failed to save product!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -133,8 +112,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allows 0-9 and backspace
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8)
-            {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8) {
                 e.Handled = true;
                 return;
             }
@@ -143,16 +121,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allows 0-9, backspace and period
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46)
-            {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46) {
                 e.Handled = true;
                 return;
             }
             // Checks to make sure only 1 period is allowed
-            if (e.KeyChar == 46)
-            {
-                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1)
-                {
+            if (e.KeyChar == 46) {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1) {
                     e.Handled = true;
                 }
             }
@@ -161,16 +136,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allows 0-9, backspace and period
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46)
-            {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46) {
                 e.Handled = true;
                 return;
             }
             // Checks to make sure only 1 period is allowed
-            if (e.KeyChar == 46)
-            {
-                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1)
-                {
+            if (e.KeyChar == 46) {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1) {
                     e.Handled = true;
                 }
             }
@@ -178,12 +150,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void frmAddProduct_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.F1)
-            {
+            if(e.KeyCode == Keys.F1) {
                 SaveProduct();
-            }
-            else if(e.KeyCode == Keys.F2)
-            {
+            } else if(e.KeyCode == Keys.F2) {
                 this.Close();
             }
         }
@@ -203,8 +172,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             CapsLock();
             AutoGenNum();
 
-            if (exist.IsCodeExist(this.txtCode.Text))
-            {
+            if (exist.IsCodeExist(this.txtCode.Text)) {
                 this.txtCode.ResetText();
                 AutoGenNum();
             }

@@ -226,8 +226,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public bool InsertProduct(string code, string description, string packagingUnit, int quantity, double price, double discount, double discounted, string generic,
-            long userId)
+        public bool InsertProduct(string code, string description, string packagingUnit, int quantity, double price, double discount, double discounted,
+            string generic, string supplier, double priceFromSupplier, long userId)
         {
             try
             {
@@ -235,6 +235,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                 bool isPackagingUnitExist = false;
                 bool isDiscountExist = false;
                 bool isGenericExist = false;
+                bool isSupplierExist = false;
 
                 using (MySqlConnection connection = new MySqlConnection(con.conString()))
                 {
@@ -444,10 +445,55 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         }
                     }
 
-                    sql = @"CALL insertProduct(@code, @descriptionId, @packagingUnitId, @quantity, @price, @discount, @discounted, @genericId, @userId);";
+                    sql = @"CALL getSupplierId(@supplier);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        cmd.Parameters.AddWithValue("@supplier", supplier);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if(dt.Rows.Count > 0) {
+                            isSupplierExist = true;
+                            val.SupplierId = dt.Rows[0].Field<long>("supplierId");
+                        }
+                    }
+
+                    if(isSupplierExist == false) {
+                        sql = @"CALL insertSupplier(@supplier);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                            cmd.Parameters.AddWithValue("@supplier", supplier);
+
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            dr.Close();
+                        }
+
+                        sql = @"CALL getSupplierId(@supplier);";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                            cmd.Parameters.AddWithValue("@supplier", supplier);
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+
+                            dt.Clear();
+                            da.Fill(dt);
+
+                            if (dt.Rows.Count > 0) {
+                                isSupplierExist = true;
+                                val.SupplierId = dt.Rows[0].Field<long>("supplierId");
+                            }
+                        }
+                    }
+                    
+                    sql = @"CALL insertProduct(@code, @descriptionId, @packagingUnitId, @quantity, @price, @discount, @discounted, @genericId,
+                            @supplierId, @priceFromSupplier, @userId);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
                         cmd.Parameters.AddWithValue("@code", code);
                         cmd.Parameters.AddWithValue("@descriptionId", val.DescriptionId);
                         cmd.Parameters.AddWithValue("@packagingUnitId", val.PackagingUnitId);
@@ -456,6 +502,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         cmd.Parameters.AddWithValue("@discount", val.DiscountId);
                         cmd.Parameters.AddWithValue("@discounted", discounted);
                         cmd.Parameters.AddWithValue("@genericId", val.GenericId);
+                        cmd.Parameters.AddWithValue("@supplierId", val.SupplierId);
+                        cmd.Parameters.AddWithValue("@priceFromSupplier", priceFromSupplier);
                         cmd.Parameters.AddWithValue("@userId", userId);
 
                         MySqlDataReader dr = cmd.ExecuteReader();

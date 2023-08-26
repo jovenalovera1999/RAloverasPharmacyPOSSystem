@@ -26,7 +26,6 @@ C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\System.Memory.dll
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\System.Numerics.Vectors.dll
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\ZstdNet.dll
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\BouncyCastle.Crypto.xml
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\Google.Protobuf.pdb
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\bin\Debug\Google.Protobuf.xml

@@ -262,7 +262,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Name = "frmDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DASHBOARD";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmDashboard_KeyDown);
             this.guna2Panel1.ResumeLayout(false);

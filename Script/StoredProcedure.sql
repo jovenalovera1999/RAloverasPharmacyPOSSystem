@@ -2,8 +2,8 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`insertUser`(pProfilePicture BLOB, pFirstName VARCHAR(45), pMiddleName VARCHAR(45), pLastName VARCHAR(45),
-    pAddress VARCHAR(45), pContactNumber VARCHAR(45), pEmail VARCHAR(45), pUsername VARBINARY(255), pUserLevelId BIGINT)
+    PROCEDURE `raloveraspharmacy_db`.`insertUser`(pProfilePicture BLOB, pFirstName VARCHAR(55), pMiddleName VARCHAR(55), pLastName VARCHAR(55),
+    pAddress VARCHAR(55), pContactNumber VARCHAR(55), pEmail VARCHAR(55), pUsername VARBINARY(255), pUserLevelId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -84,7 +84,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`getPackagingUnitId`(pPackagingUnitName VARCHAR(45))
+    PROCEDURE `raloveraspharmacy_db`.`getPackagingUnitId`(pPackagingUnitName VARCHAR(55))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -102,7 +102,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`insertPackagingUnit`(pPackagingUnitName VARCHAR(45))
+    PROCEDURE `raloveraspharmacy_db`.`insertPackagingUnit`(pPackagingUnitName VARCHAR(55))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -119,7 +119,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`getGenericId`(pGenericName VARCHAR(45))
+    PROCEDURE `raloveraspharmacy_db`.`getGenericId`(pGenericName VARCHAR(55))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -137,7 +137,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`insertGeneric`(pGenericName VARCHAR(45))
+    PROCEDURE `raloveraspharmacy_db`.`insertGeneric`(pGenericName VARCHAR(55))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -154,16 +154,18 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`insertProduct`(pCode VARCHAR(45), pDescriptionId BIGINT, pPackagingUnitId BIGINT, pQuantity INT, pPrice DOUBLE,
-    pDiscountId BIGINT, pDiscounted DOUBLE, pGenericId BIGINT, pUserId BIGINT)
+    PROCEDURE `raloveraspharmacy_db`.`insertProduct`(pCode VARCHAR(55), pDescriptionId BIGINT, pPackagingUnitId BIGINT, pQuantity INT, pPrice DOUBLE,
+    pDiscountId BIGINT, pDiscounted DOUBLE, pGenericId BIGINT, pSupplierId BIGINT, pPriceFromSupplier DOUBLE, pUserId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		INSERT INTO products(`code`, descriptionId, packagingUnitId, quantity, price, discountId, discounted, genericId, userId)
-		VALUES(pCode, pDescriptionId, pPackagingUnitId, pQuantity, pPrice, pDiscountId, pDiscounted, pGenericId, pUserId);
+		INSERT INTO
+			products(`code`, descriptionId, packagingUnitId, quantity, price, discountId, discounted, genericId, supplierId, priceFromSupplier, userId)
+		VALUES
+			(pCode, pDescriptionId, pPackagingUnitId, pQuantity, pPrice, pDiscountId, pDiscounted, pGenericId, pSupplierId, pPriceFromSupplier, pUserId);
 	END$$
 
 DELIMITER ;
@@ -172,7 +174,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`checkCodeIfExist`(pCode VARCHAR(45))
+    PROCEDURE `raloveraspharmacy_db`.`checkCodeIfExist`(pCode VARCHAR(55))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -217,7 +219,7 @@ CREATE
 		WHERE
 			p.isDeleted = 0
 		ORDER BY
-			d.description AND p.code ASC;
+			d.description;
 	END$$
 
 DELIMITER ;
@@ -282,10 +284,13 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		UPDATE products
-		SET descriptionId = pDescriptionId, packagingUnitId = pPackagingUnitId, quantity = pQuantity, price = pPrice, discountId = pDiscountId,
-		discounted = pDiscounted, genericId = pGenericId, dateUpdated = CURRENT_TIMESTAMP
-		WHERE productId = pProductId;
+		UPDATE
+			products
+		SET
+			descriptionId = pDescriptionId, packagingUnitId = pPackagingUnitId, quantity = pQuantity, price = pPrice, discountId = pDiscountId,
+			discounted = pDiscounted, genericId = pGenericId
+		WHERE
+			productId = pProductId;
 	END$$
 
 DELIMITER ;
@@ -312,7 +317,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`searchProduct`(pKeyword VARCHAR(45))
+    PROCEDURE `raloveraspharmacy_db`.`searchProduct`(pKeyword VARCHAR(55))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -385,8 +390,8 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`updateUser`(pUserId BIGINT, pProfilePicture BLOB, pFirstName VARCHAR(45), pMiddleName VARCHAR(45),
-    pLastName VARCHAR(45), pAddress VARCHAR(45), pContactNumber VARCHAR(45), pEmail VARCHAR(45), pUsername VARBINARY(255),
+    PROCEDURE `raloveraspharmacy_db`.`updateUser`(pUserId BIGINT, pProfilePicture BLOB, pFirstName VARCHAR(55), pMiddleName VARCHAR(55),
+    pLastName VARCHAR(55), pAddress VARCHAR(55), pContactNumber VARCHAR(55), pEmail VARCHAR(55), pUsername VARBINARY(255),
     pPassword VARBINARY(255))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
@@ -394,11 +399,14 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		UPDATE users
-		SET profilePicture = pProfilePicture, firstName = pFirstName, middleName = pMiddleName, lastName = pLastName,
-		`address` = pAddress, contactNumber = pContactNumber, email = pEmail, username = AES_ENCRYPT(pUsername, "J.v3n!j.$hu4c.@l0ver4!#@"),
-		`password` = AES_ENCRYPT(pPassword, "J.v3n!j.$hu4c.@l0ver4!#@"), dateUpdated = CURRENT_TIMESTAMP
-		WHERE userId = pUserId;
+		UPDATE
+			users
+		SET
+			profilePicture = pProfilePicture, firstName = pFirstName, middleName = pMiddleName, lastName = pLastName,
+			`address` = pAddress, contactNumber = pContactNumber, email = pEmail, username = AES_ENCRYPT(pUsername, "J.v3n!j.$hu4c.@l0ver4!#@"),
+			`password` = AES_ENCRYPT(pPassword, "J.v3n!j.$hu4c.@l0ver4!#@")
+		WHERE
+			userId = pUserId;
 	END$$
 
 DELIMITER ;
@@ -426,7 +434,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`proceedUpdateUserWithExistingUsername`(pUserId BIGINT, pUsername VARCHAR(45))
+    PROCEDURE `raloveraspharmacy_db`.`proceedUpdateUserWithExistingUsername`(pUserId BIGINT, pUsername VARCHAR(55))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -606,7 +614,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`insertTransaction`(pTransactionNo VARCHAR(45), pTotalAmountToPay DOUBLE, pDiscountId BIGINT, pDiscounted DOUBLE,
+    PROCEDURE `raloveraspharmacy_db`.`insertTransaction`(pTransactionNo VARCHAR(55), pTotalAmountToPay DOUBLE, pDiscountId BIGINT, pDiscounted DOUBLE,
     pAmount DOUBLE, pChange DOUBLE, pUserId BIGINT)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
@@ -884,7 +892,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`checkTransactionNoIfExist`(pTransactionNo VARCHAR(45))
+    PROCEDURE `raloveraspharmacy_db`.`checkTransactionNoIfExist`(pTransactionNo VARCHAR(55))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -924,7 +932,7 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`getUserLevel`(pUserLevel VARCHAR(45))
+    PROCEDURE `raloveraspharmacy_db`.`getUserLevel`(pUserLevel VARCHAR(55))
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -958,6 +966,46 @@ CREATE
 			discountId = pDiscountId
 		WHERE
 			userForPaymentId = pUserForPaymentId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`insertSupplier`(pSupplier VARCHAR(55))
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		INSERT INTO
+			suppliers(supplier)
+		VALUES
+			(pSupplier);
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`getSupplierId`(pSupplier VARCHAR(55))
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			supplierId
+		FROM
+			suppliers
+		WHERE
+			supplier = pSupplier;
 	END$$
 
 DELIMITER ;

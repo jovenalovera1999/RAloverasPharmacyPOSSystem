@@ -10,9 +10,8 @@ namespace RAloverasPharmacyPOSSystem.Components
     {
         Components.Value val = new Components.Value();
 
-        public string conString()
-        {
-            return String.Format("datasource = {0}; username = {1}; password = {2}; port = {3}; database = {4};",
+        public string conString() {
+            return String.Format("datasource={0}; username={1}; password={2}; port={3}; database={4};",
                 val.serverName, val.serverUser, val.serverPass, val.port, val.database);
         }
     }

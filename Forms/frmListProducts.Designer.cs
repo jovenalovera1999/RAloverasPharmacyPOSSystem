@@ -224,7 +224,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Name = "frmListProducts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LIST OF PRODUCTS";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmListProducts_Load);
             this.VisibleChanged += new System.EventHandler(this.frmListProducts_VisibleChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmListProducts_KeyDown);

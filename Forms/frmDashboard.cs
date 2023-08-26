@@ -167,6 +167,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void frmDashboard_Load(object sender, EventArgs e)
         {
+            this.Left = 0;
+            this.Top = 0;
+            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
+            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+
             this.KeyPreview = true;
 
             if(val.MyUserLevel == "EMPLOYEE")
