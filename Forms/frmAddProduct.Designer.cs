@@ -291,7 +291,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.Animated = true;
             this.txtDiscount.BorderRadius = 3;
             this.txtDiscount.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDiscount.DefaultText = "0";
+            this.txtDiscount.DefaultText = "0.00";
             this.txtDiscount.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.txtDiscount.DisabledState.FillColor = System.Drawing.Color.White;
             this.txtDiscount.DisabledState.ForeColor = System.Drawing.Color.Black;
@@ -400,7 +400,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscounted.Animated = true;
             this.txtDiscounted.BorderRadius = 3;
             this.txtDiscounted.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDiscounted.DefaultText = "0";
+            this.txtDiscounted.DefaultText = "0.00";
             this.txtDiscounted.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.txtDiscounted.DisabledState.FillColor = System.Drawing.Color.White;
             this.txtDiscounted.DisabledState.ForeColor = System.Drawing.Color.Black;
@@ -472,7 +472,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPriceFromSupplier.Animated = true;
             this.txtPriceFromSupplier.BorderRadius = 3;
             this.txtPriceFromSupplier.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtPriceFromSupplier.DefaultText = "";
+            this.txtPriceFromSupplier.DefaultText = "0.00";
             this.txtPriceFromSupplier.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtPriceFromSupplier.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtPriceFromSupplier.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -489,6 +489,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPriceFromSupplier.SelectedText = "";
             this.txtPriceFromSupplier.Size = new System.Drawing.Size(320, 36);
             this.txtPriceFromSupplier.TabIndex = 9;
+            this.txtPriceFromSupplier.TextChanged += new System.EventHandler(this.txtPriceFromSupplier_TextChanged);
+            this.txtPriceFromSupplier.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPriceFromSupplier_KeyPress);
             // 
             // frmAddProduct
             // 
@@ -521,6 +523,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(679, 494);
             this.Name = "frmAddProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ADD PRODUCT";

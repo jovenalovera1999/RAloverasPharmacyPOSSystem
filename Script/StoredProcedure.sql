@@ -201,7 +201,7 @@ CREATE
 	BEGIN
 		SELECT
 			p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), dis.discount,
-			FORMAT(p.discounted, 2), g.genericName,
+			FORMAT(p.discounted, 2), g.genericName, s.supplier, FORMAT(p.priceFromSupplier, 2),
 			CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
 			p.dateCreated, p.dateUpdated
 		FROM
@@ -214,6 +214,8 @@ CREATE
 			discounts AS dis ON p.discountId = dis.discountId
 		INNER JOIN
 			generics AS g ON p.genericId = g.genericId
+		INNER JOIN
+			suppliers AS s ON p.supplierId = s.supplierId
 		INNER JOIN
 			users AS u ON p.userId = u.userId
 		WHERE
@@ -261,13 +263,23 @@ CREATE
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		SELECT p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, p.price, dis.discount, p.discounted, g.genericName
-		FROM products AS p
-		INNER JOIN descriptions AS d ON p.descriptionId = d.descriptionId
-		INNER JOIN packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
-		INNER JOIN discounts AS dis ON p.discountId = dis.discountId
-		INNER JOIN generics AS g ON p.genericId = g.genericId
-		WHERE p.productId = pProductId;
+		SELECT
+			p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, p.price, dis.discount, p.discounted, g.genericName, s.supplier,
+			p.priceFromSupplier
+		FROM
+			products AS p
+		INNER JOIN
+			descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN
+			packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		INNER JOIN
+			discounts AS dis ON p.discountId = dis.discountId
+		INNER JOIN
+			generics AS g ON p.genericId = g.genericId
+		INNER JOIN
+			suppliers AS s ON p.supplierId = s.supplierId
+		WHERE
+			p.productId = pProductId;
 	END$$
 
 DELIMITER ;
@@ -277,7 +289,7 @@ DELIMITER $$
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
     PROCEDURE `raloveraspharmacy_db`.`updateProduct`(pProductId BIGINT, pDescriptionId BIGINT, pPackagingUnitId BIGINT, pQuantity INT, pPrice DOUBLE,
-    pDiscountId BIGINT, pDiscounted DOUBLE, pGenericId BIGINT)
+    pDiscountId BIGINT, pDiscounted DOUBLE, pGenericId BIGINT, pSupplierId BIGINT, pPriceFromSupplier DOUBLE)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
@@ -288,7 +300,7 @@ CREATE
 			products
 		SET
 			descriptionId = pDescriptionId, packagingUnitId = pPackagingUnitId, quantity = pQuantity, price = pPrice, discountId = pDiscountId,
-			discounted = pDiscounted, genericId = pGenericId
+			discounted = pDiscounted, genericId = pGenericId, supplierId = pSupplierId, priceFromSupplier = pPriceFromSupplier
 		WHERE
 			productId = pProductId;
 	END$$
@@ -326,7 +338,7 @@ CREATE
 	BEGIN
 		SELECT
 			p.productId, p.code, d.description, pu.packagingUnitName, p.quantity, FORMAT(p.price, 2), dis.discount,
-			FORMAT(p.discounted, 2), g.genericName,
+			FORMAT(p.discounted, 2), g.genericName, s.supplier, FORMAT(p.priceFromSupplier, 2),
 			CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
 			p.dateCreated, p.dateUpdated
 		FROM
@@ -340,10 +352,13 @@ CREATE
 		INNER JOIN
 			generics AS g ON p.genericId = g.genericId
 		INNER JOIN
+			suppliers AS s ON p.supplierId = s.supplierId
+		INNER JOIN
 			users AS u ON p.userId = u.userId
 		WHERE
 			p.code LIKE pKeyword AND p.isDeleted = 0 OR d.description LIKE pKeyword AND p.isDeleted = 0
-			OR pu.packagingUnitName LIKE pKeyword AND p.isDeleted = 0 OR g.genericName LIKE pKeyword AND p.isDeleted = 0
+			OR pu.packagingUnitName LIKE pKeyword AND p.isDeleted = 0 OR g.genericName LIKE pKeyword AND p.isDeleted = 0 OR
+			s.supplier LIKE pKeyword AND p.isDeleted = 0
 		ORDER BY
 			d.description AND p.code ASC;
 	END$$

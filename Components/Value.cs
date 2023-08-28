@@ -118,15 +118,15 @@ namespace RAloverasPharmacyPOSSystem.Components
 
         // Get generic id values
 
-        private static long genericId;
-        public long GenericId {
+        private static long? genericId;
+        public long? GenericId {
             get { return genericId; }
             set { genericId = value; }
         }
 
         // Get supplier id values
-        private static long supplierId;
-        public long SupplierId { 
+        private static long? supplierId;
+        public long? SupplierId { 
             get { return supplierId; }
             set { supplierId = value; }
         }
@@ -209,6 +209,18 @@ namespace RAloverasPharmacyPOSSystem.Components
         public string ProductGeneric {
             get { return productGeneric; }
             set { productGeneric = value; }
+        }
+
+        private static string productSupplier;
+        public string ProductSupplier {
+            get { return productSupplier; }
+            set { productSupplier = value; }
+        }
+
+        private static double productPriceFromSupplier;
+        public double ProductPriceFromSupplier {
+            get { return productPriceFromSupplier; }
+            set { productPriceFromSupplier = value; }
         }
 
         // Quantity values
