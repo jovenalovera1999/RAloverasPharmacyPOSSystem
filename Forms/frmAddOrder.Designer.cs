@@ -329,6 +329,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtTotalAmountToPay.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtTotalAmountToPay.Location = new System.Drawing.Point(15, 491);
             this.txtTotalAmountToPay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTotalAmountToPay.MaxLength = 55;
             this.txtTotalAmountToPay.Name = "txtTotalAmountToPay";
             this.txtTotalAmountToPay.PasswordChar = '\0';
             this.txtTotalAmountToPay.PlaceholderText = "";
@@ -445,6 +446,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtDiscount.Location = new System.Drawing.Point(261, 491);
             this.txtDiscount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDiscount.MaxLength = 55;
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.PasswordChar = '\0';
             this.txtDiscount.PlaceholderText = "";
@@ -452,6 +454,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.Size = new System.Drawing.Size(240, 36);
             this.txtDiscount.TabIndex = 3;
             this.txtDiscount.TextChanged += new System.EventHandler(this.txtDiscount_TextChanged);
+            this.txtDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiscount_KeyPress);
             // 
             // label6
             // 
@@ -483,12 +486,15 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtAmount.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtAmount.Location = new System.Drawing.Point(507, 491);
             this.txtAmount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtAmount.MaxLength = 55;
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.PasswordChar = '\0';
             this.txtAmount.PlaceholderText = "";
             this.txtAmount.SelectedText = "";
             this.txtAmount.Size = new System.Drawing.Size(240, 36);
             this.txtAmount.TabIndex = 4;
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
+            this.txtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmount_KeyPress);
             // 
             // frmAddOrder
             // 

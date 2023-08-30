@@ -35,33 +35,26 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void frmListProducts_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1)
-            {
+            if (e.KeyCode == Keys.F1) {
                 OpenAddProductForm();
             }
         }
 
         private void gridProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(this.gridProducts.Columns[e.ColumnIndex].Name == "btnUpdate")
-            {
-                if(product.GetProduct(long.Parse(this.gridProducts.SelectedCells[2].Value.ToString())))
-                {
+            if(this.gridProducts.Columns[e.ColumnIndex].Name == "btnUpdate") {
+                if(product.GetProduct(long.Parse(this.gridProducts.SelectedCells[2].Value.ToString()))) {
                     Forms.frmUpdateProduct updateProduct = new Forms.frmUpdateProduct();
                     updateProduct.ShowDialog();
                 }
             }
-            else if(this.gridProducts.Columns[e.ColumnIndex].Name == "btnDelete")
-            {
-                if(MessageBox.Show("Are you sure you want to delete this product?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    if(product.DeleteProduct(long.Parse(this.gridProducts.SelectedCells[2].Value.ToString())))
-                    {
+            else if(this.gridProducts.Columns[e.ColumnIndex].Name == "btnDelete") {
+                if(MessageBox.Show("Are you sure you want to delete this product?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    == DialogResult.Yes) {
+                    if(product.DeleteProduct(long.Parse(this.gridProducts.SelectedCells[2].Value.ToString()))) {
                         MessageBox.Show("Product was successfully deleted!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         product.LoadProducts(this.gridProducts);
-                    }
-                    else
-                    {
+                    } else {
                         MessageBox.Show("Failed to delete prodct!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -73,12 +66,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if(String.IsNullOrWhiteSpace(this.txtSearch.Text))
-            {
+            if(String.IsNullOrWhiteSpace(this.txtSearch.Text)) {
                 product.LoadProducts(this.gridProducts);
-            }
-            else
-            {
+            } else {
                 product.SearchProduct(this.txtSearch.Text, this.gridProducts);
             }
 
@@ -97,8 +87,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
             product.LoadProducts(this.gridProducts);
 
-            if(val.MyUserLevel == "ADMIN")
-            {
+            if(val.MyUserLevel == "ADMIN") {
                 DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
                 btnUpdate.HeaderText = "ACTION";
                 btnUpdate.Name = "btnUpdate";

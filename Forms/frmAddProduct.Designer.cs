@@ -159,6 +159,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDescription.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtDescription.Location = new System.Drawing.Point(16, 192);
             this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDescription.MaxLength = 55;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.PasswordChar = '\0';
             this.txtDescription.PlaceholderText = "";
@@ -195,6 +196,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtCode.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtCode.Location = new System.Drawing.Point(16, 120);
             this.txtCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCode.MaxLength = 55;
             this.txtCode.Name = "txtCode";
             this.txtCode.PasswordChar = '\0';
             this.txtCode.PlaceholderText = "";
@@ -231,6 +233,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtQuantity.Location = new System.Drawing.Point(17, 334);
             this.txtQuantity.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtQuantity.MaxLength = 55;
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.PasswordChar = '\0';
             this.txtQuantity.PlaceholderText = "";
@@ -267,6 +270,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPackagingUnit.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtPackagingUnit.Location = new System.Drawing.Point(17, 262);
             this.txtPackagingUnit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPackagingUnit.MaxLength = 55;
             this.txtPackagingUnit.Name = "txtPackagingUnit";
             this.txtPackagingUnit.PasswordChar = '\0';
             this.txtPackagingUnit.PlaceholderText = "";
@@ -302,6 +306,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtDiscount.Location = new System.Drawing.Point(342, 120);
             this.txtDiscount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDiscount.MaxLength = 55;
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.PasswordChar = '\0';
             this.txtDiscount.PlaceholderText = "";
@@ -339,6 +344,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPrice.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtPrice.Location = new System.Drawing.Point(18, 404);
             this.txtPrice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPrice.MaxLength = 55;
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.PasswordChar = '\0';
             this.txtPrice.PlaceholderText = "";
@@ -376,6 +382,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtGeneric.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtGeneric.Location = new System.Drawing.Point(343, 262);
             this.txtGeneric.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtGeneric.MaxLength = 55;
             this.txtGeneric.Name = "txtGeneric";
             this.txtGeneric.PasswordChar = '\0';
             this.txtGeneric.PlaceholderText = "";
@@ -412,6 +419,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscounted.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtDiscounted.Location = new System.Drawing.Point(342, 192);
             this.txtDiscounted.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDiscounted.MaxLength = 55;
             this.txtDiscounted.Name = "txtDiscounted";
             this.txtDiscounted.PasswordChar = '\0';
             this.txtDiscounted.PlaceholderText = "";
@@ -448,6 +456,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtSupplier.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtSupplier.Location = new System.Drawing.Point(343, 334);
             this.txtSupplier.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtSupplier.MaxLength = 55;
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.PasswordChar = '\0';
             this.txtSupplier.PlaceholderText = "";
@@ -483,6 +492,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPriceFromSupplier.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtPriceFromSupplier.Location = new System.Drawing.Point(344, 404);
             this.txtPriceFromSupplier.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPriceFromSupplier.MaxLength = 55;
             this.txtPriceFromSupplier.Name = "txtPriceFromSupplier";
             this.txtPriceFromSupplier.PasswordChar = '\0';
             this.txtPriceFromSupplier.PlaceholderText = "";

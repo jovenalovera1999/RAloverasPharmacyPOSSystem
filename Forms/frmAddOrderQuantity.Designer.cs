@@ -101,6 +101,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtQuantity.Location = new System.Drawing.Point(16, 120);
             this.txtQuantity.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtQuantity.MaxLength = 55;
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.PasswordChar = '\0';
             this.txtQuantity.PlaceholderText = "";

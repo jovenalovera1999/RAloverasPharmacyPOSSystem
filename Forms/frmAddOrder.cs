@@ -24,13 +24,19 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void ToPay() {
             if (this.gridCart.Rows.Count < 1) {
                 MessageBox.Show("Failed to send to payment transaction, there are no products added!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } else if(double.Parse(this.txtTotalAmountToPay.Text) < 0) {
+            } else if (double.Parse(this.txtAmount.Text) == 0) { 
+            
+            } else if (double.Parse(this.txtTotalAmountToPay.Text) < 0) {
                 MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtDiscount.Focus();
-            } else {
+            } else if (double.Parse(this.txtTotalAmountToPay.Text) > double.Parse(this.txtAmount.Text)) {
+                MessageBox.Show("Failed to send to payment transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtAmount.Focus();
+            }
+            else {
                 bool isInserted = false;
 
-                if (order.InsertUserForPayment(val.MyUserId, double.Parse(this.txtDiscount.Text))) {
+                if (order.InsertUserForPayment(val.MyUserId, double.Parse(this.txtDiscount.Text), double.Parse(this.txtAmount.Text))) {
                     for (int i = 0; i < this.gridCart.Rows.Count; i++) {
                         if (order.ToPay(val.UserForPaymentId, long.Parse(this.gridCart.Rows[i].Cells[1].Value.ToString()),
                             int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()), double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString())) &&
@@ -43,14 +49,15 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     }
                 }
 
-                if (isInserted == true) {
+                if (isInserted) {
                     MessageBox.Show("Transaction has been sent for payment!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadProductsWithOrWithoutSearch();
 
                     this.gridCart.Rows.Clear();
 
                     this.txtTotalAmountToPay.Text = "0.00";
-                    this.txtDiscount.Text = "0";
+                    this.txtDiscount.Text = "0.00";
+                    this.txtAmount.Text = "0.00";
 
                     this.gridAvailableProducts.Focus();
                 } else {
@@ -92,7 +99,37 @@ namespace RAloverasPharmacyPOSSystem.Forms
                         totalAmountToPay += double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString());
                     }
 
-                    this.txtTotalAmountToPay.Text = totalAmountToPay.ToString("0.00");
+                    this.txtTotalAmountToPay.Text = (totalAmountToPay - double.Parse(this.txtDiscount.Text)).ToString("0.00");
+                }
+            }
+        }
+
+        private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allows 0-9, backspace and period
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46) {
+                e.Handled = true;
+                return;
+            }
+            // Checks to make sure only 1 period is allowed
+            if (e.KeyChar == 46) {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1) {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allows 0-9, backspace and period
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46) {
+                e.Handled = true;
+                return;
+            }
+            // Checks to make sure only 1 period is allowed
+            if (e.KeyChar == 46) {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1) {
+                    e.Handled = true;
                 }
             }
         }
@@ -128,6 +165,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 this.txtTotalAmountToPay.Text = (totalAmountToPay - double.Parse(this.txtDiscount.Text)).ToString("0.00");
             } else {
                 this.txtTotalAmountToPay.Text = totalAmountToPay.ToString("0.00");
+            }
+        }
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(this.txtAmount.Text)) {
+                this.txtAmount.Text = "0.00";
             }
         }
 

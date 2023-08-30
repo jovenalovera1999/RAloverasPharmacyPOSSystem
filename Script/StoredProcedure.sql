@@ -504,15 +504,17 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`insertUserForPayment`(pUserId BIGINT, pDiscountId BIGINT)
+    PROCEDURE `raloveraspharmacy_db`.`insertUserForPayment`(pUserId BIGINT, pDiscountId BIGINT, pAmount DOUBLE)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
-		INSERT INTO user_for_payments(userId, discountId)
-		VALUES(pUserId, pDiscountId);
+		INSERT INTO
+			user_for_payments(userId, discountId, amount)
+		VALUES
+			(pUserId, pDiscountId, pAmount);
 	END$$
 
 DELIMITER ;
@@ -610,7 +612,7 @@ CREATE
 		SELECT
 			ufp.userForPaymentId,
 			CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END,
-			FORMAT(d.discount, 2)
+			FORMAT(d.discount, 2), FORMAT(ufp.amount, 2)
 		FROM
 			user_for_payments AS ufp
 		INNER JOIN
@@ -618,7 +620,7 @@ CREATE
 		INNER JOIN
 			discounts AS d ON ufp.discountId = d.discountId
 		WHERE
-			ufp.isPaid = 0
+			ufp.isPaid = 0 AND ufp.isCancelled = 0
 		ORDER BY
 			ufp.userForPaymentId ASC;
 	END$$
@@ -1021,6 +1023,76 @@ CREATE
 			suppliers
 		WHERE
 			supplier = pSupplier;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`updateDiscountIdAndAmountAfterPaymentTransaction`(pUserForPaymentId BIGINT, pDiscountId BIGINT, pAmount DOUBLE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE
+			user_for_payments
+		SET
+			discountId = pDiscountId, amount = pAmount
+		WHERE
+			userForPaymentId = pUserForPaymentId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`updateProductQuantityWhenCancelled`(pProductId BIGINT, pQuantity INT, pCartId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE
+			products AS p
+		SET
+			p.quantity = p.quantity + pQuantity
+		WHERE
+			p.productId = pProductId;
+			
+		UPDATE
+			carts AS c
+		SET
+			c.quantity = 0
+		WHERE
+			c.cartId = pCartId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`updateUserForPaymentToCancelled`(pUserForPaymentId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE
+			user_for_payments AS ufp
+		SET
+			ufp.isCancelled = 1
+		WHERE
+			ufp.userForPaymentId = pUserForPaymentId;
 	END$$
 
 DELIMITER ;

@@ -86,7 +86,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtTotalAmountToPay.Animated = true;
             this.txtTotalAmountToPay.BorderRadius = 3;
             this.txtTotalAmountToPay.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTotalAmountToPay.DefaultText = "0";
+            this.txtTotalAmountToPay.DefaultText = "0.00";
             this.txtTotalAmountToPay.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.txtTotalAmountToPay.DisabledState.FillColor = System.Drawing.Color.White;
             this.txtTotalAmountToPay.DisabledState.ForeColor = System.Drawing.Color.Black;
@@ -98,6 +98,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtTotalAmountToPay.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtTotalAmountToPay.Location = new System.Drawing.Point(16, 283);
             this.txtTotalAmountToPay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTotalAmountToPay.MaxLength = 55;
             this.txtTotalAmountToPay.Name = "txtTotalAmountToPay";
             this.txtTotalAmountToPay.PasswordChar = '\0';
             this.txtTotalAmountToPay.PlaceholderText = "";
@@ -124,7 +125,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.Animated = true;
             this.txtDiscount.BorderRadius = 3;
             this.txtDiscount.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDiscount.DefaultText = "0";
+            this.txtDiscount.DefaultText = "0.00";
             this.txtDiscount.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtDiscount.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtDiscount.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -135,6 +136,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtDiscount.Location = new System.Drawing.Point(17, 353);
             this.txtDiscount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDiscount.MaxLength = 55;
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.PasswordChar = '\0';
             this.txtDiscount.PlaceholderText = "";
@@ -163,7 +165,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtAmount.Animated = true;
             this.txtAmount.BorderRadius = 3;
             this.txtAmount.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtAmount.DefaultText = "";
+            this.txtAmount.DefaultText = "0.00";
             this.txtAmount.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtAmount.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtAmount.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -174,6 +176,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtAmount.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtAmount.Location = new System.Drawing.Point(16, 423);
             this.txtAmount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtAmount.MaxLength = 55;
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.PasswordChar = '\0';
             this.txtAmount.PlaceholderText = "";
@@ -202,7 +205,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtChange.Animated = true;
             this.txtChange.BorderRadius = 3;
             this.txtChange.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtChange.DefaultText = "0";
+            this.txtChange.DefaultText = "0.00";
             this.txtChange.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.txtChange.DisabledState.FillColor = System.Drawing.Color.White;
             this.txtChange.DisabledState.ForeColor = System.Drawing.Color.Black;
@@ -214,6 +217,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtChange.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtChange.Location = new System.Drawing.Point(16, 493);
             this.txtChange.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtChange.MaxLength = 55;
             this.txtChange.Name = "txtChange";
             this.txtChange.PasswordChar = '\0';
             this.txtChange.PlaceholderText = "";
@@ -280,7 +284,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscounted.Animated = true;
             this.txtDiscounted.BorderRadius = 3;
             this.txtDiscounted.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDiscounted.DefaultText = "0";
+            this.txtDiscounted.DefaultText = "0.00";
             this.txtDiscounted.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.txtDiscounted.DisabledState.FillColor = System.Drawing.Color.White;
             this.txtDiscounted.DisabledState.ForeColor = System.Drawing.Color.Black;
@@ -292,6 +296,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscounted.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtDiscounted.Location = new System.Drawing.Point(343, 353);
             this.txtDiscounted.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDiscounted.MaxLength = 55;
             this.txtDiscounted.Name = "txtDiscounted";
             this.txtDiscounted.PasswordChar = '\0';
             this.txtDiscounted.PlaceholderText = "";
@@ -309,7 +314,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridForPaymentTransaction.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridForPaymentTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.gridForPaymentTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridForPaymentTransaction.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.gridForPaymentTransaction.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -364,6 +368,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridForPaymentTransaction.ThemeStyle.RowsStyle.Height = 36;
             this.gridForPaymentTransaction.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gridForPaymentTransaction.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.gridForPaymentTransaction.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridForPaymentTransaction_CellContentClick);
             this.gridForPaymentTransaction.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gridForPaymentTransaction_MouseClick);
             // 
             // label7

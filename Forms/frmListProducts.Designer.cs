@@ -198,6 +198,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtSearch.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtSearch.Location = new System.Drawing.Point(555, 12);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtSearch.MaxLength = 55;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
             this.txtSearch.PlaceholderText = "";
