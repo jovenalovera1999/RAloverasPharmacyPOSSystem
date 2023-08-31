@@ -258,5 +258,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
             user.LoginUser(val.MyUsername, val.MyPassword);
             this.Close();
         }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

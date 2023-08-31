@@ -92,9 +92,9 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["discount"].HeaderText = "DISCOUNT";
                         grid.Columns["FORMAT(p.discounted, 2)"].HeaderText = "DISCOUNTED";
                         grid.Columns["genericName"].HeaderText = "GENERIC";
-                        grid.Columns["supplier"].HeaderText = "SUPPLIER";
-                        grid.Columns["FORMAT(p.priceFromSupplier, 2)"].HeaderText = "PRICE FROM SUPPLIER";
-                        grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "ADDED BY";
+                        grid.Columns["supplier"].Visible = false;
+                        grid.Columns["FORMAT(p.priceFromSupplier, 2)"].Visible = false;
+                        grid.Columns["CASE WHEN u.middleName IS NULL OR u.middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].Visible = false;
                         grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
                         grid.Columns["dateUpdated"].HeaderText = "DATE UPDATED";
 
@@ -104,6 +104,39 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
             catch (Exception ex) {
                 Console.WriteLine("Error loading products in order from database: " + ex.ToString());
+            }
+        }
+
+        public void LoadReturnedProduct(DataGridView grid) {
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+                    connection.Open();
+
+                    string sql = @"CALL loadReturnedProducts();";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        grid.DataSource = dt;
+                        grid.ClearSelection();
+
+                        grid.Columns["returnProductId"].Visible = false;
+                        grid.Columns["code"].HeaderText = "CODE";
+                        grid.Columns["description"].HeaderText = "DESCRIPTION";
+                        grid.Columns["quantity"].HeaderText = "QUANTITY";
+                        grid.Columns["FORMAT(rp.amountReturned, 2)"].HeaderText = "AMOUNT RETURNED";
+                        grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
+                        grid.Columns["dateUpdated"].HeaderText = "DATE UPDATED";
+
+                        connection.Close();
+                    }
+                }
+            } catch(Exception ex) {
+                Console.WriteLine("Error loading return products from database: " + ex.ToString());
             }
         }
 

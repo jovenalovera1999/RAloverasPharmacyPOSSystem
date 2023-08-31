@@ -53,7 +53,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.rprtReceipt.LocalReport.ReportEmbeddedResource = "RAloverasPharmacyPOSSystem.Reports.rprtReceipt.rdlc";
             this.rprtReceipt.Location = new System.Drawing.Point(12, 12);
             this.rprtReceipt.Name = "rprtReceipt";
-            this.rprtReceipt.Size = new System.Drawing.Size(374, 501);
+            this.rprtReceipt.Size = new System.Drawing.Size(374, 505);
             this.rprtReceipt.TabIndex = 0;
             this.rprtReceipt.ZoomMode = Microsoft.Reporting.WinForms.ZoomMode.FullPage;
             // 
@@ -67,11 +67,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnClose.FillColor = System.Drawing.Color.OliveDrab;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(276, 519);
+            this.btnClose.Location = new System.Drawing.Point(276, 523);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(110, 36);
+            this.btnClose.Size = new System.Drawing.Size(110, 32);
             this.btnClose.TabIndex = 16;
             this.btnClose.TabStop = false;
             this.btnClose.Text = "CLOSE (ESC)";

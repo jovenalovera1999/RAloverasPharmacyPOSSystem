@@ -73,7 +73,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void LoadProductsWithOrWithoutSearch() {
             if (String.IsNullOrWhiteSpace(this.txtSearch.Text)) {
-                product.LoadProducts(this.gridAvailableProducts);
+                product.LoadProductsInOrder(this.gridAvailableProducts);
             } else {
                 product.SearchProduct(this.txtSearch.Text, this.gridAvailableProducts);
             }
@@ -185,7 +185,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.KeyPreview = true;
             this.txtSearch.CharacterCasing = CharacterCasing.Upper;
 
-            product.LoadProducts(this.gridAvailableProducts);
+            product.LoadProductsInOrder(this.gridAvailableProducts);
 
             DataGridViewButtonColumn btnAddToCart = new DataGridViewButtonColumn();
             btnAddToCart.HeaderText = "ACTION";

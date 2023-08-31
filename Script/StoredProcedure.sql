@@ -1096,3 +1096,26 @@ CREATE
 	END$$
 
 DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`loadReturnedProducts`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			rp.returnProductId, p.code, d.description, rp.quantity, FORMAT(rp.amountReturned, 2), rp.dateCreated, rp.dateUpdated
+		FROM
+			return_products AS rp
+		INNER JOIN
+			products AS p ON rp.productId = p.productId
+		INNER JOIN
+			descriptions AS d ON p.descriptionId = d.descriptionId;
+	END$$
+
+DELIMITER ;

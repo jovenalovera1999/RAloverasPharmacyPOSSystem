@@ -64,6 +64,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // txtUsername
             // 
+            this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtUsername.Animated = true;
             this.txtUsername.BorderRadius = 3;
             this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -73,45 +74,46 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtUsername.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtUsername.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtUsername.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtUsername.ForeColor = System.Drawing.Color.Black;
             this.txtUsername.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtUsername.Location = new System.Drawing.Point(15, 95);
+            this.txtUsername.Location = new System.Drawing.Point(52, 90);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUsername.MaxLength = 55;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.PasswordChar = '\0';
             this.txtUsername.PlaceholderText = "";
             this.txtUsername.SelectedText = "";
-            this.txtUsername.Size = new System.Drawing.Size(320, 36);
+            this.txtUsername.Size = new System.Drawing.Size(240, 32);
             this.txtUsername.TabIndex = 0;
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 70);
+            this.label2.Location = new System.Drawing.Point(49, 69);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.label2.Size = new System.Drawing.Size(76, 32);
+            this.label2.Size = new System.Drawing.Size(76, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "USERNAME";
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(11, 141);
+            this.label3.Location = new System.Drawing.Point(49, 131);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.label3.Size = new System.Drawing.Size(75, 32);
+            this.label3.Size = new System.Drawing.Size(75, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "PASSWORD";
             // 
             // txtPassword
             // 
+            this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtPassword.Animated = true;
             this.txtPassword.BorderRadius = 3;
             this.txtPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -121,21 +123,22 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtPassword.FocusedState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtPassword.ForeColor = System.Drawing.Color.Black;
             this.txtPassword.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtPassword.Location = new System.Drawing.Point(15, 167);
+            this.txtPassword.Location = new System.Drawing.Point(52, 152);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPassword.MaxLength = 55;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.PlaceholderText = "";
             this.txtPassword.SelectedText = "";
-            this.txtPassword.Size = new System.Drawing.Size(320, 36);
+            this.txtPassword.Size = new System.Drawing.Size(240, 32);
             this.txtPassword.TabIndex = 1;
             // 
             // btnLogin
             // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLogin.Animated = true;
             this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -143,11 +146,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnLogin.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnLogin.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnLogin.FillColor = System.Drawing.Color.OliveDrab;
-            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(225, 210);
+            this.btnLogin.Location = new System.Drawing.Point(226, 195);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(110, 36);
+            this.btnLogin.Size = new System.Drawing.Size(110, 32);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.TabStop = false;
             this.btnLogin.Text = "LOGIN";
@@ -155,6 +158,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             // btnExit
             // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Animated = true;
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExit.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -162,11 +166,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnExit.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnExit.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnExit.FillColor = System.Drawing.Color.OliveDrab;
-            this.btnExit.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.btnExit.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(109, 210);
+            this.btnExit.Location = new System.Drawing.Point(110, 195);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(110, 36);
+            this.btnExit.Size = new System.Drawing.Size(110, 32);
             this.btnExit.TabIndex = 6;
             this.btnExit.TabStop = false;
             this.btnExit.Text = "EXIT";
@@ -177,7 +181,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(348, 254);
+            this.ClientSize = new System.Drawing.Size(348, 239);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label3);
@@ -187,7 +191,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(348, 254);
+            this.MinimumSize = new System.Drawing.Size(348, 239);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN";

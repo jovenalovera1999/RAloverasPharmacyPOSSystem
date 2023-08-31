@@ -16,5 +16,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             InitializeComponent();
         }
+
+        private void txtMiddleName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
