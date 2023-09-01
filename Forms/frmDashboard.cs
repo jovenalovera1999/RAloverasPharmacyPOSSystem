@@ -19,8 +19,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         Components.Value val = new Components.Value();
 
-        private void OpenOrderForm()
-        {
+        private void OpenOrderForm() {
             this.pnlMain.Controls.Clear();
             Forms.frmAddOrder addOrder = new Forms.frmAddOrder();
             addOrder.TopLevel = false;
@@ -31,8 +30,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Focus();
         }
 
-        private void OpenPaymentForm()
-        {
+        private void OpenPaymentForm() {
             this.pnlMain.Controls.Clear();
             Forms.frmPayment payment = new Forms.frmPayment();
             payment.TopLevel = false;
@@ -43,8 +41,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Focus();
         }
 
-        private void OpenListProductsForm()
-        {
+        private void OpenListProductsForm() {
             this.pnlMain.Controls.Clear();
             Forms.frmListProducts listProducts = new Forms.frmListProducts();
             listProducts.TopLevel = false;
@@ -55,8 +52,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Focus();
         }
 
-        private void OpenListUsersForm()
-        {
+        private void OpenListUsersForm() {
             this.pnlMain.Controls.Clear();
             Forms.frmListUsers listUsers = new Forms.frmListUsers();
             listUsers.TopLevel = false;
@@ -67,8 +63,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Focus();
         }
 
-        private void OpenListSalesForm()
-        {
+        private void OpenListSalesForm() {
             this.pnlMain.Controls.Clear();
             Forms.frmListSales listSales = new Forms.frmListSales();
             listSales.TopLevel = false;
@@ -79,87 +74,55 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Focus();
         }
 
-        private void OpenProfileForm()
-        {
+        private void OpenProfileForm() {
             Forms.frmProfile profile = new Forms.frmProfile();
             profile.ShowDialog();
         }
 
-        private void LogoutUser()
-        {
-            if (MessageBox.Show("Are you sure you want to logout?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
+        private void LogoutUser() {
+            if (MessageBox.Show("Are you sure you want to logout?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 Forms.frmLogin login = new Forms.frmLogin();
                 login.Show();
                 this.Close();
             }
         }
 
-        private void ExitApplication()
-        {
-            if (MessageBox.Show("Are you sure you want to exit?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
+        private void ExitApplication() {
+            if (MessageBox.Show("Are you sure you want to exit?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 Application.Exit();
             }
         }
 
         private void frmDashboard_KeyDown(object sender, KeyEventArgs e)
         {
-            if(val.MyUserLevel == "EMPLOYEE")
-            {
-                if (e.KeyCode == Keys.F5)
-                {
+            if(val.MyUserLevel == "EMPLOYEE") {
+                if (e.KeyCode == Keys.F5) {
                     OpenOrderForm();
-                }
-                else if (e.KeyCode == Keys.F7)
-                {
+                } else if (e.KeyCode == Keys.F7) {
                     OpenListProductsForm();
-                }
-                else if (e.KeyCode == Keys.F10)
-                {
+                } else if (e.KeyCode == Keys.F10) {
                     OpenProfileForm();
-                }
-                else if (e.KeyCode == Keys.F11)
-                {
+                } else if (e.KeyCode == Keys.F11) {
                     LogoutUser();
-                }
-                else if (e.KeyCode == Keys.Escape)
-                {
+                } else if (e.KeyCode == Keys.Escape) {
                     ExitApplication();
                 }
-            }
-            else
-            {
-                if (e.KeyCode == Keys.F5)
-                {
+            } else {
+                if (e.KeyCode == Keys.F5) {
                     OpenOrderForm();
-                }
-                else if (e.KeyCode == Keys.F6)
-                {
+                } else if (e.KeyCode == Keys.F6) {
                     OpenPaymentForm();
-                }
-                else if (e.KeyCode == Keys.F7)
-                {
+                } else if (e.KeyCode == Keys.F7) {
                     OpenListProductsForm();
-                }
-                else if (e.KeyCode == Keys.F8)
-                {
+                } else if (e.KeyCode == Keys.F8) {
                     OpenListUsersForm();
-                }
-                else if (e.KeyCode == Keys.F9)
-                {
+                } else if (e.KeyCode == Keys.F9) {
                     OpenListSalesForm();
-                }
-                else if (e.KeyCode == Keys.F10)
-                {
+                } else if (e.KeyCode == Keys.F10) {
                     OpenProfileForm();
-                }
-                else if (e.KeyCode == Keys.F11)
-                {
+                } else if (e.KeyCode == Keys.F11) {
                     LogoutUser();
-                }
-                else if (e.KeyCode == Keys.Escape)
-                {
+                } else if (e.KeyCode == Keys.Escape) {
                     ExitApplication();
                 }
             }
@@ -174,13 +137,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
             this.KeyPreview = true;
 
-            if(val.MyUserLevel == "EMPLOYEE")
-            {
+            if(val.MyUserLevel == "EMPLOYEE") {
                 this.btnPayment.Visible = false;
                 this.btnUsers.Visible = false;
                 this.btnSales.Visible = false;
 
-                this.btnProducts.Location = new Point(0, 39);
+                this.btnProducts.Location = new Point(0, 46);
             }
         }
 

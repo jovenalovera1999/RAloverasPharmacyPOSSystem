@@ -52,6 +52,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridForPaymentTransaction = new Guna.UI2.WinForms.Guna2DataGridView();
             this.label7 = new System.Windows.Forms.Label();
             this.gridCart = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridForPaymentTransaction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCart)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +61,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 16);
+            this.label1.Location = new System.Drawing.Point(9, 48);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(166, 15);
@@ -72,7 +73,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 264);
+            this.label2.Location = new System.Drawing.Point(9, 295);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(133, 15);
@@ -95,9 +96,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtTotalAmountToPay.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTotalAmountToPay.ForeColor = System.Drawing.Color.Black;
             this.txtTotalAmountToPay.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtTotalAmountToPay.Location = new System.Drawing.Point(16, 283);
+            this.txtTotalAmountToPay.Location = new System.Drawing.Point(13, 314);
             this.txtTotalAmountToPay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtTotalAmountToPay.MaxLength = 55;
+            this.txtTotalAmountToPay.MaxLength = 100;
             this.txtTotalAmountToPay.Name = "txtTotalAmountToPay";
             this.txtTotalAmountToPay.PasswordChar = '\0';
             this.txtTotalAmountToPay.PlaceholderText = "";
@@ -110,7 +111,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 324);
+            this.label3.Location = new System.Drawing.Point(9, 355);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 15);
@@ -132,9 +133,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtDiscount.ForeColor = System.Drawing.Color.Black;
             this.txtDiscount.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtDiscount.Location = new System.Drawing.Point(17, 343);
+            this.txtDiscount.Location = new System.Drawing.Point(14, 374);
             this.txtDiscount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtDiscount.MaxLength = 55;
+            this.txtDiscount.MaxLength = 100;
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.PasswordChar = '\0';
             this.txtDiscount.PlaceholderText = "";
@@ -149,7 +150,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 384);
+            this.label4.Location = new System.Drawing.Point(9, 415);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 15);
@@ -171,9 +172,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtAmount.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtAmount.ForeColor = System.Drawing.Color.Black;
             this.txtAmount.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtAmount.Location = new System.Drawing.Point(16, 403);
+            this.txtAmount.Location = new System.Drawing.Point(13, 434);
             this.txtAmount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtAmount.MaxLength = 55;
+            this.txtAmount.MaxLength = 100;
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.PasswordChar = '\0';
             this.txtAmount.PlaceholderText = "";
@@ -188,7 +189,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 444);
+            this.label5.Location = new System.Drawing.Point(9, 475);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 15);
@@ -211,9 +212,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtChange.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtChange.ForeColor = System.Drawing.Color.Black;
             this.txtChange.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtChange.Location = new System.Drawing.Point(15, 463);
+            this.txtChange.Location = new System.Drawing.Point(12, 494);
             this.txtChange.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtChange.MaxLength = 55;
+            this.txtChange.MaxLength = 100;
             this.txtChange.Name = "txtChange";
             this.txtChange.PasswordChar = '\0';
             this.txtChange.PlaceholderText = "";
@@ -266,7 +267,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(260, 324);
+            this.label6.Location = new System.Drawing.Point(257, 355);
             this.label6.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(78, 15);
@@ -289,9 +290,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscounted.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtDiscounted.ForeColor = System.Drawing.Color.Black;
             this.txtDiscounted.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.txtDiscounted.Location = new System.Drawing.Point(263, 343);
+            this.txtDiscounted.Location = new System.Drawing.Point(260, 374);
             this.txtDiscounted.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtDiscounted.MaxLength = 55;
+            this.txtDiscounted.MaxLength = 100;
             this.txtDiscounted.Name = "txtDiscounted";
             this.txtDiscounted.PasswordChar = '\0';
             this.txtDiscounted.PlaceholderText = "";
@@ -333,13 +334,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridForPaymentTransaction.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridForPaymentTransaction.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gridForPaymentTransaction.Location = new System.Drawing.Point(12, 34);
+            this.gridForPaymentTransaction.Location = new System.Drawing.Point(9, 66);
             this.gridForPaymentTransaction.MultiSelect = false;
             this.gridForPaymentTransaction.Name = "gridForPaymentTransaction";
             this.gridForPaymentTransaction.ReadOnly = true;
             this.gridForPaymentTransaction.RowHeadersVisible = false;
             this.gridForPaymentTransaction.RowTemplate.Height = 32;
-            this.gridForPaymentTransaction.Size = new System.Drawing.Size(394, 216);
+            this.gridForPaymentTransaction.Size = new System.Drawing.Size(394, 215);
             this.gridForPaymentTransaction.TabIndex = 19;
             this.gridForPaymentTransaction.TabStop = false;
             this.gridForPaymentTransaction.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -370,7 +371,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(409, 16);
+            this.label7.Location = new System.Drawing.Point(409, 48);
             this.label7.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 15);
@@ -413,13 +414,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridCart.DefaultCellStyle = dataGridViewCellStyle6;
             this.gridCart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gridCart.Location = new System.Drawing.Point(412, 34);
+            this.gridCart.Location = new System.Drawing.Point(409, 66);
             this.gridCart.MultiSelect = false;
             this.gridCart.Name = "gridCart";
             this.gridCart.ReadOnly = true;
             this.gridCart.RowHeadersVisible = false;
             this.gridCart.RowTemplate.Height = 32;
-            this.gridCart.Size = new System.Drawing.Size(463, 216);
+            this.gridCart.Size = new System.Drawing.Size(463, 215);
             this.gridCart.TabIndex = 5;
             this.gridCart.TabStop = false;
             this.gridCart.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -444,12 +445,24 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridCart.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gridCart.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(12, 12);
+            this.label8.Margin = new System.Windows.Forms.Padding(3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(252, 28);
+            this.label8.TabIndex = 47;
+            this.label8.Text = "PAYMENT TRANSACTION";
+            // 
             // frmPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(887, 539);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.gridForPaymentTransaction);
             this.Controls.Add(this.label6);
@@ -501,5 +514,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2DataGridView gridForPaymentTransaction;
         private System.Windows.Forms.Label label7;
         private Guna.UI2.WinForms.Guna2DataGridView gridCart;
+        private System.Windows.Forms.Label label8;
     }
 }

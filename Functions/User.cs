@@ -20,18 +20,14 @@ namespace RAloverasPharmacyPOSSystem.Functions
         int totalRows = 0;
         int maxRecords = 25;
 
-        public bool LoginUser(string username, string password)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(con.conString()))
-                {
+        public bool LoginUser(string username, string password) {
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                     connection.Open();
 
                     string sql = @"CALL loginUser(@username, @password);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
 
@@ -41,8 +37,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if(dt.Rows.Count > 0)
-                        {
+                        if(dt.Rows.Count > 0) {
                             val.MyUserId = dt.Rows[0].Field<long>("userId");
                             val.MyProfilePicture = dt.Rows[0].Field<byte[]>("profilePicture");
                             val.MyFirstName = dt.Rows[0].Field<string>("firstName");
@@ -57,34 +52,26 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                             connection.Close();
                             return true;
-                        }
-                        else
-                        {
+                        } else {
                             connection.Close();
                             return false;
                         }
                     }
                 }
-            }
-            catch(Exception ex)
-            {
+            } catch(Exception ex) {
                 Console.WriteLine("Error logging in user: " + ex.ToString());
                 return false;
             }
         }
 
-        public bool ResetPasswordUser(long userId)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(con.conString()))
-                {
+        public bool ResetPasswordUser(long userId) {
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                     connection.Open();
 
                     string sql = @"CALL resetUserPassword(@userId);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
                         cmd.Parameters.AddWithValue("@userId", userId);
 
                         MySqlDataReader dr = cmd.ExecuteReader();
@@ -95,30 +82,23 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            }
-            catch(Exception ex)
-            {
+            } catch(Exception ex) {
                 Console.WriteLine("Error reseting the password of the user from database: " + ex.ToString());
                 return false;
             }
         }
 
-        public void LoadUserLevels(ComboBox cmb)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(con.conString()))
-                {
+        public void LoadUserLevels(ComboBox cmb) {
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                     connection.Open();
 
                     string sql = @"CALL loadUserLevels();";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
                         MySqlDataReader dr = cmd.ExecuteReader();
 
-                        while(dr.Read())
-                        {
+                        while(dr.Read()) {
                             string userLevels = dr.GetString("userLevel");
                             cmb.Items.Add(userLevels);
                         }
@@ -127,23 +107,18 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         connection.Close();
                     }
                 }
-            }
-            catch(Exception ex)
-            {
+            } catch(Exception ex) {
                 Console.WriteLine("Error loading user levels from database: " + ex.ToString());
             }
         }
 
-        public void LoadUsers(DataGridView grid)
-        {
-            using (MySqlConnection connection = new MySqlConnection(con.conString()))
-            {
+        public void LoadUsers(DataGridView grid) {
+            using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                 connection.Open();
 
                 string sql = @"CALL loadUsers();";
 
-                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                {
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
                     da = new MySqlDataAdapter(cmd);
                     dt = new DataTable();
 
@@ -170,12 +145,10 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public void NextPage(DataGridView grid)
-        {
+        public void NextPage(DataGridView grid) {
             scollVal += maxRecords;
 
-            if(scollVal >= totalRows)
-            {
+            if(scollVal >= totalRows) {
                 scollVal = totalRows;
             }
 
@@ -185,12 +158,10 @@ namespace RAloverasPharmacyPOSSystem.Functions
             grid.ClearSelection();
         }
 
-        public void PreviousPage(DataGridView grid)
-        {
+        public void PreviousPage(DataGridView grid) {
             scollVal -= maxRecords;
 
-            if(scollVal <= 0)
-            {
+            if(scollVal <= 0) {
                 scollVal = 0;
             }
 
@@ -201,18 +172,14 @@ namespace RAloverasPharmacyPOSSystem.Functions
         }
 
         public bool InsertUser(byte[] profilePicture, string firstName, string middleName, string lastName, string address, string contactNumber, string email,
-            string username, string userLevel)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(con.conString()))
-                {
+            string username, string userLevel) {
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                     connection.Open();
 
                     string sql = @"CALL getUserLevel(@userLevel);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
                         cmd.Parameters.AddWithValue("@userLevel", userLevel);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -221,16 +188,14 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if(dt.Rows.Count > 0)
-                        {
+                        if(dt.Rows.Count > 0) {
                             val.UserLevelId = dt.Rows[0].Field<long>("userLevelId");
                         }
                     }
                     
                     sql = @"CALL insertUser(@profilePicture, @firstName, @middleName, @lastName, @address, @contactNumber, @email, @username, @userLevelId);";
 
-                    using(MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
+                    using(MySqlCommand cmd = new MySqlCommand(sql, connection)) {
                         cmd.Parameters.AddWithValue("@profilePicture", profilePicture);
                         cmd.Parameters.AddWithValue("@firstName", firstName);
                         cmd.Parameters.AddWithValue("@middleName", middleName);
@@ -249,28 +214,22 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            }
-            catch(Exception ex)
-            {
+            } catch(Exception ex) {
                 Console.WriteLine("Error inserting user to database: " + ex.ToString());
                 return false;
             }
         }
 
         public bool UpdateUser(long userId, byte[] profilePicture, string firstName, string middleName, string lastName, string address, string contactNumber, string email,
-            string username, string password)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(con.conString()))
-                {
+            string username, string password) {
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                     connection.Open();
 
                     string sql = @"CALL updateUser(@userId, @profilePicture, @firstName, @middleName, @lastName, @address, @contactNumber, @email,
                                     @username, @password);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
                         cmd.Parameters.AddWithValue("@userId", userId);
                         cmd.Parameters.AddWithValue("@profilePicture", profilePicture);
                         cmd.Parameters.AddWithValue("@firstName", firstName);
@@ -290,26 +249,20 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            }
-            catch(Exception ex)
-            {
+            } catch(Exception ex) {
                 Console.WriteLine("Error updating user in database: " + ex.ToString());
                 return false;
             }
         }
 
-        public bool DeleteUser(long userId)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(con.conString()))
-                {
+        public bool DeleteUser(long userId) {
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                     connection.Open();
 
                     string sql = @"CALL deleteUser(@userId);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
                         cmd.Parameters.AddWithValue("@userId", userId);
 
                         MySqlDataReader dr = cmd.ExecuteReader();
@@ -320,9 +273,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            }
-            catch(Exception ex)
-            {
+            } catch(Exception ex) {
                 Console.WriteLine("Error deleting user in database: " + ex.ToString());
                 return false;
             }

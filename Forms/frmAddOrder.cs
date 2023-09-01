@@ -24,8 +24,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void ToPay() {
             if (this.gridCart.Rows.Count < 1) {
                 MessageBox.Show("Failed to send to payment transaction, there are no products added!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } else if (double.Parse(this.txtAmount.Text) == 0) { 
-            
             } else if (double.Parse(this.txtTotalAmountToPay.Text) < 0) {
                 MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtDiscount.Focus();

@@ -79,7 +79,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtUsername.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtUsername.Location = new System.Drawing.Point(52, 90);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtUsername.MaxLength = 55;
+            this.txtUsername.MaxLength = 100;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.PasswordChar = '\0';
             this.txtUsername.PlaceholderText = "";
@@ -128,7 +128,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPassword.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
             this.txtPassword.Location = new System.Drawing.Point(52, 152);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtPassword.MaxLength = 55;
+            this.txtPassword.MaxLength = 100;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.PlaceholderText = "";

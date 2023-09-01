@@ -35,6 +35,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.CartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rprtReceipt = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnClose = new Guna.UI2.WinForms.Guna2Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.CartBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,9 +52,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             reportDataSource1.Value = this.CartBindingSource;
             this.rprtReceipt.LocalReport.DataSources.Add(reportDataSource1);
             this.rprtReceipt.LocalReport.ReportEmbeddedResource = "RAloverasPharmacyPOSSystem.Reports.rprtReceipt.rdlc";
-            this.rprtReceipt.Location = new System.Drawing.Point(12, 12);
+            this.rprtReceipt.Location = new System.Drawing.Point(12, 46);
             this.rprtReceipt.Name = "rprtReceipt";
-            this.rprtReceipt.Size = new System.Drawing.Size(374, 505);
+            this.rprtReceipt.Size = new System.Drawing.Size(374, 471);
             this.rprtReceipt.TabIndex = 0;
             this.rprtReceipt.ZoomMode = Microsoft.Reporting.WinForms.ZoomMode.FullPage;
             // 
@@ -77,12 +78,24 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnClose.Text = "CLOSE (ESC)";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 12);
+            this.label3.Margin = new System.Windows.Forms.Padding(3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(154, 28);
+            this.label3.TabIndex = 47;
+            this.label3.Text = "PRINT RECEIPT";
+            // 
             // frmPrintReceipt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(398, 567);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.rprtReceipt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -95,6 +108,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPrintReceipt_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.CartBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -103,5 +117,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Microsoft.Reporting.WinForms.ReportViewer rprtReceipt;
         private Guna.UI2.WinForms.Guna2Button btnClose;
         private System.Windows.Forms.BindingSource CartBindingSource;
+        private System.Windows.Forms.Label label3;
     }
 }

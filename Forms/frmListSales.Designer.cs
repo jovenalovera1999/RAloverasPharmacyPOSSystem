@@ -47,6 +47,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridSales = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btnPrevious = new Guna.UI2.WinForms.Guna2Button();
             this.btnNext = new Guna.UI2.WinForms.Guna2Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
@@ -62,7 +63,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.guna2Panel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.guna2Panel1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 50);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 71);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -145,7 +146,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(605, 19);
+            this.label1.Location = new System.Drawing.Point(605, 40);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 17);
@@ -164,7 +165,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.dateTo.ForeColor = System.Drawing.Color.White;
             this.dateTo.Format = System.Windows.Forms.DateTimePickerFormat.Long;
             this.dateTo.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.dateTo.Location = new System.Drawing.Point(635, 12);
+            this.dateTo.Location = new System.Drawing.Point(635, 33);
             this.dateTo.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dateTo.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dateTo.Name = "dateTo";
@@ -179,7 +180,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(309, 19);
+            this.label2.Location = new System.Drawing.Point(309, 40);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 17);
@@ -198,7 +199,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.dateFrom.ForeColor = System.Drawing.Color.White;
             this.dateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Long;
             this.dateFrom.HoverState.BorderColor = System.Drawing.Color.OliveDrab;
-            this.dateFrom.Location = new System.Drawing.Point(359, 12);
+            this.dateFrom.Location = new System.Drawing.Point(359, 33);
             this.dateFrom.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dateFrom.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dateFrom.Name = "dateFrom";
@@ -243,13 +244,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridSales.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridSales.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gridSales.Location = new System.Drawing.Point(12, 146);
+            this.gridSales.Location = new System.Drawing.Point(12, 167);
             this.gridSales.MultiSelect = false;
             this.gridSales.Name = "gridSales";
             this.gridSales.ReadOnly = true;
             this.gridSales.RowHeadersVisible = false;
             this.gridSales.RowTemplate.Height = 32;
-            this.gridSales.Size = new System.Drawing.Size(863, 343);
+            this.gridSales.Size = new System.Drawing.Size(863, 322);
             this.gridSales.TabIndex = 44;
             this.gridSales.TabStop = false;
             this.gridSales.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -315,12 +316,24 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnNext.Text = ">>";
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 12);
+            this.label5.Margin = new System.Windows.Forms.Padding(3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(145, 28);
+            this.label5.TabIndex = 52;
+            this.label5.Text = "LIST OF SALES";
+            // 
             // frmListSales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(887, 539);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -365,5 +378,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2DataGridView gridSales;
         private Guna.UI2.WinForms.Guna2Button btnPrevious;
         private Guna.UI2.WinForms.Guna2Button btnNext;
+        private System.Windows.Forms.Label label5;
     }
 }

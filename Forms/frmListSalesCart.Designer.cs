@@ -35,6 +35,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListSalesCart));
             this.gridSalesCart = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btnBack = new Guna.UI2.WinForms.Guna2Button();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridSalesCart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,13 +75,14 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridSalesCart.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridSalesCart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gridSalesCart.Location = new System.Drawing.Point(12, 12);
+            this.gridSalesCart.Location = new System.Drawing.Point(12, 48);
+            this.gridSalesCart.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.gridSalesCart.MultiSelect = false;
             this.gridSalesCart.Name = "gridSalesCart";
             this.gridSalesCart.ReadOnly = true;
             this.gridSalesCart.RowHeadersVisible = false;
             this.gridSalesCart.RowTemplate.Height = 32;
-            this.gridSalesCart.Size = new System.Drawing.Size(863, 477);
+            this.gridSalesCart.Size = new System.Drawing.Size(863, 441);
             this.gridSalesCart.TabIndex = 45;
             this.gridSalesCart.TabStop = false;
             this.gridSalesCart.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -125,12 +127,24 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnBack.Text = "BACK (F1)";
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(12, 12);
+            this.label9.Margin = new System.Windows.Forms.Padding(3);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(202, 28);
+            this.label9.TabIndex = 95;
+            this.label9.Text = "LIST OF SALES CART";
+            // 
             // frmListSalesCart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(887, 539);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.gridSalesCart);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -145,6 +159,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Leave += new System.EventHandler(this.frmListSalesCart_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.gridSalesCart)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -152,5 +167,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private Guna.UI2.WinForms.Guna2DataGridView gridSalesCart;
         private Guna.UI2.WinForms.Guna2Button btnBack;
+        private System.Windows.Forms.Label label9;
     }
 }

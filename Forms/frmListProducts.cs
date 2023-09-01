@@ -28,6 +28,18 @@ namespace RAloverasPharmacyPOSSystem.Forms
             addProduct.ShowDialog();
         }
 
+        private void OpenAddReturnProductForm() {
+            Forms.frmDashboard dashboard = (Forms.frmDashboard)Application.OpenForms["frmDashboard"];
+            Panel pnlMain = (Panel)dashboard.Controls["pnlMain"];
+
+            pnlMain.Controls.Clear();
+            Forms.frmAddReturnProduct returnProduct = new Forms.frmAddReturnProduct();
+            returnProduct.TopLevel = false;
+            pnlMain.Controls.Add(returnProduct);
+            returnProduct.Dock = DockStyle.Fill;
+            returnProduct.Show();
+        }
+
         private void frmListProducts_VisibleChanged(object sender, EventArgs e)
         {
             this.gridProducts.ClearSelection();
@@ -37,6 +49,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             if (e.KeyCode == Keys.F1) {
                 OpenAddProductForm();
+            } else if(e.KeyCode == Keys.F2) {
+                OpenAddReturnProductForm();
             }
         }
 
@@ -109,6 +123,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
             OpenAddProductForm();
+        }
+
+        private void btnAddReturnProduct_Click(object sender, EventArgs e)
+        {
+            OpenAddReturnProductForm();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
