@@ -51,4 +51,5 @@ C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmAddReturnProduct.resources
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RdlCompile.cache
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RdlCompile.compiled
+C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.Forms.frmUpdateReturnProduct.resources
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Debug\RAloverasPharmacyPOSSystem.csproj.AssemblyReference.cache

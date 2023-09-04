@@ -1184,3 +1184,49 @@ CREATE
 	END$$
 
 DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`getReturnedProduct`(pReturnProductId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			rp.returnProductId, d.description, rp.quantity, rp.amountReturned
+		FROM
+			return_products AS rp
+		INNER JOIN
+			products AS p ON rp.productId = p.productId
+		INNER JOIN
+			descriptions AS d ON p.descriptionId = d.descriptionId
+		WHERE
+			rp.returnProductId = pReturnProductId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`updateReturnedProduct`(pReturnProductId BIGINT, pProductId BIGINT, pQuantity INT, pAmountReturned DOUBLE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE
+			return_products AS rp
+		SET
+			rp.productId = pProductId, rp.quantity = pQuantity, rp.amountReturned = pAmountReturned
+		WHERE
+			rp.returnProductId = pReturnProductId;
+	END$$
+
+DELIMITER ;

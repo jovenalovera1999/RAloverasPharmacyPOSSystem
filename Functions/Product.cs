@@ -20,14 +20,18 @@ namespace RAloverasPharmacyPOSSystem.Functions
         int totalRows = 0;
         int maxRecords = 25;
 
-        public void LoadProducts(DataGridView grid) {
-            try {
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+        public void LoadProducts(DataGridView grid) 
+        {
+            try 
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL loadProducts();";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         da = new MySqlDataAdapter(cmd);
                         dt = new DataTable();
 
@@ -58,19 +62,25 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         connection.Close();
                     }
                 }
-            } catch(Exception ex) {
+            } 
+            catch(Exception ex) 
+            {
                 Console.WriteLine("Error loading products from database: " + ex.ToString());
             }
         }
 
-        public void LoadProductsInOrder(DataGridView grid) {
-            try {
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+        public void LoadProductsInOrder(DataGridView grid) 
+        {
+            try 
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL loadProducts();";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         da = new MySqlDataAdapter(cmd);
                         dt = new DataTable();
 
@@ -102,19 +112,24 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     }
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex) 
+            {
                 Console.WriteLine("Error loading products in order from database: " + ex.ToString());
             }
         }
 
-        public void LoadReturnedProducts(DataGridView grid) {
-            try {
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+        public void LoadReturnedProducts(DataGridView grid) 
+        {
+            try 
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL loadReturnedProducts();";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
 
@@ -135,15 +150,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         connection.Close();
                     }
                 }
-            } catch(Exception ex) {
+            } 
+            catch(Exception ex) 
+            {
                 Console.WriteLine("Error loading return products from database: " + ex.ToString());
             }
         }
 
         public void SearchProduct(string keyword, DataGridView grid)
         {
-            try {
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+            try 
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL searchProduct(@keyword);";
@@ -181,15 +200,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         connection.Close();
                     }
                 }
-            } catch(Exception ex) {
+            } 
+            catch(Exception ex) 
+            {
                 Console.WriteLine("Error searching product from database: " + ex.ToString());
             }
         }
 
-        public void NextPage(DataGridView grid) {
+        public void NextPage(DataGridView grid) 
+        {
             scollVal += maxRecords;
 
-            if(scollVal >= totalRows) {
+            if(scollVal >= totalRows) 
+            {
                 scollVal = totalRows;
             }
 
@@ -199,10 +222,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
             grid.ClearSelection();
         }
 
-        public void PreviousPage(DataGridView grid) {
+        public void PreviousPage(DataGridView grid) 
+        {
             scollVal -= maxRecords;
 
-            if (scollVal <= 0) {
+            if (scollVal <= 0) 
+            {
                 scollVal = 0;
             }
 
@@ -212,10 +237,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
             grid.ClearSelection();
         }
 
-        public void NextPageAtOrder(DataGridView grid) {
+        public void NextPageAtOrder(DataGridView grid) 
+        {
             scollVal += maxRecords;
 
-            if (scollVal >= totalRows) {
+            if (scollVal >= totalRows) 
+            {
                 scollVal = totalRows;
             }
 
@@ -225,10 +252,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
             grid.Focus();
         }
 
-        public void PreviousPageAtOrder(DataGridView grid) {
+        public void PreviousPageAtOrder(DataGridView grid) 
+        {
             scollVal -= maxRecords;
 
-            if (scollVal <= 0) {
+            if (scollVal <= 0) 
+            {
                 scollVal = 0;
             }
 
@@ -238,14 +267,18 @@ namespace RAloverasPharmacyPOSSystem.Functions
             grid.Focus();
         }
 
-        public bool GetProduct(long productId) {
-            try {
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+        public bool GetProduct(long productId) 
+        {
+            try 
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL getProduct(@productId);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@productId", productId);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -254,7 +287,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if(dt.Rows.Count > 0) {
+                        if(dt.Rows.Count > 0) 
+                        {
                             val.ProductId = dt.Rows[0].Field<long>("productId");
                             val.ProductCode = dt.Rows[0].Field<string>("code");
                             val.ProductDescription = dt.Rows[0].Field<string>("description");
@@ -269,15 +303,62 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                             connection.Close();
                             return true;
-                        } else {
+                        } 
+                        else 
+                        {
                             connection.Close();
                             return false;
                         }
                     }
                 }
             }
-            catch(Exception ex) {
+            catch(Exception ex) 
+            {
                 Console.WriteLine("Error getting product from database: " + ex.ToString());
+                return false;
+            }
+        }
+
+        public bool GetReturnedProduct(long returnProductId) 
+        {
+            try 
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
+                    connection.Open();
+
+                    string sql = @"CALL getReturnedProduct(@returnProductId);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        cmd.Parameters.AddWithValue("@returnProductId", returnProductId);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        if(dt.Rows.Count > 0) 
+                        {
+                            val.ReturnProductId = dt.Rows[0].Field<long>("returnProductId");
+                            val.ReturnProductDescription = dt.Rows[0].Field<string>("description");
+                            val.ReturnProductQuantity = dt.Rows[0].Field<int>("quantity");
+                            val.ReturnProductAmountReturned = dt.Rows[0].Field<double>("amountReturned");
+
+                            connection.Close();
+                            return true;
+                        } 
+                        else 
+                        {
+                            connection.Close();
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine("Error getting return product from database: " + ex.ToString());
                 return false;
             }
         }
@@ -285,19 +366,22 @@ namespace RAloverasPharmacyPOSSystem.Functions
         public bool InsertProduct(string code, string description, string packagingUnit, int quantity, double price, double discount,
             double discounted, string generic, string supplier, double priceFromSupplier, long userId)
         {
-            try {
+            try 
+            {
                 bool isDescriptionExist = false;
                 bool isPackagingUnitExist = false;
                 bool isDiscountExist = false;
                 bool isGenericExist = false;
                 bool isSupplierExist = false;
 
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL getDescriptionId(@description);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@description", description);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -306,16 +390,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if(dt.Rows.Count > 0) {
+                        if(dt.Rows.Count > 0) 
+                        {
                             isDescriptionExist = true;
                             val.DescriptionId = dt.Rows[0].Field<long>("descriptionId");
                         }
                     }
 
-                    if(!isDescriptionExist) {
+                    if(!isDescriptionExist) 
+                    {
                         sql = @"CALL insertDescription(@description);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@description", description);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -324,7 +411,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getDescriptionId(@description);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@description", description);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -333,7 +421,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             dt.Clear();
                             da.Fill(dt);
 
-                            if (dt.Rows.Count > 0) {
+                            if (dt.Rows.Count > 0) 
+                            {
                                 isDescriptionExist = true;
                                 val.DescriptionId = dt.Rows[0].Field<long>("descriptionId");
                             }
@@ -342,7 +431,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                     sql = @"CALL getPackagingUnitId(@packagingUnit);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -351,16 +441,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if(dt.Rows.Count > 0) {
+                        if(dt.Rows.Count > 0) 
+                        {
                             isPackagingUnitExist = true;
                             val.PackagingUnitId = dt.Rows[0].Field<long>("packagingUnitId");
                         }
                     }
 
-                    if(!isPackagingUnitExist) {
+                    if(!isPackagingUnitExist) 
+                    {
                         sql = @"CALL insertPackagingUnit(@packagingUnit);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -369,7 +462,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getPackagingUnitId(@packagingUnit);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -387,7 +481,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                     sql = @"CALL getDiscountId(@discount);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@discount", discount);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -396,16 +491,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if (dt.Rows.Count > 0) {
+                        if (dt.Rows.Count > 0) 
+                        {
                             isDiscountExist = true;
                             val.DiscountId = dt.Rows[0].Field<long>("discountId");
                         }
                     }
 
-                    if(!isDiscountExist) {
+                    if(!isDiscountExist) 
+                    {
                         sql = @"CALL insertDiscount(@discount);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@discount", discount);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -414,7 +512,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getDiscountId(@discount);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@discount", discount);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -423,7 +522,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             dt.Clear();
                             da.Fill(dt);
 
-                            if (dt.Rows.Count > 0) {
+                            if (dt.Rows.Count > 0) 
+                            {
                                 isDiscountExist = true;
                                 val.DiscountId = dt.Rows[0].Field<long>("discountId");
                             }
@@ -432,7 +532,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                     sql = @"CALL getGenericId(@generic);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@generic", generic);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -441,16 +542,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if (dt.Rows.Count > 0) {
+                        if (dt.Rows.Count > 0) 
+                        {
                             isGenericExist = true;
                             val.GenericId = dt.Rows[0].Field<long>("genericId");
                         }
                     }
 
-                    if(!isGenericExist) {
+                    if(!isGenericExist) 
+                    {
                         sql = @"CALL insertGeneric(@generic);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@generic", generic);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -459,7 +563,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getGenericId(@generic);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@generic", generic);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -468,7 +573,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             dt.Clear();
                             da.Fill(dt);
 
-                            if (dt.Rows.Count > 0) {
+                            if (dt.Rows.Count > 0) 
+                            {
                                 isGenericExist = true;
                                 val.GenericId = dt.Rows[0].Field<long>("genericId");
                             }
@@ -477,7 +583,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                     sql = @"CALL getSupplierId(@supplier);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@supplier", supplier);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -486,16 +593,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if(dt.Rows.Count > 0) {
+                        if(dt.Rows.Count > 0) 
+                        {
                             isSupplierExist = true;
                             val.SupplierId = dt.Rows[0].Field<long>("supplierId");
                         }
                     }
 
-                    if(!isSupplierExist) {
+                    if(!isSupplierExist) 
+                    {
                         sql = @"CALL insertSupplier(@supplier);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@supplier", supplier);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -504,7 +614,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getSupplierId(@supplier);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@supplier", supplier);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -513,7 +624,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             dt.Clear();
                             da.Fill(dt);
 
-                            if (dt.Rows.Count > 0) {
+                            if (dt.Rows.Count > 0) 
+                            {
                                 isSupplierExist = true;
                                 val.SupplierId = dt.Rows[0].Field<long>("supplierId");
                             }
@@ -523,7 +635,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     sql = @"CALL insertProduct(@code, @descriptionId, @packagingUnitId, @quantity, @price, @discount, @discounted, @genericId,
                             @supplierId, @priceFromSupplier, @userId);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@code", code);
                         cmd.Parameters.AddWithValue("@descriptionId", val.DescriptionId);
                         cmd.Parameters.AddWithValue("@packagingUnitId", val.PackagingUnitId);
@@ -544,20 +657,26 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            } catch (Exception ex) {
+            } 
+            catch (Exception ex) 
+            {
                 Console.WriteLine("Error inserting product to database: " + ex.ToString());
                 return false;
             }
         }
 
-        public bool InsertReturnedProduct(long productId, int quantity, double amountReturned) { 
-            try {
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+        public bool InsertReturnedProduct(long productId, int quantity, double amountReturned) 
+        { 
+            try 
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL insertReturnedProduct(@productId, @quantity, @amountReturned);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@productId", productId);
                         cmd.Parameters.AddWithValue("@quantity", quantity);
                         cmd.Parameters.AddWithValue("@amountReturned", amountReturned);
@@ -570,27 +689,33 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            } catch(Exception ex) {
+            } 
+            catch(Exception ex) 
+            {
                 Console.WriteLine("Error inserting returned product to database: " + ex.ToString());
                 return false;
             }
         }
 
         public bool UpdateProduct(long productId, string description, string packagingUnit, int quantity, double price, double discount,
-            double discounted, string generic, string supplier, double priceFromSupplier) {
-            try {
+            double discounted, string generic, string supplier, double priceFromSupplier) 
+        {
+            try 
+            {
                 bool isDescriptionExist = false;
                 bool isPackagingUnitExist = false;
                 bool isDiscountExist = false;
                 bool isGenericExist = false;
                 bool isSupplierExist = false;
 
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL getDescriptionId(@description);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@description", description);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -599,16 +724,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if (dt.Rows.Count > 0) {
+                        if (dt.Rows.Count > 0) 
+                        {
                             isDescriptionExist = true;
                             val.DescriptionId = dt.Rows[0].Field<long>("descriptionId");
                         }
                     }
 
-                    if (!isDescriptionExist) {
+                    if (!isDescriptionExist) 
+                    {
                         sql = @"CALL insertDescription(@description);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@description", description);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -617,7 +745,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getDescriptionId(@description);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@description", description);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -626,7 +755,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             dt.Clear();
                             da.Fill(dt);
 
-                            if (dt.Rows.Count > 0) {
+                            if (dt.Rows.Count > 0) 
+                            {
                                 isDescriptionExist = true;
                                 val.DescriptionId = dt.Rows[0].Field<long>("descriptionId");
                             }
@@ -635,7 +765,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                     sql = @"CALL getPackagingUnitId(@packagingUnit);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -644,16 +775,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if (dt.Rows.Count > 0) {
+                        if (dt.Rows.Count > 0) 
+                        {
                             isPackagingUnitExist = true;
                             val.PackagingUnitId = dt.Rows[0].Field<long>("packagingUnitId");
                         }
                     }
 
-                    if (!isPackagingUnitExist) {
+                    if (!isPackagingUnitExist) 
+                    {
                         sql = @"CALL insertPackagingUnit(@packagingUnit);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -662,7 +796,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getPackagingUnitId(@packagingUnit);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@packagingUnit", packagingUnit);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -671,7 +806,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             dt.Clear();
                             da.Fill(dt);
 
-                            if (dt.Rows.Count > 0) {
+                            if (dt.Rows.Count > 0) 
+                            {
                                 isPackagingUnitExist = true;
                                 val.PackagingUnitId = dt.Rows[0].Field<long>("packagingUnitId");
                             }
@@ -680,7 +816,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                     sql = @"CALL getDiscountId(@discount);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@discount", discount);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -689,16 +826,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if (dt.Rows.Count > 0) {
+                        if (dt.Rows.Count > 0) 
+                        {
                             isDiscountExist = true;
                             val.DiscountId = dt.Rows[0].Field<long>("discountId");
                         }
                     }
 
-                    if (!isDiscountExist) {
+                    if (!isDiscountExist) 
+                    {
                         sql = @"CALL insertDiscount(@discount);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@discount", discount);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -707,7 +847,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getDiscountId(@discount);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@discount", discount);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -716,7 +857,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             dt.Clear();
                             da.Fill(dt);
 
-                            if (dt.Rows.Count > 0) {
+                            if (dt.Rows.Count > 0) 
+                            {
                                 isDiscountExist = true;
                                 val.DiscountId = dt.Rows[0].Field<long>("discountId");
                             }
@@ -725,7 +867,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                     sql = @"CALL getGenericId(@generic);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@generic", generic);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -734,16 +877,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if (dt.Rows.Count > 0) {
+                        if (dt.Rows.Count > 0) 
+                        {
                             isGenericExist = true;
                             val.GenericId = dt.Rows[0].Field<long>("genericId");
                         }
                     }
 
-                    if (!isGenericExist) {
+                    if (!isGenericExist) 
+                    {
                         sql = @"CALL insertGeneric(@generic);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@generic", generic);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -752,7 +898,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getGenericId(@generic);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@generic", generic);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -761,7 +908,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             dt.Clear();
                             da.Fill(dt);
 
-                            if (dt.Rows.Count > 0) {
+                            if (dt.Rows.Count > 0) 
+                            {
                                 isGenericExist = true;
                                 val.GenericId = dt.Rows[0].Field<long>("genericId");
                             }
@@ -770,7 +918,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                     sql = @"CALL getSupplierId(@supplier);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@supplier", supplier);
 
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -779,16 +928,19 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt.Clear();
                         da.Fill(dt);
 
-                        if (dt.Rows.Count > 0) {
+                        if (dt.Rows.Count > 0) 
+                        {
                             isSupplierExist = true;
                             val.SupplierId = dt.Rows[0].Field<long>("supplierId");
                         }
                     }
 
-                    if (!isSupplierExist) {
+                    if (!isSupplierExist) 
+                    {
                         sql = @"CALL insertSupplier(@supplier);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@supplier", supplier);
 
                             MySqlDataReader dr = cmd.ExecuteReader();
@@ -797,7 +949,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                         sql = @"CALL getSupplierId(@supplier);";
 
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                        {
                             cmd.Parameters.AddWithValue("@supplier", supplier);
 
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -806,7 +959,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                             dt.Clear();
                             da.Fill(dt);
 
-                            if (dt.Rows.Count > 0) {
+                            if (dt.Rows.Count > 0) 
+                            {
                                 isSupplierExist = true;
                                 val.SupplierId = dt.Rows[0].Field<long>("supplierId");
                             }
@@ -816,7 +970,8 @@ namespace RAloverasPharmacyPOSSystem.Functions
                     sql = @"CALL updateProduct(@productId, @descriptionId, @packagingUnitId, @quantity, @price, @discount, @discounted, @genericId,
                                 @supplierId, @priceFromSupplier);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
                         cmd.Parameters.AddWithValue("@productId", productId);
                         cmd.Parameters.AddWithValue("@descriptionId", val.DescriptionId);
                         cmd.Parameters.AddWithValue("@packagingUnitId", val.PackagingUnitId);
@@ -836,20 +991,26 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            } catch (Exception ex) {
+            } 
+            catch (Exception ex) 
+            {
                 Console.WriteLine("Error updating product in database: " + ex.ToString());
                 return false;
             }
         }
 
-        public bool updateProductQuantityWhenReturnedProduct(long productId, int quantity) {
-            try {
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+        public bool UpdateProductQuantityWhenReturnedProduct(long productId, int quantity) 
+        {
+            try 
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL updateProductQuantityWhenReturnedProduct(@productId, @quantity);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@productId", productId);
                         cmd.Parameters.AddWithValue("@quantity", quantity);
 
@@ -861,21 +1022,58 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            } catch(Exception ex) {
+            } 
+            catch(Exception ex)
+            {
                 Console.WriteLine("Error updating product quantity in database when returning product: " + ex.ToString());
+                return false;
+            }
+        }
+
+        public bool UpdateReturnedProduct(long returnProductId, long productId, int quantity, double amountReturned) 
+        { 
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    connection.Open();
+
+                    string sql = @"CALL updateReturnedProduct(@returnProductId, @productId, @quantity, @amountReturned);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@returnProductId", returnProductId);
+                        cmd.Parameters.AddWithValue("@productId", productId);
+                        cmd.Parameters.AddWithValue("@quantity", quantity);
+                        cmd.Parameters.AddWithValue("@amountReturned", amountReturned);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error updating return product in database: " + ex.ToString());
                 return false;
             }
         }
 
         public bool DeleteProduct(long productId)
         {
-            try {
+            try 
+            {
                 using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                     connection.Open();
 
                     string sql = @"CALL deleteProduct(@productId);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@productId", productId);
 
                         MySqlDataReader dr = cmd.ExecuteReader();
@@ -886,20 +1084,26 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            } catch(Exception ex) {
+            } 
+            catch(Exception ex)
+            {
                 Console.WriteLine("Error deleting product in database: " + ex.ToString());
                 return false;
             }
         }
 
-        public bool DeleteReturnedProduct(long returnProductId) {
-            try {
-                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+        public bool DeleteReturnedProduct(long returnProductId) 
+        {
+            try 
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) 
+                {
                     connection.Open();
 
                     string sql = @"CALL deleteReturnedProduct(@returnProductId);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@returnProductId", returnProductId);
 
                         MySqlDataReader dr = cmd.ExecuteReader();
@@ -910,7 +1114,9 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            } catch(Exception ex) {
+            } 
+            catch(Exception ex) 
+            {
                 Console.WriteLine("Error deleting returned product in database: " + ex.ToString());
                 return false;
             }
@@ -918,13 +1124,15 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
         public bool DeductProduct(long productId, int quantity)
         {
-            try {
+            try 
+            {
                 using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                     connection.Open();
 
                     string sql = @"CALL deductProductQuantity(@productId, @quantity);";
 
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
+                    {
                         cmd.Parameters.AddWithValue("@productId", productId);
                         cmd.Parameters.AddWithValue("@quantity", quantity);
 
@@ -936,7 +1144,9 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         return true;
                     }
                 }
-            } catch(Exception ex) {
+            } 
+            catch(Exception ex)
+            {
                 Console.WriteLine("Error deducting product in database: " + ex.ToString());
                 return false;
             }

@@ -122,6 +122,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.Size = new System.Drawing.Size(240, 32);
             this.txtQuantity.TabIndex = 1;
             this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
+            this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantity_KeyPress);
             // 
             // label2
             // 
@@ -157,6 +158,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtAmountReturned.Size = new System.Drawing.Size(240, 32);
             this.txtAmountReturned.TabIndex = 2;
             this.txtAmountReturned.TextChanged += new System.EventHandler(this.txtAmountReturned_TextChanged);
+            this.txtAmountReturned.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmountReturned_KeyPress);
             // 
             // btnPrevious
             // 

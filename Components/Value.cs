@@ -230,5 +230,32 @@ namespace RAloverasPharmacyPOSSystem.Components
             get { return productCartQuantity; }
             set { productCartQuantity = value; }
         }
+
+        // Return product values
+
+        private static long returnProductId;
+        public long ReturnProductId {
+            get { return returnProductId; }
+            set { returnProductId = value; }
+        }
+
+        private static string returnProductDescription;
+        public string ReturnProductDescription { 
+            get { return returnProductDescription; }
+            set { returnProductDescription = value; }
+        }
+
+        private static int returnProductQuantity;
+        public int ReturnProductQuantity {
+            get { return returnProductQuantity; }
+            set { returnProductQuantity = value; }
+        }
+
+        private static double returnProductAmountReturned;
+        public double ReturnProductAmountReturned
+        {
+            get { return returnProductAmountReturned; }
+            set { returnProductAmountReturned = value; }
+        }
     }
 }
