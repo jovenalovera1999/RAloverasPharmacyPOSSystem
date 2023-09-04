@@ -1109,13 +1109,78 @@ CREATE
     | COMMENT 'string'*/
 	BEGIN
 		SELECT
-			rp.returnProductId, p.code, d.description, rp.quantity, FORMAT(rp.amountReturned, 2), rp.dateCreated, rp.dateUpdated
+			rp.returnProductId, p.code, d.description, pu.packagingUnitName, rp.quantity, FORMAT(rp.amountReturned, 2), rp.dateCreated, rp.dateUpdated
 		FROM
 			return_products AS rp
 		INNER JOIN
 			products AS p ON rp.productId = p.productId
 		INNER JOIN
-			descriptions AS d ON p.descriptionId = d.descriptionId;
+			descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN
+			packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		WHERE
+			rp.isDeleted = 0;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`insertReturnedProduct`(pProductId BIGINT, pQuantity INT, pAmountReturned DOUBLE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		INSERT INTO
+			return_products(productId, quantity, amountReturned)
+		VALUES
+			(pProductId, pQuantity, pAmountReturned);
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`updateProductQuantityWhenReturnedProduct`(pProductId BIGINT, pQuantity INT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE
+			products AS p
+		SET
+			p.quantity = p.quantity + pQuantity
+		WHERE
+			p.productId = pProductId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`deleteReturnedProduct`(pReturnProductId BIGINT)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		UPDATE
+			return_products AS rp
+		SET
+			rp.isDeleted = 1
+		WHERE
+			rp.returnProductId = pReturnProductId;
 	END$$
 
 DELIMITER ;

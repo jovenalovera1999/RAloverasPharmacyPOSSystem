@@ -50,3 +50,4 @@ C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Releas
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Release\RAloverasPharmacyPOSSystem.csproj.CopyComplete
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Release\RAloverasPharmacyPOSSystem.exe
 C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Release\RAloverasPharmacyPOSSystem.pdb
+C:\Users\joven joshua alovera\source\repos\RAloverasPharmacyPOSSystem\obj\Release\RAloverasPharmacyPOSSystem.Forms.frmAddReturnProduct.resources

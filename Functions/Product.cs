@@ -107,7 +107,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public void LoadReturnedProduct(DataGridView grid) {
+        public void LoadReturnedProducts(DataGridView grid) {
             try {
                 using (MySqlConnection connection = new MySqlConnection(con.conString())) {
                     connection.Open();
@@ -550,6 +550,32 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
+        public bool InsertReturnedProduct(long productId, int quantity, double amountReturned) { 
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+                    connection.Open();
+
+                    string sql = @"CALL insertReturnedProduct(@productId, @quantity, @amountReturned);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        cmd.Parameters.AddWithValue("@productId", productId);
+                        cmd.Parameters.AddWithValue("@quantity", quantity);
+                        cmd.Parameters.AddWithValue("@amountReturned", amountReturned);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            } catch(Exception ex) {
+                Console.WriteLine("Error inserting returned product to database: " + ex.ToString());
+                return false;
+            }
+        }
+
         public bool UpdateProduct(long productId, string description, string packagingUnit, int quantity, double price, double discount,
             double discounted, string generic, string supplier, double priceFromSupplier) {
             try {
@@ -816,6 +842,31 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
+        public bool updateProductQuantityWhenReturnedProduct(long productId, int quantity) {
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+                    connection.Open();
+
+                    string sql = @"CALL updateProductQuantityWhenReturnedProduct(@productId, @quantity);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        cmd.Parameters.AddWithValue("@productId", productId);
+                        cmd.Parameters.AddWithValue("@quantity", quantity);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            } catch(Exception ex) {
+                Console.WriteLine("Error updating product quantity in database when returning product: " + ex.ToString());
+                return false;
+            }
+        }
+
         public bool DeleteProduct(long productId)
         {
             try {
@@ -837,6 +888,30 @@ namespace RAloverasPharmacyPOSSystem.Functions
                 }
             } catch(Exception ex) {
                 Console.WriteLine("Error deleting product in database: " + ex.ToString());
+                return false;
+            }
+        }
+
+        public bool DeleteReturnedProduct(long returnProductId) {
+            try {
+                using (MySqlConnection connection = new MySqlConnection(con.conString())) {
+                    connection.Open();
+
+                    string sql = @"CALL deleteReturnedProduct(@returnProductId);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection)) {
+                        cmd.Parameters.AddWithValue("@returnProductId", returnProductId);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        dr.Close();
+
+                        connection.Close();
+
+                        return true;
+                    }
+                }
+            } catch(Exception ex) {
+                Console.WriteLine("Error deleting returned product in database: " + ex.ToString());
                 return false;
             }
         }

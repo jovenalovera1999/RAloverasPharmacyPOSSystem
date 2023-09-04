@@ -47,9 +47,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
-            this.lblMessageOne = new System.Windows.Forms.Label();
-            this.lblMessageTwo = new System.Windows.Forms.Label();
-            this.lblMessageThree = new System.Windows.Forms.Label();
+            this.lblMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridReturnProducts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -123,6 +121,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.SelectedText = "";
             this.txtQuantity.Size = new System.Drawing.Size(240, 32);
             this.txtQuantity.TabIndex = 1;
+            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
             // 
             // label2
             // 
@@ -157,6 +156,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtAmountReturned.SelectedText = "";
             this.txtAmountReturned.Size = new System.Drawing.Size(240, 32);
             this.txtAmountReturned.TabIndex = 2;
+            this.txtAmountReturned.TextChanged += new System.EventHandler(this.txtAmountReturned_TextChanged);
             // 
             // btnPrevious
             // 
@@ -231,13 +231,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridReturnProducts.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridReturnProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gridReturnProducts.Location = new System.Drawing.Point(12, 158);
+            this.gridReturnProducts.Location = new System.Drawing.Point(12, 164);
             this.gridReturnProducts.MultiSelect = false;
             this.gridReturnProducts.Name = "gridReturnProducts";
             this.gridReturnProducts.ReadOnly = true;
             this.gridReturnProducts.RowHeadersVisible = false;
             this.gridReturnProducts.RowTemplate.Height = 32;
-            this.gridReturnProducts.Size = new System.Drawing.Size(863, 331);
+            this.gridReturnProducts.Size = new System.Drawing.Size(863, 325);
             this.gridReturnProducts.TabIndex = 33;
             this.gridReturnProducts.TabStop = false;
             this.gridReturnProducts.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -261,6 +261,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridReturnProducts.ThemeStyle.RowsStyle.Height = 32;
             this.gridReturnProducts.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.YellowGreen;
             this.gridReturnProducts.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.gridReturnProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridReturnProducts_CellContentClick);
             // 
             // btnSave
             // 
@@ -279,6 +280,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnSave.TabIndex = 36;
             this.btnSave.TabStop = false;
             this.btnSave.Text = "SAVE (F1)";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnBack
             // 
@@ -297,6 +299,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnBack.TabIndex = 37;
             this.btnBack.TabStop = false;
             this.btnBack.Text = "BACK (F2)";
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // label3
             // 
@@ -343,44 +346,20 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtSearch.PlaceholderText = "";
             this.txtSearch.SelectedText = "";
             this.txtSearch.Size = new System.Drawing.Size(240, 32);
-            this.txtSearch.TabIndex = 39;
-            this.txtSearch.TabStop = false;
+            this.txtSearch.TabIndex = 3;
             // 
-            // lblMessageOne
+            // lblMessage
             // 
-            this.lblMessageOne.AutoSize = true;
-            this.lblMessageOne.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessageOne.Location = new System.Drawing.Point(247, 106);
-            this.lblMessageOne.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblMessageOne.Name = "lblMessageOne";
-            this.lblMessageOne.Size = new System.Drawing.Size(330, 15);
-            this.lblMessageOne.TabIndex = 41;
-            this.lblMessageOne.Text = "SELECT THE PRODUCT CODE OF THE DESCRIPTION YOU JUST";
-            this.lblMessageOne.Visible = false;
-            // 
-            // lblMessageTwo
-            // 
-            this.lblMessageTwo.AutoSize = true;
-            this.lblMessageTwo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessageTwo.Location = new System.Drawing.Point(247, 123);
-            this.lblMessageTwo.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblMessageTwo.Name = "lblMessageTwo";
-            this.lblMessageTwo.Size = new System.Drawing.Size(306, 15);
-            this.lblMessageTwo.TabIndex = 42;
-            this.lblMessageTwo.Text = " TYPED TO ADD BACK THE QUANTITY OF THE RETURNED";
-            this.lblMessageTwo.Visible = false;
-            // 
-            // lblMessageThree
-            // 
-            this.lblMessageThree.AutoSize = true;
-            this.lblMessageThree.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessageThree.Location = new System.Drawing.Point(247, 140);
-            this.lblMessageThree.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblMessageThree.Name = "lblMessageThree";
-            this.lblMessageThree.Size = new System.Drawing.Size(63, 15);
-            this.lblMessageThree.TabIndex = 43;
-            this.lblMessageThree.Text = "PRODUCT.";
-            this.lblMessageThree.Visible = false;
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.Location = new System.Drawing.Point(12, 146);
+            this.lblMessage.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(813, 15);
+            this.lblMessage.TabIndex = 41;
+            this.lblMessage.Text = "SELECT THE PRODUCT CODE AND PACKAGING UNIT OF THE DESCRIPTION YOU JUST TYPED TO A" +
+    "DD BACK THE QUANTITY OF THE RETURNED PRODUCT.";
+            this.lblMessage.Visible = false;
             // 
             // frmAddReturnProduct
             // 
@@ -388,9 +367,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(887, 539);
-            this.Controls.Add(this.lblMessageThree);
-            this.Controls.Add(this.lblMessageTwo);
-            this.Controls.Add(this.lblMessageOne);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label3);
@@ -412,6 +389,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ADD RETURN PRODUCT";
             this.Load += new System.EventHandler(this.frmAddReturnProduct_Load);
+            this.VisibleChanged += new System.EventHandler(this.frmAddReturnProduct_VisibleChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmAddReturnProduct_KeyDown);
+            this.Leave += new System.EventHandler(this.frmAddReturnProduct_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.gridReturnProducts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -433,8 +413,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
-        private System.Windows.Forms.Label lblMessageOne;
-        private System.Windows.Forms.Label lblMessageTwo;
-        private System.Windows.Forms.Label lblMessageThree;
+        private System.Windows.Forms.Label lblMessage;
     }
 }

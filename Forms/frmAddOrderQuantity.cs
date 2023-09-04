@@ -24,31 +24,27 @@ namespace RAloverasPharmacyPOSSystem.Forms
             DataGridView gridCart = (DataGridView)addOrder.Controls["gridCart"];
             Guna.UI2.WinForms.Guna2TextBox txtTotalAmountToPay = (Guna.UI2.WinForms.Guna2TextBox)addOrder.Controls["txtTotalAmountToPay"];
 
-            if (String.IsNullOrWhiteSpace(this.txtQuantity.Text))
-            {
+            if (String.IsNullOrWhiteSpace(this.txtQuantity.Text)) {
                 MessageBox.Show("Quantity is required!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtQuantity.Focus();
-            }
-            else if(int.Parse(gridAvailableProducts.SelectedCells[5].Value.ToString()) - int.Parse(this.txtQuantity.Text) < 0)
-            {
+            } else if (int.Parse(gridAvailableProducts.SelectedCells[5].Value.ToString()) - int.Parse(this.txtQuantity.Text) < 0) {
                 MessageBox.Show("Failed to add to cart, insufficiet supply!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtQuantity.Focus();
-            }
-            else
-            {
+            } else if (int.Parse(this.txtQuantity.Text) < 1) {
+                MessageBox.Show("Failed to add to cart, quantity must be greater than 0!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtQuantity.ResetText();
+                this.txtQuantity.Focus();
+            } else {
                 int n = gridCart.Rows.Add();
                 gridCart.Rows[n].Cells[1].Value = gridAvailableProducts.SelectedCells[1].Value;
                 gridCart.Rows[n].Cells[2].Value = gridAvailableProducts.SelectedCells[3].Value;
 
                 double subTotal = 0;
 
-                if (double.Parse(gridAvailableProducts.SelectedCells[8].Value.ToString()) == 0)
-                {
+                if (double.Parse(gridAvailableProducts.SelectedCells[8].Value.ToString()) < 1) {
                     gridCart.Rows[n].Cells[3].Value = gridAvailableProducts.SelectedCells[6].Value;
                     subTotal = double.Parse(gridAvailableProducts.SelectedCells[6].Value.ToString()) * int.Parse(this.txtQuantity.Text);
-                }
-                else
-                {
+                } else {
                     gridCart.Rows[n].Cells[3].Value = gridAvailableProducts.SelectedCells[8].Value;
                     subTotal = double.Parse(gridAvailableProducts.SelectedCells[8].Value.ToString()) * int.Parse(this.txtQuantity.Text);
                 }
@@ -58,8 +54,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
                 double totalAmountToPay = 0;
 
-                for (int i = 0; i < gridCart.Rows.Count; i++)
-                {
+                for (int i = 0; i < gridCart.Rows.Count; i++) {
                     totalAmountToPay += double.Parse(gridCart.Rows[i].Cells[5].Value.ToString());
                 }
 
@@ -73,12 +68,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void frmAddOrderQuantity_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.F1)
-            {
+            if(e.KeyCode == Keys.F1) {
                 AddToCart();
-            }
-            else if(e.KeyCode == Keys.F2)
-            {
+            } else if(e.KeyCode == Keys.F2) {
                 this.Close();
             }
         }
@@ -92,8 +84,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allows 0-9 and backspace
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8)
-            {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8) {
                 e.Handled = true;
                 return;
             }

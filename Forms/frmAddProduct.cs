@@ -30,10 +30,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
         }
 
         private void CalculateDiscount() {
-            if(String.IsNullOrWhiteSpace(this.txtPrice.Text) || double.Parse(this.txtPrice.Text) == 0) {
-                this.txtPrice.Text = null;
+            if(String.IsNullOrWhiteSpace(this.txtPrice.Text) || double.Parse(this.txtPrice.Text) < 1) {
+                this.txtPrice.Text = "0.00";
                 this.txtDiscounted.Text = "0.00";
-            } else if(String.IsNullOrWhiteSpace(this.txtDiscount.Text) || double.Parse(this.txtDiscount.Text) == 0) {
+            } else if(String.IsNullOrWhiteSpace(this.txtDiscount.Text) || double.Parse(this.txtDiscount.Text) < 1) {
                 this.txtDiscount.Text = "0.00";
                 this.txtDiscounted.Text = "0.00";
             } else if(double.IsNaN(double.Parse(this.txtPrice.Text)) || double.IsNaN(double.Parse(this.txtDiscount.Text))) {

@@ -20,7 +20,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         Components.Value val = new Components.Value();
         Functions.Payment payment = new Functions.Payment();
-        Functions.Product product = new Functions.Product();
         Functions.Exist exist = new Functions.Exist();
 
         string transactionNo = string.Empty;
@@ -52,7 +51,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void CalculateDiscount() {
             if(String.IsNullOrWhiteSpace(this.txtDiscount.Text) || double.IsNaN(double.Parse(this.txtDiscount.Text)) ||
-                double.Parse(this.txtDiscount.Text) == 0) {
+                double.Parse(this.txtDiscount.Text) < 1) {
                 this.txtDiscount.Text = "0.00";
                 this.txtDiscounted.Text = "0.00";
             } else {
@@ -65,13 +64,13 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
             if (String.IsNullOrWhiteSpace(this.txtAmount.Text) || double.IsNaN(double.Parse(this.txtAmount.Text))) {
                 total = 0;
-            } else if (double.Parse(this.txtDiscount.Text) == 0) {
+            } else if (double.Parse(this.txtDiscount.Text) < 1) {
                 total = double.Parse(this.txtAmount.Text) - double.Parse(this.txtTotalAmountToPay.Text);
             } else {
                 total = double.Parse(this.txtAmount.Text) - double.Parse(this.txtDiscounted.Text);
             }
 
-            this.txtChange.Text = (total == 0) ? "0.00" : total.ToString("0.00");
+            this.txtChange.Text = (total < 1) ? "0.00" : total.ToString("0.00");
         }
 
         private void LoadCarts() {
@@ -103,7 +102,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             } else if (double.Parse(this.txtDiscounted.Text) < 0) {
                 MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtDiscount.Focus();
-            } else if (double.Parse(this.txtDiscount.Text) == 0 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text)) {
+            } else if (double.Parse(this.txtDiscount.Text) < 1 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text)) {
                 MessageBox.Show("Failed to save transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
             } else if (double.Parse(this.txtDiscount.Text) != 0 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text)) {
@@ -174,16 +173,16 @@ namespace RAloverasPharmacyPOSSystem.Forms
             } else if(double.Parse(this.txtDiscounted.Text) < 0) {
                 MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtDiscount.Focus();
-            } else if (double.Parse(this.txtDiscount.Text) == 0 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text)) {
+            } else if (double.Parse(this.txtDiscount.Text) < 1 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtTotalAmountToPay.Text)) {
                 MessageBox.Show("Failed to print, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
-            } else if (double.Parse(this.txtDiscount.Text) != 0 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text)) {
+            } else if (double.Parse(this.txtDiscount.Text) > 0 && double.Parse(this.txtAmount.Text) < double.Parse(this.txtDiscounted.Text)) {
                 MessageBox.Show("Failed to print, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
             } else {
                 string totalAmountPaid = string.Empty;
 
-                if (double.Parse(this.txtDiscounted.Text) == 0) {
+                if (double.Parse(this.txtDiscounted.Text) < 1) {
                     totalAmountPaid = this.txtTotalAmountToPay.Text;
                 } else {
                     totalAmountPaid = this.txtDiscounted.Text;
@@ -304,7 +303,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             CalculateDiscount();
             CalculatePayment();
 
-            if(double.Parse(this.txtAmount.Text) == 0) {
+            if(double.Parse(this.txtAmount.Text) < 1) {
                 this.txtChange.Text = "0.00";
             }
         }
