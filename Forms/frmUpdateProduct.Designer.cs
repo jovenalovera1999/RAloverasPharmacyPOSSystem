@@ -71,7 +71,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscounted.Animated = true;
             this.txtDiscounted.BorderRadius = 3;
             this.txtDiscounted.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDiscounted.DefaultText = "";
+            this.txtDiscounted.DefaultText = "0.00";
             this.txtDiscounted.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.txtDiscounted.DisabledState.FillColor = System.Drawing.Color.White;
             this.txtDiscounted.DisabledState.ForeColor = System.Drawing.Color.Black;
@@ -143,7 +143,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDiscount.Animated = true;
             this.txtDiscount.BorderRadius = 3;
             this.txtDiscount.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDiscount.DefaultText = "";
+            this.txtDiscount.DefaultText = "0.00";
             this.txtDiscount.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.txtDiscount.DisabledState.FillColor = System.Drawing.Color.White;
             this.txtDiscount.DisabledState.ForeColor = System.Drawing.Color.Black;
@@ -180,7 +180,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPrice.Animated = true;
             this.txtPrice.BorderRadius = 3;
             this.txtPrice.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtPrice.DefaultText = "";
+            this.txtPrice.DefaultText = "0.00";
             this.txtPrice.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtPrice.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtPrice.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -217,7 +217,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.Animated = true;
             this.txtQuantity.BorderRadius = 3;
             this.txtQuantity.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtQuantity.DefaultText = "";
+            this.txtQuantity.DefaultText = "0";
             this.txtQuantity.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtQuantity.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtQuantity.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -235,6 +235,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.SelectedText = "";
             this.txtQuantity.Size = new System.Drawing.Size(240, 32);
             this.txtQuantity.TabIndex = 3;
+            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
             this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantity_KeyPress);
             // 
             // label15
@@ -400,7 +401,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPriceFromSupplier.Animated = true;
             this.txtPriceFromSupplier.BorderRadius = 3;
             this.txtPriceFromSupplier.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtPriceFromSupplier.DefaultText = "";
+            this.txtPriceFromSupplier.DefaultText = "0.00";
             this.txtPriceFromSupplier.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtPriceFromSupplier.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtPriceFromSupplier.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));

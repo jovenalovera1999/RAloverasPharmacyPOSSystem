@@ -15,10 +15,20 @@ namespace RAloverasPharmacyPOSSystem.Forms
         public frmUpdateReturnProduct()
         {
             InitializeComponent();
+
+            this.txtQuantity.Click += TextBoxOnClick;
+            this.txtAmountReturned.Click += TextBoxOnClick;
         }
 
         Components.Value val = new Components.Value();
         Functions.Product product = new Functions.Product();
+
+        private void TextBoxOnClick(object sender, EventArgs eventArgs)
+        {
+            var textBox = (Guna.UI2.WinForms.Guna2TextBox)sender;
+            textBox.SelectAll();
+            textBox.Focus();
+        }
 
         private void CapsLock()
         {
@@ -31,6 +41,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 product.SearchProduct(this.txtDescription.Text, this.gridReturnProducts);
             }
+
+            this.gridReturnProducts.ClearSelection();
         }
 
         private void txtDescription_TextChanged(object sender, EventArgs e)
@@ -82,6 +94,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             }
         }
 
+        private void frmUpdateReturnProduct_VisibleChanged(object sender, EventArgs e)
+        {
+            this.gridReturnProducts.ClearSelection();
+        }
+
         private void frmUpdateReturnProduct_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
@@ -115,11 +132,20 @@ namespace RAloverasPharmacyPOSSystem.Forms
             {
                 MessageBox.Show("Failed to update returned product, amount returned must be greater than zero!");
                 this.txtAmountReturned.Focus();
-            } 
-            else if (this.gridReturnProducts.SelectedRows.Count < 1) 
+            }
+            else if (this.gridReturnProducts.SelectedRows.Count < 1)
             {
                 MessageBox.Show("Select the product code and packaging unit of the description you just typed first to add back the quantity of the returned product!", "",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (product.UpdateReturnedProduct(val.ProductId, val.ReturnProductQuantity, val.ReturnProductId, long.Parse(this.gridReturnProducts.SelectedCells[0].Value.ToString()),
+                    int.Parse(this.txtQuantity.Text), double.Parse(this.txtAmountReturned.Text)))
+                {
+                    MessageBox.Show("Returned product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadSearchedProducts();
+                }
             }
         }
 

@@ -15,39 +15,61 @@ namespace RAloverasPharmacyPOSSystem.Forms
         public frmAddOrder()
         {
             InitializeComponent();
+
+            this.txtDiscount.Click += TextBoxOnClick;
+            this.txtAmount.Click += TextBoxOnClick;
         }
 
         Components.Value val = new Components.Value();
         Functions.Product product = new Functions.Product();
         Functions.Order order = new Functions.Order();
 
-        private void ToPay() {
-            if (this.gridCart.Rows.Count < 1) {
+        private void TextBoxOnClick(object sender, EventArgs eventArgs)
+        {
+            var textBox = (Guna.UI2.WinForms.Guna2TextBox)sender;
+            textBox.SelectAll();
+            textBox.Focus();
+        }
+
+        private void ToPay() 
+        {
+            if (this.gridCart.Rows.Count < 1) 
+            {
                 MessageBox.Show("Failed to send to payment transaction, there are no products added!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } else if (double.Parse(this.txtTotalAmountToPay.Text) < 0) {
+            } 
+            else if (double.Parse(this.txtTotalAmountToPay.Text) < 0) 
+            {
                 MessageBox.Show("Discount is invalid!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtDiscount.Focus();
-            } else if (double.Parse(this.txtTotalAmountToPay.Text) > double.Parse(this.txtAmount.Text)) {
+            }
+            else if (double.Parse(this.txtTotalAmountToPay.Text) > double.Parse(this.txtAmount.Text)) 
+            {
                 MessageBox.Show("Failed to send to payment transaction, insufficient amount!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmount.Focus();
             }
-            else {
+            else
+            {
                 bool isInserted = false;
 
-                if (order.InsertUserForPayment(val.MyUserId, double.Parse(this.txtDiscount.Text), double.Parse(this.txtAmount.Text))) {
-                    for (int i = 0; i < this.gridCart.Rows.Count; i++) {
+                if (order.InsertUserForPayment(val.MyUserId, double.Parse(this.txtDiscount.Text), double.Parse(this.txtAmount.Text)))
+                {
+                    for (int i = 0; i < this.gridCart.Rows.Count; i++) 
+                    {
                         if (order.ToPay(val.UserForPaymentId, long.Parse(this.gridCart.Rows[i].Cells[1].Value.ToString()),
                             int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()), double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString())) &&
                             product.DeductProduct(long.Parse(this.gridCart.Rows[i].Cells[1].Value.ToString()),
-                            int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()))) {
-                            if (i == this.gridCart.Rows.Count - 1) {
+                            int.Parse(this.gridCart.Rows[i].Cells[4].Value.ToString()))) 
+                        {
+                            if (i == this.gridCart.Rows.Count - 1)
+                            {
                                 isInserted = true;
                             }
                         }
                     }
                 }
 
-                if (isInserted) {
+                if (isInserted) 
+                {
                     MessageBox.Show("Transaction has been sent for payment!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadProductsWithOrWithoutSearch();
 
@@ -58,42 +80,53 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     this.txtAmount.Text = "0.00";
 
                     this.gridAvailableProducts.Focus();
-                } else {
+                } 
+                else
+                {
                     MessageBox.Show("Failed to send transaction for payment!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        private void OpenQuantityForm() {
+        private void OpenQuantityForm() 
+        {
             Forms.frmAddOrderQuantity addOrderQuantity = new Forms.frmAddOrderQuantity();
             addOrderQuantity.ShowDialog();
         }
 
-        private void LoadProductsWithOrWithoutSearch() {
-            if (String.IsNullOrWhiteSpace(this.txtSearch.Text)) {
+        private void LoadProductsWithOrWithoutSearch()
+        {
+            if (String.IsNullOrWhiteSpace(this.txtSearch.Text))
+            {
                 product.LoadProductsInOrder(this.gridAvailableProducts);
-            } else {
+            } 
+            else
+            {
                 product.SearchProduct(this.txtSearch.Text, this.gridAvailableProducts);
             }
         }
 
         private void gridAvailableProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(this.gridAvailableProducts.Columns[e.ColumnIndex].Name == "btnAddToCart") {
+            if(this.gridAvailableProducts.Columns[e.ColumnIndex].Name == "btnAddToCart")
+            {
                 OpenQuantityForm();
             }
         }
 
         private void gridCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(this.gridCart.Columns[e.ColumnIndex].Name == "btnRemove") {
-                foreach (DataGridViewRow row in this.gridCart.SelectedRows) {
+            if(this.gridCart.Columns[e.ColumnIndex].Name == "btnRemove") 
+            {
+                foreach (DataGridViewRow row in this.gridCart.SelectedRows)
+                {
                     this.gridCart.Rows.Remove(row);
                     this.gridCart.ClearSelection();
 
                     double totalAmountToPay = 0;
 
-                    for (int i = 0; i < this.gridCart.Rows.Count; i++) {
+                    for (int i = 0; i < this.gridCart.Rows.Count; i++) 
+                    {
                         totalAmountToPay += double.Parse(this.gridCart.Rows[i].Cells[5].Value.ToString());
                     }
 
@@ -105,13 +138,16 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allows 0-9, backspace and period
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46) {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46) 
+            {
                 e.Handled = true;
                 return;
             }
             // Checks to make sure only 1 period is allowed
-            if (e.KeyChar == 46) {
-                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1) {
+            if (e.KeyChar == 46) 
+            {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1) 
+                {
                     e.Handled = true;
                 }
             }
@@ -120,13 +156,16 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allows 0-9, backspace and period
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46) {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46) 
+            {
                 e.Handled = true;
                 return;
             }
             // Checks to make sure only 1 period is allowed
-            if (e.KeyChar == 46) {
-                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1) {
+            if (e.KeyChar == 46) 
+            {
+                if ((sender as Guna.UI2.WinForms.Guna2TextBox).Text.IndexOf(e.KeyChar) != -1) 
+                {
                     e.Handled = true;
                 }
             }
@@ -134,9 +173,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void frmAddOrder_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.F1) {
+            if(e.KeyCode == Keys.F1) 
+            {
                 ToPay();
-            } else if(e.KeyCode == Keys.F2) {
+            } 
+            else if(e.KeyCode == Keys.F2) 
+            {
                 OpenQuantityForm();
             }
         }
@@ -150,25 +192,32 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             double totalAmountToPay = 0;
 
-            for (int i = 0; i < gridCart.Rows.Count; i++) {
+            for (int i = 0; i < gridCart.Rows.Count; i++) 
+            {
                 totalAmountToPay += double.Parse(gridCart.Rows[i].Cells[5].Value.ToString());
             }
 
             txtTotalAmountToPay.Text = totalAmountToPay.ToString("0.00");
 
-            if (String.IsNullOrEmpty(this.txtDiscount.Text) || double.IsNaN(double.Parse(this.txtDiscount.Text))) {
+            if (String.IsNullOrEmpty(this.txtDiscount.Text) || double.IsNaN(double.Parse(this.txtDiscount.Text)))
+            {
                 this.txtTotalAmountToPay.Text = totalAmountToPay.ToString("0.00");
                 this.txtDiscount.Text = "0.00";
-            } else if(this.txtDiscount.Text != "0") {
+            }
+            else if(this.txtDiscount.Text != "0") 
+            {
                 this.txtTotalAmountToPay.Text = (totalAmountToPay - double.Parse(this.txtDiscount.Text)).ToString("0.00");
-            } else {
+            } 
+            else 
+            {
                 this.txtTotalAmountToPay.Text = totalAmountToPay.ToString("0.00");
             }
         }
 
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(this.txtAmount.Text)) {
+            if (String.IsNullOrWhiteSpace(this.txtAmount.Text)) 
+            {
                 this.txtAmount.Text = "0.00";
             }
         }

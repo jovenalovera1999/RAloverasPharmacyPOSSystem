@@ -183,7 +183,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.Animated = true;
             this.txtQuantity.BorderRadius = 3;
             this.txtQuantity.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtQuantity.DefaultText = "";
+            this.txtQuantity.DefaultText = "0";
             this.txtQuantity.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtQuantity.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtQuantity.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -201,6 +201,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.SelectedText = "";
             this.txtQuantity.Size = new System.Drawing.Size(240, 32);
             this.txtQuantity.TabIndex = 3;
+            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
             this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantity_KeyPress);
             // 
             // label15
@@ -291,7 +292,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtPrice.Animated = true;
             this.txtPrice.BorderRadius = 3;
             this.txtPrice.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtPrice.DefaultText = "";
+            this.txtPrice.DefaultText = "0.00";
             this.txtPrice.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtPrice.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtPrice.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));

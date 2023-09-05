@@ -1109,7 +1109,7 @@ CREATE
     | COMMENT 'string'*/
 	BEGIN
 		SELECT
-			rp.returnProductId, p.code, d.description, pu.packagingUnitName, rp.quantity, FORMAT(rp.amountReturned, 2), rp.dateCreated, rp.dateUpdated
+			rp.returnProductId, rp.productId, p.code, d.description, pu.packagingUnitName, rp.quantity, FORMAT(rp.amountReturned, 2), rp.dateCreated, rp.dateUpdated
 		FROM
 			return_products AS rp
 		INNER JOIN
@@ -1197,7 +1197,7 @@ CREATE
     | COMMENT 'string'*/
 	BEGIN
 		SELECT
-			rp.returnProductId, d.description, rp.quantity, rp.amountReturned
+			rp.returnProductId, rp.productId, d.description, rp.quantity, rp.amountReturned
 		FROM
 			return_products AS rp
 		INNER JOIN
@@ -1214,13 +1214,27 @@ DELIMITER $$
 
 CREATE
     /*[DEFINER = { user | CURRENT_USER }]*/
-    PROCEDURE `raloveraspharmacy_db`.`updateReturnedProduct`(pReturnProductId BIGINT, pProductId BIGINT, pQuantity INT, pAmountReturned DOUBLE)
+    PROCEDURE `raloveraspharmacy_db`.`updateReturnedProduct`(ppProductId BIGINT, ppQuantity INT, pReturnProductId BIGINT, pProductId BIGINT, pQuantity INT, pAmountReturned DOUBLE)
     /*LANGUAGE SQL
     | [NOT] DETERMINISTIC
     | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
     | SQL SECURITY { DEFINER | INVOKER }
     | COMMENT 'string'*/
 	BEGIN
+		UPDATE
+			products AS p
+		SET
+			p.quantity = p.quantity - ppQuantity
+		WHERE
+			p.productId = ppProductId;
+
+		UPDATE
+			products AS p
+		SET
+			p.quantity = p.quantity + pQuantity
+		WHERE
+			p.productId = pProductId;
+			
 		UPDATE
 			return_products AS rp
 		SET

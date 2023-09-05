@@ -130,16 +130,20 @@ namespace RAloverasPharmacyPOSSystem.Functions
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection)) 
                     {
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
+                        da = new MySqlDataAdapter(cmd);
+                        dt = new DataTable();
 
                         dt.Clear();
-                        da.Fill(dt);
+                        totalRows = da.Fill(dt);
+
+                        dt.Clear();
+                        da.Fill(scollVal, maxRecords, dt);
 
                         grid.DataSource = dt;
                         grid.ClearSelection();
 
                         grid.Columns["returnProductId"].Visible = false;
+                        grid.Columns["productId"].Visible = false;
                         grid.Columns["code"].HeaderText = "CODE";
                         grid.Columns["description"].HeaderText = "DESCRIPTION";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
@@ -174,7 +178,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         dt = new DataTable();
 
                         dt.Clear();
-                        da.Fill(dt);
+                        totalRows = da.Fill(dt);
 
                         dt.Clear();
                         da.Fill(scollVal, maxRecords, dt);
@@ -341,6 +345,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         if(dt.Rows.Count > 0) 
                         {
                             val.ReturnProductId = dt.Rows[0].Field<long>("returnProductId");
+                            val.ProductId = dt.Rows[0].Field<long>("productId");
                             val.ReturnProductDescription = dt.Rows[0].Field<string>("description");
                             val.ReturnProductQuantity = dt.Rows[0].Field<int>("quantity");
                             val.ReturnProductAmountReturned = dt.Rows[0].Field<double>("amountReturned");
@@ -1030,7 +1035,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public bool UpdateReturnedProduct(long returnProductId, long productId, int quantity, double amountReturned) 
+        public bool UpdateReturnedProduct(long pPProductId, int pPQuantity, long returnProductId, long productId, int quantity, double amountReturned) 
         { 
             try
             {
@@ -1038,10 +1043,12 @@ namespace RAloverasPharmacyPOSSystem.Functions
                 {
                     connection.Open();
 
-                    string sql = @"CALL updateReturnedProduct(@returnProductId, @productId, @quantity, @amountReturned);";
+                    string sql = @"CALL updateReturnedProduct(@ppProductId, @ppQuantity, @returnProductId, @productId, @quantity, @amountReturned);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
+                        cmd.Parameters.AddWithValue("@ppProductId", pPProductId);
+                        cmd.Parameters.AddWithValue("@ppQuantity", pPQuantity);
                         cmd.Parameters.AddWithValue("@returnProductId", returnProductId);
                         cmd.Parameters.AddWithValue("@productId", productId);
                         cmd.Parameters.AddWithValue("@quantity", quantity);

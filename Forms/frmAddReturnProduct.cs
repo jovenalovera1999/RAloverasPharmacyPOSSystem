@@ -15,9 +15,19 @@ namespace RAloverasPharmacyPOSSystem.Forms
         public frmAddReturnProduct()
         {
             InitializeComponent();
+
+            this.txtQuantity.Click += TextBoxOnClick;
+            this.txtAmountReturned.Click += TextBoxOnClick;
         }
 
         Functions.Product product = new Functions.Product();
+
+        private void TextBoxOnClick(object sender, EventArgs eventArgs)
+        {
+            var textBox = (Guna.UI2.WinForms.Guna2TextBox)sender;
+            textBox.SelectAll();
+            textBox.Focus();
+        }
 
         private void CapsLock()
         {
@@ -242,6 +252,16 @@ namespace RAloverasPharmacyPOSSystem.Forms
             LoadReturnedProductsAction();
 
             this.txtDescription.Focus();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            product.NextPage(this.gridReturnProducts);
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            product.PreviousPage(this.gridReturnProducts);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
