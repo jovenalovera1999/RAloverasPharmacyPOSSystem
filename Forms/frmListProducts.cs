@@ -53,6 +53,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             LoadProductsAction();
 
             this.gridProducts.ClearSelection();
+            this.txtSearch.Focus();
         }
 
         private void LoadReturnedProducts()
@@ -65,6 +66,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             LoadProductsAction();
 
             this.gridProducts.ClearSelection();
+            this.txtSearch.Focus();
         }
 
         private void OpenAddProductForm()
@@ -102,6 +104,14 @@ namespace RAloverasPharmacyPOSSystem.Forms
             else if(e.KeyCode == Keys.F2)
             {
                 OpenAddReturnProductForm();
+            }
+            else if(e.KeyCode == Keys.F3)
+            {
+                LoadProducts();
+            }
+            else if(e.KeyCode == Keys.F4)
+            {
+                LoadReturnedProducts();
             }
         }
 
@@ -176,11 +186,25 @@ namespace RAloverasPharmacyPOSSystem.Forms
         {
             if(String.IsNullOrWhiteSpace(this.txtSearch.Text)) 
             {
-                product.LoadProducts(this.gridProducts);
+                if(isProducts)
+                {
+                    product.LoadProducts(this.gridProducts);
+                }
+                else
+                {
+                    product.LoadReturnedProducts(this.gridProducts);
+                }
             }
             else
             {
-                product.SearchProduct(this.txtSearch.Text, this.gridProducts);
+                if(isProducts)
+                {
+                    product.SearchProduct(this.txtSearch.Text, this.gridProducts);
+                }
+                else
+                {
+                    product.SearchReturnedProduct(this.txtSearch.Text, this.gridProducts);
+                }
             }
 
             this.gridProducts.ClearSelection();
@@ -197,8 +221,6 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtSearch.CharacterCasing = CharacterCasing.Upper;
 
             LoadProducts();
-
-            this.txtSearch.Focus();
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)

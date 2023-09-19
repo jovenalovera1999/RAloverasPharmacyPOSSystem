@@ -221,7 +221,7 @@ CREATE
 		WHERE
 			p.isDeleted = 0
 		ORDER BY
-			d.description;
+			d.description ASC;
 	END$$
 
 DELIMITER ;
@@ -360,7 +360,7 @@ CREATE
 			OR pu.packagingUnitName LIKE pKeyword AND p.isDeleted = 0 OR g.genericName LIKE pKeyword AND p.isDeleted = 0 OR
 			s.supplier LIKE pKeyword AND p.isDeleted = 0
 		ORDER BY
-			d.description AND p.code ASC;
+			d.description ASC;
 	END$$
 
 DELIMITER ;
@@ -1119,7 +1119,9 @@ CREATE
 		INNER JOIN
 			packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
 		WHERE
-			rp.isDeleted = 0;
+			rp.isDeleted = 0
+		ORDER BY
+			d.description ASC;
 	END$$
 
 DELIMITER ;
@@ -1241,6 +1243,36 @@ CREATE
 			rp.productId = pProductId, rp.quantity = pQuantity, rp.amountReturned = pAmountReturned
 		WHERE
 			rp.returnProductId = pReturnProductId;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`searchReturnedProduct`(pKeyword varchar(100))
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			rp.returnProductId, rp.productId, p.code, d.description, pu.packagingUnitName, rp.quantity, FORMAT(rp.amountReturned, 2), rp.dateCreated, rp.dateUpdated
+		FROM
+			return_products AS rp
+		INNER JOIN
+			products AS p ON rp.productId = p.productId
+		INNER JOIN
+			descriptions AS d ON p.descriptionId = d.descriptionId
+		INNER JOIN
+			packaging_units AS pu ON p.packagingUnitId = pu.packagingUnitId
+		WHERE
+			p.code LIKE pKeyword AND rp.isDeleted = 0 OR d.description LIKE pKeyword AND rp.isDeleted = 0 OR pu.packagingUnitName LIKE pKeyword
+			AND rp.isDeleted = 0 OR rp.quantity LIKE pKeyword AND rp.isDeleted = 0 OR rp.amountReturned LIKE pKeyword AND rp.isDeleted = 0
+		ORDER BY
+			d.description ASC;
 	END$$
 
 DELIMITER ;

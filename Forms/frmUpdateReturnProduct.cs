@@ -35,6 +35,47 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDescription.CharacterCasing = CharacterCasing.Upper;
         }
 
+        private void SaveReturnedProduct()
+        {
+            if (double.Parse(this.txtQuantity.Text) < 1)
+            {
+                MessageBox.Show("Failed to update returned product, quantity must be greater than zero!");
+                this.txtQuantity.Focus();
+            }
+            else if (double.Parse(this.txtAmountReturned.Text) < 1)
+            {
+                MessageBox.Show("Failed to update returned product, amount returned must be greater than zero!");
+                this.txtAmountReturned.Focus();
+            }
+            else if (this.gridProducts.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Select the product code and packaging unit of the description you just typed first to add back the quantity of the returned product!", "",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (product.UpdateReturnedProduct(val.ProductId, val.ReturnProductQuantity, val.ReturnProductId, long.Parse(this.gridProducts.SelectedCells[0].Value.ToString()),
+                    int.Parse(this.txtQuantity.Text), double.Parse(this.txtAmountReturned.Text)))
+                {
+                    MessageBox.Show("Returned product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadProducts();
+                }
+            }
+        }
+
+        private void BackToProductsForm()
+        {
+            Forms.frmDashboard dashboard = (Forms.frmDashboard)Application.OpenForms["frmDashboard"];
+            Panel pnlMain = (Panel)dashboard.Controls["pnlMain"];
+
+            pnlMain.Controls.Clear();
+            Forms.frmListProducts products = new Forms.frmListProducts();
+            products.TopLevel = false;
+            pnlMain.Controls.Add(products);
+            products.Dock = DockStyle.Fill;
+            products.Show();
+        }
+
         private void LoadProducts()
         {
             if (String.IsNullOrWhiteSpace(this.txtDescription.Text))
@@ -103,6 +144,18 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.gridProducts.ClearSelection();
         }
 
+        private void frmUpdateReturnProduct_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                SaveReturnedProduct();
+            }
+            else if (e.KeyCode == Keys.F2)
+            {
+                BackToProductsForm();
+            }
+        }
+
         private void frmUpdateReturnProduct_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
@@ -113,6 +166,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtAmountReturned.Text = val.ReturnProductAmountReturned.ToString();
 
             LoadProducts();
+
+            this.txtDescription.Focus();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -127,43 +182,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (double.Parse(this.txtQuantity.Text) < 1)
-            {
-                MessageBox.Show("Failed to update returned product, quantity must be greater than zero!");
-                this.txtQuantity.Focus();
-            }
-            else if (double.Parse(this.txtAmountReturned.Text) < 1)
-            {
-                MessageBox.Show("Failed to update returned product, amount returned must be greater than zero!");
-                this.txtAmountReturned.Focus();
-            }
-            else if (this.gridProducts.SelectedRows.Count < 1)
-            {
-                MessageBox.Show("Select the product code and packaging unit of the description you just typed first to add back the quantity of the returned product!", "",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (product.UpdateReturnedProduct(val.ProductId, val.ReturnProductQuantity, val.ReturnProductId, long.Parse(this.gridProducts.SelectedCells[0].Value.ToString()),
-                    int.Parse(this.txtQuantity.Text), double.Parse(this.txtAmountReturned.Text)))
-                {
-                    MessageBox.Show("Returned product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadProducts();
-                }
-            }
+            SaveReturnedProduct();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Forms.frmDashboard dashboard = (Forms.frmDashboard)Application.OpenForms["frmDashboard"];
-            Panel pnlMain = (Panel)dashboard.Controls["pnlMain"];
-
-            pnlMain.Controls.Clear();
-            Forms.frmListProducts products = new Forms.frmListProducts();
-            products.TopLevel = false;
-            pnlMain.Controls.Add(products);
-            products.Dock = DockStyle.Fill;
-            products.Show();
+            BackToProductsForm();
         }
 
         private void frmUpdateReturnProduct_Leave(object sender, EventArgs e)

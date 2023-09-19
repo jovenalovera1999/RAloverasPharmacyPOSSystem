@@ -212,6 +212,52 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
+        public void SearchReturnedProduct(string keyword, DataGridView grid)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    connection.Open();
+
+                    string sql = @"CALL searchReturnedProduct(@keyword);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@keyword", string.Format("%{0}%", keyword));
+
+                        da = new MySqlDataAdapter(cmd);
+                        dt = new DataTable();
+
+                        dt.Clear();
+                        totalRows = da.Fill(dt);
+
+                        dt.Clear();
+                        da.Fill(scollVal, maxRecords, dt);
+
+                        grid.DataSource = dt;
+                        grid.ClearSelection();
+
+                        grid.Columns["returnProductId"].Visible = false;
+                        grid.Columns["productId"].Visible = false;
+                        grid.Columns["code"].HeaderText = "CODE";
+                        grid.Columns["description"].HeaderText = "DESCRIPTION";
+                        grid.Columns["packagingUnitName"].HeaderText = "PACKAGING UNIT";
+                        grid.Columns["quantity"].HeaderText = "QUANTITY";
+                        grid.Columns["FORMAT(rp.amountReturned, 2)"].HeaderText = "AMOUNT RETURNED";
+                        grid.Columns["dateCreated"].HeaderText = "DATE CREATED";
+                        grid.Columns["dateUpdated"].HeaderText = "DATE UPDATED";
+
+                        connection.Close();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error searching returned product from database: " + ex.ToString());
+            }
+        }
+
         public void NextPage(DataGridView grid) 
         {
             scollVal += maxRecords;
