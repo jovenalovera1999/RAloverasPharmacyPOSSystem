@@ -1276,3 +1276,45 @@ CREATE
 	END$$
 
 DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`countItemsReturnedWithDateRange`(pFrom DATE, pTo DATE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			COUNT(returnProductId)
+		FROM
+			return_products
+		WHERE
+			dateCreated BETWEEN pFrom AND pTo AND isDeleted = 0 OR dateCreated BETWEEN pTo AND pFrom AND isDeleted = 0;
+	END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `raloveraspharmacy_db`.`sumTotalAmountReturnedWithDateRange`(pFrom DATE, pTo DATE)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+		SELECT
+			SUM(amountReturned)
+		FROM
+			return_products
+		WHERE
+			dateCreated BETWEEN pFrom AND pTo AND isDeleted = 0 OR dateCreated BETWEEN pTo AND pFrom AND isDeleted = 0;
+	END$$
+
+DELIMITER ;

@@ -67,50 +67,6 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public void LoadSalesWithoutDateRange(DataGridView grid)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(con.conString()))
-                {
-                    connection.Open();
-
-                    string sql = @"CALL loadSalesWithoutDateRange();";
-
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
-                        da = new MySqlDataAdapter(cmd);
-                        dt = new DataTable();
-
-                        dt.Clear();
-                        totalRows = da.Fill(dt);
-
-                        dt.Clear();
-                        da.Fill(scollVal, maxRecords, dt);
-
-                        grid.DataSource = dt;
-                        grid.ClearSelection();
-
-                        grid.Columns["transactionId"].Visible = false;
-                        grid.Columns["transactionNo"].HeaderText = "TRANSACTION NO.";
-                        grid.Columns["FORMAT(t.totalAmountToPay, 2)"].HeaderText = "AMOUNT TO PAY";
-                        grid.Columns["FORMAT(d.discount, 2)"].HeaderText = "DISCOUNT";
-                        grid.Columns["FORMAT(t.discounted, 2)"].HeaderText = "DISCOUNTED";
-                        grid.Columns["FORMAT(t.amount, 2)"].HeaderText = "AMOUNT";
-                        grid.Columns["FORMAT(t.change, 2)"].HeaderText = "CHANGE";
-                        grid.Columns["CASE WHEN middleName IS NULL OR middleName = '' THEN CONCAT(u.lastName, ', ', u.firstName) ELSE CONCAT(u.lastName, ', ', u.firstName, ' ', LEFT(u.middleName, 1), '.') END"].HeaderText = "TRANSACTED BY";
-                        grid.Columns["dateCreated"].HeaderText = "DATE TRANSACTED";
-
-                        connection.Close();
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("Error loading sales without date range from database: " + ex.ToString());
-            }
-        }
-
         public void NextPage(DataGridView grid)
         {
             scollVal += maxRecords;
@@ -174,36 +130,6 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public void SumTotalSalesWithoutDateRange(Label lbl)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(con.conString()))
-                {
-                    connection.Open();
-
-                    string sql = @"CALL sumTotalSalesWithoutDateRange();";
-
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-
-                        dt.Clear();
-                        da.Fill(dt);
-
-                        lbl.Text = double.Parse(cmd.ExecuteScalar().ToString()).ToString("0.00");
-
-                        connection.Close();
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("Error calculating sales without date range from database: " + ex.ToString());
-            }
-        }
-
         public void CountTransactionsWithDateRange(DateTime from, DateTime to, Label lbl)
         {
             try
@@ -237,7 +163,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
         }
 
-        public void CountTransactionsWithoutDateRange(Label lbl)
+        public void CountItemsReturnedWithDateRange(DateTime from, DateTime to, Label lbl)
         {
             try
             {
@@ -245,10 +171,46 @@ namespace RAloverasPharmacyPOSSystem.Functions
                 {
                     connection.Open();
 
-                    string sql = @"CALL countTransactionsWithoutDateRange();";
+                    string sql = @"CALL countItemsReturnedWithDateRange(@from, @to);";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
+                        cmd.Parameters.AddWithValue("@from", from);
+                        cmd.Parameters.AddWithValue("@to", to);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        dt.Clear();
+                        da.Fill(dt);
+
+                        lbl.Text = cmd.ExecuteScalar().ToString();
+
+                        connection.Close();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error counting items returned with date range from database: " + ex.ToString());
+            }
+        }
+
+        public void SumTotalAmountReturnedWithDateRange(DateTime from, DateTime to, Label lbl)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(con.conString()))
+                {
+                    connection.Open();
+
+                    string sql = @"CALL sumTotalAmountReturnedWithDateRange(@from, @to);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@from", from);
+                        cmd.Parameters.AddWithValue("@to", to);
+
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
 
@@ -263,7 +225,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error counting transactions without date range from database: " + ex.ToString());
+                Console.WriteLine("Error counting items returned with date range from database: " + ex.ToString());
             }
         }
 

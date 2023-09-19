@@ -48,37 +48,49 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnPrevious = new Guna.UI2.WinForms.Guna2Button();
             this.btnNext = new Guna.UI2.WinForms.Guna2Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            this.lblTotalAmountReturned = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblTotalItemsReturned = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSales)).BeginInit();
+            this.guna2Panel3.SuspendLayout();
+            this.guna2Panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.guna2Panel4, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.guna2Panel3, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.guna2Panel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.guna2Panel1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 71);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(863, 90);
             this.tableLayoutPanel1.TabIndex = 49;
             // 
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.Color.OliveDrab;
-            this.guna2Panel2.Controls.Add(this.lblTotalTransactions);
             this.guna2Panel2.Controls.Add(this.label4);
+            this.guna2Panel2.Controls.Add(this.lblTotalAmountReturned);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2Panel2.Location = new System.Drawing.Point(434, 3);
+            this.guna2Panel2.Location = new System.Drawing.Point(648, 3);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(426, 84);
+            this.guna2Panel2.Size = new System.Drawing.Size(212, 84);
             this.guna2Panel2.TabIndex = 1;
             // 
             // lblTotalTransactions
@@ -86,7 +98,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.lblTotalTransactions.AutoSize = true;
             this.lblTotalTransactions.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalTransactions.ForeColor = System.Drawing.Color.White;
-            this.lblTotalTransactions.Location = new System.Drawing.Point(3, 41);
+            this.lblTotalTransactions.Location = new System.Drawing.Point(4, 41);
             this.lblTotalTransactions.Margin = new System.Windows.Forms.Padding(3);
             this.lblTotalTransactions.Name = "lblTotalTransactions";
             this.lblTotalTransactions.Size = new System.Drawing.Size(28, 32);
@@ -96,14 +108,14 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(3, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(276, 32);
+            this.label4.Size = new System.Drawing.Size(209, 20);
             this.label4.TabIndex = 26;
-            this.label4.Text = "TOTAL TRANSACTIONS";
+            this.label4.Text = "TOTAL AMOUNT RETURNED";
             // 
             // guna2Panel1
             // 
@@ -113,7 +125,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2Panel1.Location = new System.Drawing.Point(3, 3);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(425, 84);
+            this.guna2Panel1.Size = new System.Drawing.Size(209, 84);
             this.guna2Panel1.TabIndex = 0;
             // 
             // lblTotalSales
@@ -131,12 +143,12 @@ namespace RAloverasPharmacyPOSSystem.Forms
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(3, 3);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(161, 32);
+            this.label3.Size = new System.Drawing.Size(101, 20);
             this.label3.TabIndex = 25;
             this.label3.Text = "TOTAL SALES";
             // 
@@ -327,6 +339,76 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label5.TabIndex = 52;
             this.label5.Text = "LIST OF SALES";
             // 
+            // guna2Panel3
+            // 
+            this.guna2Panel3.BackColor = System.Drawing.Color.OliveDrab;
+            this.guna2Panel3.Controls.Add(this.lblTotalTransactions);
+            this.guna2Panel3.Controls.Add(this.label7);
+            this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.guna2Panel3.Location = new System.Drawing.Point(218, 3);
+            this.guna2Panel3.Name = "guna2Panel3";
+            this.guna2Panel3.Size = new System.Drawing.Size(209, 84);
+            this.guna2Panel3.TabIndex = 2;
+            // 
+            // lblTotalAmountReturned
+            // 
+            this.lblTotalAmountReturned.AutoSize = true;
+            this.lblTotalAmountReturned.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAmountReturned.ForeColor = System.Drawing.Color.White;
+            this.lblTotalAmountReturned.Location = new System.Drawing.Point(3, 41);
+            this.lblTotalAmountReturned.Margin = new System.Windows.Forms.Padding(3);
+            this.lblTotalAmountReturned.Name = "lblTotalAmountReturned";
+            this.lblTotalAmountReturned.Size = new System.Drawing.Size(28, 32);
+            this.lblTotalAmountReturned.TabIndex = 27;
+            this.lblTotalAmountReturned.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(3, 3);
+            this.label7.Margin = new System.Windows.Forms.Padding(3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(173, 20);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "TOTAL TRANSACTIONS";
+            // 
+            // guna2Panel4
+            // 
+            this.guna2Panel4.BackColor = System.Drawing.Color.OliveDrab;
+            this.guna2Panel4.Controls.Add(this.label8);
+            this.guna2Panel4.Controls.Add(this.lblTotalItemsReturned);
+            this.guna2Panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.guna2Panel4.Location = new System.Drawing.Point(433, 3);
+            this.guna2Panel4.Name = "guna2Panel4";
+            this.guna2Panel4.Size = new System.Drawing.Size(209, 84);
+            this.guna2Panel4.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(3, 3);
+            this.label8.Margin = new System.Windows.Forms.Padding(3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(177, 20);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "TOTAL ITEM RETURNED";
+            // 
+            // lblTotalItemsReturned
+            // 
+            this.lblTotalItemsReturned.AutoSize = true;
+            this.lblTotalItemsReturned.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalItemsReturned.ForeColor = System.Drawing.Color.White;
+            this.lblTotalItemsReturned.Location = new System.Drawing.Point(3, 41);
+            this.lblTotalItemsReturned.Margin = new System.Windows.Forms.Padding(3);
+            this.lblTotalItemsReturned.Name = "lblTotalItemsReturned";
+            this.lblTotalItemsReturned.Size = new System.Drawing.Size(28, 32);
+            this.lblTotalItemsReturned.TabIndex = 27;
+            this.lblTotalItemsReturned.Text = "0";
+            // 
             // frmListSales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -357,6 +439,10 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSales)).EndInit();
+            this.guna2Panel3.ResumeLayout(false);
+            this.guna2Panel3.PerformLayout();
+            this.guna2Panel4.ResumeLayout(false);
+            this.guna2Panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,5 +465,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2Button btnPrevious;
         private Guna.UI2.WinForms.Guna2Button btnNext;
         private System.Windows.Forms.Label label5;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblTotalAmountReturned;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblTotalItemsReturned;
     }
 }

@@ -21,18 +21,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void LoadSalesSumCount()
         {
-            if(this.dateFrom.Value.Date == this.dateTo.Value.Date)
-            {
-                sale.LoadSalesWithoutDateRange(this.gridSales);
-                sale.SumTotalSalesWithoutDateRange(this.lblTotalSales);
-                sale.CountTransactionsWithoutDateRange(this.lblTotalTransactions);
-            }
-            else
-            {
-                sale.LoadSalesWithDateRange(this.dateFrom.Value.Date, this.dateTo.Value.Date, this.gridSales);
-                sale.SumTotalSalesWithDateRange(this.dateFrom.Value.Date, this.dateTo.Value.Date, this.lblTotalSales);
-                sale.CountTransactionsWithDateRange(this.dateFrom.Value.Date, this.dateTo.Value.Date, this.lblTotalTransactions);
-            }
+            sale.LoadSalesWithDateRange(this.dateFrom.Value.Date, this.dateTo.Value.Date, this.gridSales);
+            sale.SumTotalSalesWithDateRange(this.dateFrom.Value.Date, this.dateTo.Value.Date, this.lblTotalSales);
+            sale.CountTransactionsWithDateRange(this.dateFrom.Value.Date, this.dateTo.Value.Date, this.lblTotalTransactions);
+            sale.CountItemsReturnedWithDateRange(this.dateFrom.Value.Date, this.dateTo.Value.Date, this.lblTotalItemsReturned);
+            sale.SumTotalAmountReturnedWithDateRange(this.dateFrom.Value.Date, this.dateTo.Value.Date, this.lblTotalAmountReturned);
 
             this.gridSales.ClearSelection();
         }
