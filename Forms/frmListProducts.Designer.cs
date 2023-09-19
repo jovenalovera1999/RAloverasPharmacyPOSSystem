@@ -41,6 +41,8 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnAddReturnProduct = new Guna.UI2.WinForms.Guna2Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnLoadProducts = new Guna.UI2.WinForms.Guna2Button();
+            this.btnLoadReturnedProducts = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridProducts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -238,12 +240,52 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label3.TabIndex = 47;
             this.label3.Text = "LIST OF PRODUCTS";
             // 
+            // btnLoadProducts
+            // 
+            this.btnLoadProducts.Animated = true;
+            this.btnLoadProducts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLoadProducts.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLoadProducts.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLoadProducts.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLoadProducts.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLoadProducts.FillColor = System.Drawing.Color.OliveDrab;
+            this.btnLoadProducts.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnLoadProducts.ForeColor = System.Drawing.Color.White;
+            this.btnLoadProducts.Location = new System.Drawing.Point(341, 46);
+            this.btnLoadProducts.Name = "btnLoadProducts";
+            this.btnLoadProducts.Size = new System.Drawing.Size(145, 32);
+            this.btnLoadProducts.TabIndex = 48;
+            this.btnLoadProducts.TabStop = false;
+            this.btnLoadProducts.Text = "LOAD PRODUCTS (F3)";
+            this.btnLoadProducts.Click += new System.EventHandler(this.btnLoadProducts_Click);
+            // 
+            // btnLoadReturnedProducts
+            // 
+            this.btnLoadReturnedProducts.Animated = true;
+            this.btnLoadReturnedProducts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLoadReturnedProducts.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLoadReturnedProducts.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLoadReturnedProducts.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLoadReturnedProducts.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLoadReturnedProducts.FillColor = System.Drawing.Color.OliveDrab;
+            this.btnLoadReturnedProducts.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnLoadReturnedProducts.ForeColor = System.Drawing.Color.White;
+            this.btnLoadReturnedProducts.Location = new System.Drawing.Point(492, 46);
+            this.btnLoadReturnedProducts.Name = "btnLoadReturnedProducts";
+            this.btnLoadReturnedProducts.Size = new System.Drawing.Size(204, 32);
+            this.btnLoadReturnedProducts.TabIndex = 49;
+            this.btnLoadReturnedProducts.TabStop = false;
+            this.btnLoadReturnedProducts.Text = "LOAD RETURNED PRODUCTS (F4)";
+            this.btnLoadReturnedProducts.Click += new System.EventHandler(this.btnLoadReturnedProducts_Click);
+            // 
             // frmListProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(887, 539);
+            this.Controls.Add(this.btnLoadReturnedProducts);
+            this.Controls.Add(this.btnLoadProducts);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAddReturnProduct);
             this.Controls.Add(this.label2);
@@ -278,5 +320,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
         private Guna.UI2.WinForms.Guna2Button btnAddReturnProduct;
         private System.Windows.Forms.Label label3;
+        private Guna.UI2.WinForms.Guna2Button btnLoadProducts;
+        private Guna.UI2.WinForms.Guna2Button btnLoadReturnedProducts;
     }
 }

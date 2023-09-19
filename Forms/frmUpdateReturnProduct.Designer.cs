@@ -36,7 +36,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.btnBack = new Guna.UI2.WinForms.Guna2Button();
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
-            this.gridReturnProducts = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.gridProducts = new Guna.UI2.WinForms.Guna2DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAmountReturned = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,7 +45,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDescription = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnPrevious = new Guna.UI2.WinForms.Guna2Button();
             this.btnNext = new Guna.UI2.WinForms.Guna2Button();
-            ((System.ComponentModel.ISupportInitialize)(this.gridReturnProducts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProducts)).BeginInit();
             this.SuspendLayout();
             // 
             // lblMessage
@@ -109,20 +109,20 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.btnSave.Text = "SAVE (F1)";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // gridReturnProducts
+            // gridProducts
             // 
-            this.gridReturnProducts.AllowUserToAddRows = false;
-            this.gridReturnProducts.AllowUserToDeleteRows = false;
-            this.gridReturnProducts.AllowUserToResizeColumns = false;
-            this.gridReturnProducts.AllowUserToResizeRows = false;
+            this.gridProducts.AllowUserToAddRows = false;
+            this.gridProducts.AllowUserToDeleteRows = false;
+            this.gridProducts.AllowUserToResizeColumns = false;
+            this.gridProducts.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.gridReturnProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.gridReturnProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gridProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridReturnProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.gridReturnProducts.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.gridReturnProducts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Single;
+            this.gridProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gridProducts.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.gridProducts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.OliveDrab;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -131,9 +131,9 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.OliveDrab;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridReturnProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.gridReturnProducts.ColumnHeadersHeight = 32;
-            this.gridReturnProducts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gridProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.gridProducts.ColumnHeadersHeight = 32;
+            this.gridProducts.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -142,38 +142,38 @@ namespace RAloverasPharmacyPOSSystem.Forms
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkOliveGreen;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridReturnProducts.DefaultCellStyle = dataGridViewCellStyle3;
-            this.gridReturnProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gridReturnProducts.Location = new System.Drawing.Point(12, 164);
-            this.gridReturnProducts.MultiSelect = false;
-            this.gridReturnProducts.Name = "gridReturnProducts";
-            this.gridReturnProducts.ReadOnly = true;
-            this.gridReturnProducts.RowHeadersVisible = false;
-            this.gridReturnProducts.RowTemplate.Height = 32;
-            this.gridReturnProducts.Size = new System.Drawing.Size(863, 325);
-            this.gridReturnProducts.TabIndex = 56;
-            this.gridReturnProducts.TabStop = false;
-            this.gridReturnProducts.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.gridReturnProducts.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.gridReturnProducts.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.gridReturnProducts.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.gridReturnProducts.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.gridReturnProducts.ThemeStyle.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.gridReturnProducts.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gridReturnProducts.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.OliveDrab;
-            this.gridReturnProducts.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.gridReturnProducts.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridReturnProducts.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.gridReturnProducts.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gridReturnProducts.ThemeStyle.HeaderStyle.Height = 32;
-            this.gridReturnProducts.ThemeStyle.ReadOnly = true;
-            this.gridReturnProducts.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.gridReturnProducts.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Single;
-            this.gridReturnProducts.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridReturnProducts.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.White;
-            this.gridReturnProducts.ThemeStyle.RowsStyle.Height = 32;
-            this.gridReturnProducts.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.YellowGreen;
-            this.gridReturnProducts.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.gridProducts.DefaultCellStyle = dataGridViewCellStyle3;
+            this.gridProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.gridProducts.Location = new System.Drawing.Point(12, 164);
+            this.gridProducts.MultiSelect = false;
+            this.gridProducts.Name = "gridProducts";
+            this.gridProducts.ReadOnly = true;
+            this.gridProducts.RowHeadersVisible = false;
+            this.gridProducts.RowTemplate.Height = 32;
+            this.gridProducts.Size = new System.Drawing.Size(863, 325);
+            this.gridProducts.TabIndex = 56;
+            this.gridProducts.TabStop = false;
+            this.gridProducts.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.gridProducts.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.gridProducts.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.gridProducts.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.gridProducts.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.gridProducts.ThemeStyle.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.gridProducts.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.gridProducts.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.OliveDrab;
+            this.gridProducts.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.gridProducts.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridProducts.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.gridProducts.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gridProducts.ThemeStyle.HeaderStyle.Height = 32;
+            this.gridProducts.ThemeStyle.ReadOnly = true;
+            this.gridProducts.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.gridProducts.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Single;
+            this.gridProducts.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridProducts.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.White;
+            this.gridProducts.ThemeStyle.RowsStyle.Height = 32;
+            this.gridProducts.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.YellowGreen;
+            this.gridProducts.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.White;
             // 
             // label2
             // 
@@ -336,7 +336,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.gridReturnProducts);
+            this.Controls.Add(this.gridProducts);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtAmountReturned);
             this.Controls.Add(this.label1);
@@ -351,7 +351,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.Load += new System.EventHandler(this.frmUpdateReturnProduct_Load);
             this.VisibleChanged += new System.EventHandler(this.frmUpdateReturnProduct_VisibleChanged);
             this.Leave += new System.EventHandler(this.frmUpdateReturnProduct_Leave);
-            ((System.ComponentModel.ISupportInitialize)(this.gridReturnProducts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProducts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,7 +362,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private System.Windows.Forms.Label label3;
         private Guna.UI2.WinForms.Guna2Button btnBack;
         private Guna.UI2.WinForms.Guna2Button btnSave;
-        private Guna.UI2.WinForms.Guna2DataGridView gridReturnProducts;
+        private Guna.UI2.WinForms.Guna2DataGridView gridProducts;
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2TextBox txtAmountReturned;
         private System.Windows.Forms.Label label1;

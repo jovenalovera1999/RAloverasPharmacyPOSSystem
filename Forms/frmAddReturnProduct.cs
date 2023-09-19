@@ -32,25 +32,24 @@ namespace RAloverasPharmacyPOSSystem.Forms
         private void CapsLock()
         {
             this.txtDescription.CharacterCasing = CharacterCasing.Upper;
-            this.txtSearch.CharacterCasing = CharacterCasing.Upper;
         }
 
-        private void LoadReturnedProductsAction() 
-        {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
-            btnUpdate.HeaderText = "ACTION";
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Text = "UPDATE";
-            btnUpdate.UseColumnTextForButtonValue = true;
-            this.gridReturnProducts.Columns.Insert(0, btnUpdate);
-
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-            btnDelete.HeaderText = "";
-            btnDelete.Name = "btnDelete";
-            btnDelete.Text = "DELETE";
-            btnDelete.UseColumnTextForButtonValue = true;
-            this.gridReturnProducts.Columns.Insert(1, btnDelete);
-        }
+        // private void LoadReturnedProductsAction() 
+        // {
+        //     DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
+        //     btnUpdate.HeaderText = "ACTION";
+        //     btnUpdate.Name = "btnUpdate";
+        //     btnUpdate.Text = "UPDATE";
+        //     btnUpdate.UseColumnTextForButtonValue = true;
+        //     this.gridReturnProducts.Columns.Insert(0, btnUpdate);
+        // 
+        //     DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+        //     btnDelete.HeaderText = "";
+        //     btnDelete.Name = "btnDelete";
+        //     btnDelete.Text = "DELETE";
+        //     btnDelete.UseColumnTextForButtonValue = true;
+        //     this.gridReturnProducts.Columns.Insert(1, btnDelete);
+        // }
 
         private void SaveReturnedProduct() 
         {
@@ -64,16 +63,16 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 MessageBox.Show("Failed to save returned product, amount returned must be greater than zeo!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.txtAmountReturned.Focus();
             } 
-            else if (this.gridReturnProducts.SelectedRows.Count < 1) 
+            else if (this.gridProducts.SelectedRows.Count < 1) 
             {
                 MessageBox.Show("Select the product code and packaging unit of the description you just typed first to add back the quantity of the returned product!", "",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             } 
             else 
             {
-                if (product.InsertReturnedProduct(long.Parse(this.gridReturnProducts.SelectedCells[0].Value.ToString()),
+                if (product.InsertReturnedProduct(long.Parse(this.gridProducts.SelectedCells[0].Value.ToString()),
                     int.Parse(this.txtQuantity.Text), double.Parse(this.txtAmountReturned.Text)) &&
-                    product.UpdateProductQuantityWhenReturnedProduct(long.Parse(this.gridReturnProducts.SelectedCells[0].Value.ToString()),
+                    product.UpdateProductQuantityWhenReturnedProduct(long.Parse(this.gridProducts.SelectedCells[0].Value.ToString()),
                     int.Parse(this.txtQuantity.Text))) 
                 {
                     MessageBox.Show("Returned product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -83,8 +82,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
                     this.txtQuantity.Text = "0";
                     this.txtAmountReturned.Text = "0.00";
 
-                    product.LoadReturnedProducts(this.gridReturnProducts);
-
+                    product.LoadProducts(this.gridProducts);
                     this.txtDescription.Focus();
                 } 
                 else 
@@ -107,73 +105,17 @@ namespace RAloverasPharmacyPOSSystem.Forms
             products.Show();
         }
 
-        private void gridReturnProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if(this.gridReturnProducts.Columns[e.ColumnIndex].Name == "btnUpdate") 
-            {
-                if (product.GetReturnedProduct(long.Parse(this.gridReturnProducts.SelectedCells[2].Value.ToString()))) 
-                {
-                    Forms.frmDashboard dashboard = (Forms.frmDashboard)Application.OpenForms["frmDashboard"];
-                    Panel pnlMain = (Panel)dashboard.Controls["pnlMain"];
-
-                    pnlMain.Controls.Clear();
-                    Forms.frmUpdateReturnProduct updateReturnProduct = new Forms.frmUpdateReturnProduct();
-                    updateReturnProduct.TopLevel = false;
-                    pnlMain.Controls.Add(updateReturnProduct);
-                    updateReturnProduct.Dock = DockStyle.Fill;
-                    updateReturnProduct.Show();
-                }
-            } 
-            else if(this.gridReturnProducts.Columns[e.ColumnIndex].Name == "btnDelete") {
-                if(MessageBox.Show("Are you sure you want to delete this returned product?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                    == DialogResult.Yes) { 
-                    if(product.DeleteReturnedProduct(long.Parse(this.gridReturnProducts.SelectedCells[2].Value.ToString()))) 
-                    {
-                        MessageBox.Show("Returned product was successfully deleted!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        product.LoadReturnedProducts(this.gridReturnProducts);
-                        this.gridReturnProducts.ClearSelection();
-
-                        this.txtDescription.Focus();
-                    } 
-                    else 
-                    {
-                        MessageBox.Show("Failed to delete returned product!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
-
         private void txtDescription_TextChanged(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(this.txtDescription.Text))
             {
-                this.lblMessage.Visible = false;
-
-                product.LoadReturnedProducts(this.gridReturnProducts);
-                LoadReturnedProductsAction();
-
-                this.gridReturnProducts.ClearSelection();
+                product.LoadProducts(this.gridProducts);
+                this.gridProducts.ClearSelection();
             }
             else 
             {
-                this.lblMessage.Visible = true;
-
-                for(int i = 0; i < this.gridReturnProducts.Columns.Count; i++) 
-                {
-                    if(this.gridReturnProducts.Columns[i].Name == "btnUpdate") 
-                    { 
-                        this.gridReturnProducts.Columns.Remove("btnUpdate");
-                    } 
-                    
-                    if(this.gridReturnProducts.Columns[i].Name == "btnDelete")
-                    { 
-                        this.gridReturnProducts.Columns.Remove("btnDelete");
-                    }
-                }
-
-                product.SearchProduct(this.txtDescription.Text, this.gridReturnProducts);
-                this.gridReturnProducts.ClearSelection();
+                product.SearchProduct(this.txtDescription.Text, this.gridProducts);
+                this.gridProducts.ClearSelection();
             }
         }
 
@@ -235,7 +177,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void frmAddReturnProduct_VisibleChanged(object sender, EventArgs e)
         {
-            this.gridReturnProducts.ClearSelection();
+            this.gridProducts.ClearSelection();
         }
 
         private void frmAddReturnProduct_Leave(object sender, EventArgs e)
@@ -248,20 +190,19 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.KeyPreview = true;
             CapsLock();
 
-            product.LoadReturnedProducts(this.gridReturnProducts);
-            LoadReturnedProductsAction();
+            product.LoadProducts(this.gridProducts);
 
             this.txtDescription.Focus();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            product.NextPage(this.gridReturnProducts);
+            product.NextPage(this.gridProducts);
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            product.PreviousPage(this.gridReturnProducts);
+            product.PreviousPage(this.gridProducts);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

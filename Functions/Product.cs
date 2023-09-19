@@ -146,6 +146,7 @@ namespace RAloverasPharmacyPOSSystem.Functions
                         grid.Columns["productId"].Visible = false;
                         grid.Columns["code"].HeaderText = "CODE";
                         grid.Columns["description"].HeaderText = "DESCRIPTION";
+                        grid.Columns["packagingUnitName"].HeaderText = "PACKAGING UNIT";
                         grid.Columns["quantity"].HeaderText = "QUANTITY";
                         grid.Columns["FORMAT(rp.amountReturned, 2)"].HeaderText = "AMOUNT RETURNED";
                         grid.Columns["dateCreated"].HeaderText = "DATE CREATED";

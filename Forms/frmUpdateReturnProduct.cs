@@ -35,19 +35,23 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtDescription.CharacterCasing = CharacterCasing.Upper;
         }
 
-        private void LoadSearchedProducts()
+        private void LoadProducts()
         {
-            if (!String.IsNullOrWhiteSpace(this.txtDescription.Text))
+            if (String.IsNullOrWhiteSpace(this.txtDescription.Text))
             {
-                product.SearchProduct(this.txtDescription.Text, this.gridReturnProducts);
+                product.LoadProducts(this.gridProducts);
+            }
+            else
+            {
+                product.SearchProduct(this.txtDescription.Text, this.gridProducts);
             }
 
-            this.gridReturnProducts.ClearSelection();
+            this.gridProducts.ClearSelection();
         }
 
         private void txtDescription_TextChanged(object sender, EventArgs e)
         {
-            LoadSearchedProducts();
+            LoadProducts();
         }
 
         private void txtQuantity_TextChanged(object sender, EventArgs e)
@@ -96,7 +100,7 @@ namespace RAloverasPharmacyPOSSystem.Forms
 
         private void frmUpdateReturnProduct_VisibleChanged(object sender, EventArgs e)
         {
-            this.gridReturnProducts.ClearSelection();
+            this.gridProducts.ClearSelection();
         }
 
         private void frmUpdateReturnProduct_Load(object sender, EventArgs e)
@@ -108,17 +112,17 @@ namespace RAloverasPharmacyPOSSystem.Forms
             this.txtQuantity.Text = val.ReturnProductQuantity.ToString();
             this.txtAmountReturned.Text = val.ReturnProductAmountReturned.ToString();
 
-            LoadSearchedProducts();
+            LoadProducts();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            product.NextPage(this.gridReturnProducts);
+            product.NextPage(this.gridProducts);
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            product.PreviousPage(this.gridReturnProducts);
+            product.PreviousPage(this.gridProducts);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -133,18 +137,18 @@ namespace RAloverasPharmacyPOSSystem.Forms
                 MessageBox.Show("Failed to update returned product, amount returned must be greater than zero!");
                 this.txtAmountReturned.Focus();
             }
-            else if (this.gridReturnProducts.SelectedRows.Count < 1)
+            else if (this.gridProducts.SelectedRows.Count < 1)
             {
                 MessageBox.Show("Select the product code and packaging unit of the description you just typed first to add back the quantity of the returned product!", "",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                if (product.UpdateReturnedProduct(val.ProductId, val.ReturnProductQuantity, val.ReturnProductId, long.Parse(this.gridReturnProducts.SelectedCells[0].Value.ToString()),
+                if (product.UpdateReturnedProduct(val.ProductId, val.ReturnProductQuantity, val.ReturnProductId, long.Parse(this.gridProducts.SelectedCells[0].Value.ToString()),
                     int.Parse(this.txtQuantity.Text), double.Parse(this.txtAmountReturned.Text)))
                 {
                     MessageBox.Show("Returned product was successfully saved!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadSearchedProducts();
+                    LoadProducts();
                 }
             }
         }
@@ -155,11 +159,11 @@ namespace RAloverasPharmacyPOSSystem.Forms
             Panel pnlMain = (Panel)dashboard.Controls["pnlMain"];
 
             pnlMain.Controls.Clear();
-            Forms.frmAddReturnProduct returnProduct = new Forms.frmAddReturnProduct();
-            returnProduct.TopLevel = false;
-            pnlMain.Controls.Add(returnProduct);
-            returnProduct.Dock = DockStyle.Fill;
-            returnProduct.Show();
+            Forms.frmListProducts products = new Forms.frmListProducts();
+            products.TopLevel = false;
+            pnlMain.Controls.Add(products);
+            products.Dock = DockStyle.Fill;
+            products.Show();
         }
 
         private void frmUpdateReturnProduct_Leave(object sender, EventArgs e)
